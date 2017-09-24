@@ -143,7 +143,6 @@ C:\Users\DichterSS\Documents\GitHub\RID\RID\bin\EntityFramework.SqlServer.xml
 C:\Users\DichterSS\Documents\GitHub\RID\RID\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\DichterSS\Documents\GitHub\RID\RID\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\DichterSS\Documents\GitHub\RID\RID\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csproj.CoreCompileInputs.cache
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.dll
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.pdb

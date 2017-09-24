@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -7,11 +6,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RID.Models;
+using CASMUL.Controllers;
 
 namespace RID.Controllers
 {
-    [Authorize]
-    public class ManageController : Controller
+    //[Authorize]
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -32,9 +32,9 @@ namespace RID.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -47,6 +47,25 @@ namespace RID.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public ActionResult VerPerfilUsuario()
+        {
+            using (var context = new RID.DB.BodMantEntities())
+            {
+                var usuario = context.usuario.Find(ObtenerIdUsuario());
+                return View(new PerfilUsuarioViewModel
+                {
+                    IdUsuario = usuario.id_usuario,
+                    Nombre = usuario.nombre,
+                    Apellido = usuario.apellido,
+                    CorreoElectronico = usuario.AspNetUsers.Email,
+                    FechaNacimiento = usuario.fecha_nacimiento,
+                    Identidad = usuario.identidad,
+                    NombreUsuario = usuario.AspNetUsers.UserName,
+                    TipoUsuario = usuario.AspNetUsers.AspNetRoles.FirstOrDefault().Name
+                });
             }
         }
 
@@ -305,7 +324,7 @@ namespace RID.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
-            // Request a redirect to the external login provider to link a login for the current user
+            //Request a redirect to the external login provider to link a login for the current user
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
@@ -333,7 +352,7 @@ namespace RID.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +403,6 @@ namespace RID.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
