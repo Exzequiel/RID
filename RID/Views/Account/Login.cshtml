@@ -37,7 +37,7 @@
     <!-- end #page-loader -->
 
     <div class="login-cover">
-        <div class="login-cover-image"><img src="assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
+        <div class="login-cover-image"><img src="~/assets/img/login-bg/bg-1.jpg" data-id="login-cover-image" alt="" /></div>
         <div class="login-cover-bg"></div>
     </div>
     <!-- begin #page-container -->
@@ -47,8 +47,8 @@
             <!-- begin brand -->
             <div class="login-header">
                 <div class="brand">
-                    <span class="logo"><i class="ion-ios-briefcase"></i></span>Control de Stock
-                    <small>Control de Bajas en Mantenimiento</small>
+                    <span class="logo"><i class="ion-ios-briefcase"></i></span>Control
+                    <small>Control de Bajas</small>
                 </div>
                 <div class="icon">
                     <i class="ion-ios-locked"></i>
@@ -57,18 +57,18 @@
             <!-- end brand -->
 
             <div class="login-content">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "margin-bottom-0" }))
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "margin-bottom" }))
                 {
-                    @Html.ValidationSummary(true, "", new { @class = "control-label text-danger padding-10 text-center" })
+                    @Html.ValidationSummary(true,"", new { @class = "control-label text-danger padding-10 text-center" })
                     @*<form action="index.html" method="POST" class="margin-bottom-0">*@
                     <div class="form-group m-b-10">
-                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre de Usuario" } })
-                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder ="Nombre de Usuario" } })
+                        @Html.ValidationMessageFor(model => model.UserName,"", new { @class = "text-danger" })
                         @*<input type="text" class="form-control input-lg" placeholder="Email Address" required />*@
                     </div>
 
                     <div class="form-group m-b-10">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contraseña" } })
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder ="Contraseña" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         @*<input type="password" class="form-control input-lg" placeholder="Password" required />*@
                     </div>
@@ -106,12 +106,11 @@
         <!-- end login -->
 
         <ul class="login-bg-list clearfix">
-            <li class="active"><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-9.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-2.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-3.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-4.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-5.jpg" alt="" /></a></li>
-            <li><a href="#" data-click="change-bg"><img src="assets/img/login-bg/bg-6.jpg" alt="" /></a></li>
+            <li class="active"><a href="#" data-click="change-bg"><img src="~/assets/img/login-bg/bg-1.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="~/assets/img/login-bg/bg-2.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="~/assets/img/login-bg/bg-3.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="~/assets/img/login-bg/bg-7.jpg" alt="" /></a></li>
+            <li><a href="#" data-click="change-bg"><img src="~/assets/img/login-bg/bg-8.jpg" alt="" /></a></li>
         </ul>
 
         <!-- begin theme-panel -->
@@ -204,7 +203,7 @@
     <script>
         $(document).ready(function () {
             App.init();
-            //LoginV2.init();
+            LoginV2.init();
         });
     </script>
 </body>
