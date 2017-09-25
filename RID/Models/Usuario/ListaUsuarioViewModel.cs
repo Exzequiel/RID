@@ -6,7 +6,6 @@ namespace RID.Models.Usuario
     public class ListaUsuarioViewModel
     {
         public int Id { get; set; }
-        public bool esAdmin { get; set; }
 
         [Display(Name = "Perfil")]
         public string Perfil { get; set; }

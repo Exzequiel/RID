@@ -105,15 +105,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tecnico">
-      <EntityTypeMapping TypeName="BodMantModel.tecnico">
-        <MappingFragment StoreEntitySet="tecnico">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ubicacion">
       <EntityTypeMapping TypeName="BodMantModel.ubicacion">
         <MappingFragment StoreEntitySet="ubicacion">
@@ -161,6 +152,17 @@
           <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
           <ScalarProperty Name="IdAspnetUser" ColumnName="IdAspnetUser" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tecnico">
+      <EntityTypeMapping TypeName="BodMantModel.tecnico">
+        <MappingFragment StoreEntitySet="tecnico">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="puesto" ColumnName="puesto" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

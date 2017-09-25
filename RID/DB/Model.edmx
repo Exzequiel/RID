@@ -134,6 +134,8 @@
           </Key>
           <Property Name="id_tecnico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="puesto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ubicacion">
@@ -404,7 +406,6 @@
           <EntitySet Name="salida" EntityType="BodMantModel.salida" />
           <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
           <EntitySet Name="sysdiagrams" EntityType="BodMantModel.sysdiagrams" />
-          <EntitySet Name="tecnico" EntityType="BodMantModel.tecnico" />
           <EntitySet Name="ubicacion" EntityType="BodMantModel.ubicacion" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="BodMantModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -434,10 +435,6 @@
             <End Role="salida" EntitySet="salida" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
           </AssociationSet>
-          <AssociationSet Name="FK_salida_tecnico" Association="BodMantModel.FK_salida_tecnico">
-            <End Role="tecnico" EntitySet="tecnico" />
-            <End Role="salida" EntitySet="salida" />
-          </AssociationSet>
           <AssociationSet Name="FK_salida_ubicacion" Association="BodMantModel.FK_salida_ubicacion">
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="salida" EntitySet="salida" />
@@ -456,6 +453,11 @@
           <AssociationSet Name="FK_usuario_ubicacion" Association="BodMantModel.FK_usuario_ubicacion">
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <EntitySet Name="tecnico" EntityType="BodMantModel.tecnico" />
+          <AssociationSet Name="FK_salida_tecnico" Association="BodMantModel.FK_salida_tecnico">
+            <End Role="tecnico" EntitySet="tecnico" />
+            <End Role="salida" EntitySet="salida" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -548,8 +550,8 @@
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_salida_objeto" FromRole="salida" ToRole="objeto" />
           <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida" ToRole="salida_detalle" />
-          <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_tecnico" FromRole="salida" ToRole="tecnico" />
           <NavigationProperty Name="ubicacion" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="salida" ToRole="ubicacion" />
+          <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_tecnico" FromRole="salida" ToRole="tecnico" />
         </EntityType>
         <EntityType Name="salida_detalle">
           <Key>
@@ -572,15 +574,6 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="tecnico">
-          <Key>
-            <PropertyRef Name="id_tecnico" />
-          </Key>
-          <Property Name="id_tecnico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_tecnico" FromRole="tecnico" ToRole="salida" />
         </EntityType>
         <EntityType Name="ubicacion">
           <Key>
@@ -681,18 +674,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_salida_tecnico">
-          <End Type="BodMantModel.tecnico" Role="tecnico" Multiplicity="1" />
-          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tecnico">
-              <PropertyRef Name="id_tecnico" />
-            </Principal>
-            <Dependent Role="salida">
-              <PropertyRef Name="id_tecnico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_salida_ubicacion">
           <End Type="BodMantModel.ubicacion" Role="ubicacion" Multiplicity="1" />
           <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
@@ -763,6 +744,29 @@
             </Principal>
             <Dependent Role="usuario">
               <PropertyRef Name="id_ubicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tecnico">
+          <Key>
+            <PropertyRef Name="id_tecnico" />
+          </Key>
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_tecnico" FromRole="tecnico" ToRole="salida" />
+        </EntityType>
+        <Association Name="FK_salida_tecnico">
+          <End Type="BodMantModel.tecnico" Role="tecnico" Multiplicity="1" />
+          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tecnico">
+              <PropertyRef Name="id_tecnico" />
+            </Principal>
+            <Dependent Role="salida">
+              <PropertyRef Name="id_tecnico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -876,15 +880,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tecnico">
-            <EntityTypeMapping TypeName="BodMantModel.tecnico">
-              <MappingFragment StoreEntitySet="tecnico">
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ubicacion">
             <EntityTypeMapping TypeName="BodMantModel.ubicacion">
               <MappingFragment StoreEntitySet="ubicacion">
@@ -932,6 +927,17 @@
                 <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
                 <ScalarProperty Name="IdAspnetUser" ColumnName="IdAspnetUser" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tecnico">
+            <EntityTypeMapping TypeName="BodMantModel.tecnico">
+              <MappingFragment StoreEntitySet="tecnico">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

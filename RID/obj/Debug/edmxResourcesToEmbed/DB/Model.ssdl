@@ -129,6 +129,8 @@
     </Key>
     <Property Name="id_tecnico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="puesto" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ubicacion">

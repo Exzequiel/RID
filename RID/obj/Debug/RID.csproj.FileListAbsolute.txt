@@ -147,3 +147,4 @@ C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csproj.CoreCompileInpu
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.dll
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.pdb
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache
+C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache

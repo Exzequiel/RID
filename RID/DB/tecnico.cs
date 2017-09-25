@@ -22,6 +22,8 @@ namespace RID.DB
     
         public int id_tecnico { get; set; }
         public string nombre { get; set; }
+        public string apellido { get; set; }
+        public string puesto { get; set; }
         public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
