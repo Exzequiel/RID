@@ -41,12 +41,11 @@ namespace RID.Controllers
                         Id = x.id_usuario,
                         Nombre = x.nombre,
                         Apellido = x.apellido,
-                        FechaNac = x.fecha_nacimiento,
                         Email = x.AspNetUsers.Email,
                         Estado = x.activo,
                         Perfil = x.AspNetUsers.AspNetRoles.Any() ? x.AspNetUsers.AspNetRoles.FirstOrDefault().Name : "",
                         UserName = x.AspNetUsers.UserName,
-                        NombreFinca = x.ubicacion!=null?x.ubicacion.descripcion:""
+                        NombreUbicacion = x.ubicacion!=null?x.ubicacion.descripcion:""
                         //esAdmin = x.AspNetUsers.AspNetRoles.Any(z=>z.Name=="Administrador")
                     }).ToList();
 
@@ -67,7 +66,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 ViewBag.ListaTipoUsuario = context.AspNetRoles.Where(x=>x.activo??false).Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
-                ViewBag.ListaFinca = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem {Value=x.id_ubicacion.ToString(), Text=x.descripcion }).ToList();
+                ViewBag.ListaUbicacion = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem {Value=x.id_ubicacion.ToString(), Text=x.descripcion }).ToList();
                 return View(new CrearUsuarioViewModel { FechaNac = DateTime.Now });
             }
            
@@ -89,10 +88,7 @@ namespace RID.Controllers
                         {
                             nombre = model.Nombre.Trim(),
                             apellido = model.Apellido.Trim(),
-                            fecha_nacimiento = model.FechaNac,
                             IdAspnetUser = user.Id,
-                            nro_telefono = model.Telefono,
-                            identidad = model.Identidad,
                             activo=true,
                             cuenta_usuario = model.UserName,
                             email = model.Email,
@@ -127,10 +123,6 @@ namespace RID.Controllers
                 {
                     Nombre = usuario.nombre,
                     Apellido = usuario.apellido,
-                    FechaNac = usuario.fecha_nacimiento,
-                    Telefono = usuario.nro_telefono,
-                    Identidad = usuario.identidad,
-                  
                 });
             }
         }
@@ -143,9 +135,6 @@ namespace RID.Controllers
                 var usuario = context.usuario.Find(model.Id);
                 usuario.nombre = model.Nombre;
                 usuario.apellido = model.Apellido;
-                usuario.fecha_nacimiento = model.FechaNac;
-                usuario.nro_telefono = model.Telefono;
-                usuario.identidad = model.Identidad;
                 context.Entry(usuario).State = EntityState.Modified;
                 var result = context.SaveChanges() > 0;
                 return Json(new MensajeRespuestaViewModel
@@ -163,7 +152,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 ViewBag.ListaTipoUsuario = context.AspNetRoles.Where(x=>x.activo??false).Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
-                ViewBag.ListaFinca = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_ubicacion.ToString(), Text = x.descripcion }).ToList();
+                ViewBag.ListaUbicacion = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_ubicacion.ToString(), Text = x.descripcion }).ToList();
                 var usuario = context.usuario.Find(Id);
                 return PartialView(new CrearUsuarioViewModel
                 {
@@ -276,9 +265,6 @@ namespace RID.Controllers
                 var  detalleUsuario = new DetalleUsuarioViewModel { PersonaID = Usuario.id_usuario,
                                                                     Nombre = Usuario.nombre,
                                                                     Apellido=Usuario.apellido,
-                                                                    Identidad=Usuario.identidad,
-                                                                    FechaNac= Usuario.fecha_nacimiento,
-                                                                    Telefono=Usuario.nro_telefono,
                                                                   };
                 return View(detalleUsuario); 
             }

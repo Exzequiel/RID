@@ -17,12 +17,9 @@ namespace RID.DB
         public int id_usuario { get; set; }
         public string IdAspnetUser { get; set; }
         public int id_ubicacion { get; set; }
-        public string identidad { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string cuenta_usuario { get; set; }
-        public System.DateTime fecha_nacimiento { get; set; }
-        public string nro_telefono { get; set; }
         public string email { get; set; }
         public bool activo { get; set; }
     

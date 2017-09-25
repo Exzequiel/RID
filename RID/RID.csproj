@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -269,6 +270,9 @@
     <Compile Include="Models\TipoUsuario\CreateTipoUsuarioViewModel.cs" />
     <Compile Include="Models\TipoUsuario\EditTipoUsuarioViewModel.cs" />
     <Compile Include="Models\TipoUsuario\ListTipoUsuarioViewModel.cs" />
+    <Compile Include="Models\Ubicacion\CreateUbicacionViewModel.cs" />
+    <Compile Include="Models\Ubicacion\EditUbicacionViewModel.cs" />
+    <Compile Include="Models\Ubicacion\ListUbicacionVIewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\Usuario\CambiarContrasenaViewModel.cs" />
     <Compile Include="Models\Usuario\CrearUsuarioViewModel.cs" />
@@ -6616,6 +6620,9 @@
     <Content Include="Views\Usuario\EditarInfoUsuario.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\ResetContrasena.cshtml" />
+    <Content Include="Views\Ubicacion\Create.cshtml" />
+    <Content Include="Views\Ubicacion\Edit.cshtml" />
+    <Content Include="Views\Ubicacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

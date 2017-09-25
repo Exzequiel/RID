@@ -123,23 +123,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="usuario">
-      <EntityTypeMapping TypeName="BodMantModel.usuario">
-        <MappingFragment StoreEntitySet="usuario">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="nro_telefono" ColumnName="nro_telefono" />
-          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-          <ScalarProperty Name="cuenta_usuario" ColumnName="cuenta_usuario" />
-          <ScalarProperty Name="apellido" ColumnName="apellido" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="identidad" ColumnName="identidad" />
-          <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
-          <ScalarProperty Name="IdAspnetUser" ColumnName="IdAspnetUser" />
-          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="BodMantModel.AspNetRoles">
         <MappingFragment StoreEntitySet="AspNetRoles">
@@ -164,6 +147,20 @@
           <ScalarProperty Name="valor" ColumnName="valor" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="id_configuracion" ColumnName="id_configuracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="BodMantModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="cuenta_usuario" ColumnName="cuenta_usuario" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
+          <ScalarProperty Name="IdAspnetUser" ColumnName="IdAspnetUser" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

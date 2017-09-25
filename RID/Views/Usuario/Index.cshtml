@@ -23,10 +23,9 @@
                             <th>Cuenta de Usuario</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Fecha de Nacimiento</th>
                             <th>Correo Electronico</th>
                             <th>Perfil </th>
-                            <th>Finca</th>
+                            <th>Ubicación</th>
                             <th>Estado </th>
 
                         </tr>
@@ -172,12 +171,12 @@
                     data: "Apellido"
                 },
 
-                {
-                    data: null,
-                    render: function (data) {
-                        return moment(data.FechaNac).format("DD/MM/YYYY");
-                    }
-                },
+                //{
+                //    data: null,
+                //    render: function (data) {
+                //        return moment(data.FechaNac).format("DD/MM/YYYY");
+                //    }
+                //},
                 {
                     data: "Email"
                 },
@@ -185,7 +184,7 @@
                     data: "Perfil"
                 },
                 {
-                    data: "NombreFinca"
+                    data: "NombreUbicacion"
                 },
                 {
                     data: null,

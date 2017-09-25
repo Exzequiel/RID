@@ -146,12 +146,9 @@
     <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAspnetUser" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="id_ubicacion" Type="int" Nullable="false" />
-    <Property Name="identidad" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="apellido" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="cuenta_usuario" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="fecha_nacimiento" Type="date" Nullable="false" />
-    <Property Name="nro_telefono" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>

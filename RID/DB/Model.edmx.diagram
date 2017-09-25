@@ -16,10 +16,8 @@
         <EntityTypeShape EntityType="BodMantModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="BodMantModel.tecnico" Width="1.5" PointX="0.75" PointY="8.875" />
         <EntityTypeShape EntityType="BodMantModel.ubicacion" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="BodMantModel.usuario" Width="1.5" PointX="6" PointY="5" />
         <AssociationConnector Association="BodMantModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BodMantModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="BodMantModel.FK_usuario_AspNetUsers" />
         <AssociationConnector Association="BodMantModel.FK_item_objeto" />
         <AssociationConnector Association="BodMantModel.FK_item_ubicacion" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_item" />
@@ -27,10 +25,12 @@
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_salida" />
         <AssociationConnector Association="BodMantModel.FK_salida_tecnico" />
         <AssociationConnector Association="BodMantModel.FK_salida_ubicacion" />
-        <AssociationConnector Association="BodMantModel.FK_usuario_ubicacion" />
         <EntityTypeShape EntityType="BodMantModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="13.875" />
         <AssociationConnector Association="BodMantModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="BodMantModel.configuracion" Width="1.5" PointX="8.375" PointY="6.75" />
+        <EntityTypeShape EntityType="BodMantModel.usuario" Width="1.5" PointX="6" PointY="8.875" />
+        <AssociationConnector Association="BodMantModel.FK_usuario_AspNetUsers" />
+        <AssociationConnector Association="BodMantModel.FK_usuario_ubicacion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -61,8 +61,6 @@ namespace RID.Controllers
                     Nombre = usuario.nombre,
                     Apellido = usuario.apellido,
                     CorreoElectronico = usuario.AspNetUsers.Email,
-                    FechaNacimiento = usuario.fecha_nacimiento,
-                    Identidad = usuario.identidad,
                     NombreUsuario = usuario.AspNetUsers.UserName,
                     TipoUsuario = usuario.AspNetUsers.AspNetRoles.FirstOrDefault().Name
                 });

@@ -57,7 +57,7 @@ namespace RID.Models.Usuario
         public string RoleUsuario { get; set; }
 
         [Display(Name = "Ubicación")]
-        public int? IdUbicacion { get; set; }
+        public int IdUbicacion { get; set; }
 
         public bool Estado { get; set; }
     }

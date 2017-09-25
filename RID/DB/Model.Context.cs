@@ -36,8 +36,8 @@ namespace RID.DB
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tecnico> tecnico { get; set; }
         public virtual DbSet<ubicacion> ubicacion { get; set; }
-        public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<configuracion> configuracion { get; set; }
+        public virtual DbSet<usuario> usuario { get; set; }
     }
 }
