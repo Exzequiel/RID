@@ -56,8 +56,8 @@ namespace RID.Models.Usuario
         [Display(Name = "Tipo de Usuario")]
         public string RoleUsuario { get; set; }
 
-        [Display(Name = "Finca")]
-        public int? IdFinca { get; set; }
+        [Display(Name = "Ubicación")]
+        public int? IdUbicacion { get; set; }
 
         public bool Estado { get; set; }
     }

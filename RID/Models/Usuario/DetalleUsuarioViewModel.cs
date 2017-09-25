@@ -16,7 +16,7 @@ namespace RID.Models.Usuario
         [Display(Name = "Tipo de Usuario")]
         public string TipoUsuario { get; set; }
 
-        [Display(Name = "Finca")]
-        public string NombreFinca { get; set; }
+        [Display(Name = "Ubicación")]
+        public string NombreUbicacion { get; set; }
     }
 }

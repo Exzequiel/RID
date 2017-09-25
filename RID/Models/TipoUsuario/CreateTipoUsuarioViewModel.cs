@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CASMUL.Models.TipoUsuario
+namespace RID.Models.TipoUsuario
 {
     public class CreateTipoUsuarioViewModel
     {

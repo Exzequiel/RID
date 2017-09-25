@@ -200,6 +200,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DB\AspNetRoles.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -6609,6 +6610,12 @@
     <Content Include="Views\Role\Crear.cshtml" />
     <Content Include="Views\Role\Editar.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Usuario\CrearUsuario.cshtml" />
+    <Content Include="Views\Usuario\DetalleUsuario.cshtml" />
+    <Content Include="Views\Usuario\EditarCuentaUsuario.cshtml" />
+    <Content Include="Views\Usuario\EditarInfoUsuario.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\ResetContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
