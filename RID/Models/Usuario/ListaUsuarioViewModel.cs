@@ -20,9 +20,6 @@ namespace RID.Models.Usuario
         [Display(Name = "Apellido")]
         public string Apellido { get; set; }
 
-        [Display(Name="Fecha de Nacimiento")]
-        public DateTime? FechaNac { get; set; }
-
         [Display(Name = "Correo Electrónico")]
         public string Email { get; set; }
 

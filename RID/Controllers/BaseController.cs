@@ -70,7 +70,7 @@ namespace RID.Controllers
             }
         }
 
-        public int ObtenerIdFincaPorUsuario()
+        public int ObtenerIdUbicacionPorUsuario()
         {
             using (var context = new RID.DB.BodMantEntities())
             {
@@ -78,7 +78,7 @@ namespace RID.Controllers
             }
         }
 
-        public string ObtenerNombreFincaPorUsuario()
+        public string ObtenerNombreUbicacionPorUsuario()
         {
             using (var context = new RID.DB.BodMantEntities())
             {
@@ -101,7 +101,5 @@ namespace RID.Controllers
             decimal semana= cantidadDias > 365 ? Convert.ToInt32(Math.Ceiling((cantidadDias % 365) / 7)) : Convert.ToInt32(Math.Ceiling(cantidadDias / 7));
             return Convert.ToInt32( Math.Ceiling(semana / 4));
         }
-
-     
     }
 }

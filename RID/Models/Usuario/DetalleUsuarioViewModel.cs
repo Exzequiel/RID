@@ -8,9 +8,6 @@ namespace RID.Models.Usuario
         public string IdAspnetUser { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string Identidad { get; set; }
-        public System.DateTime FechaNac { get; set; }
-        public string Telefono { get; set; }
         public bool Activo { get; set; }
 
         [Display(Name = "Tipo de Usuario")]

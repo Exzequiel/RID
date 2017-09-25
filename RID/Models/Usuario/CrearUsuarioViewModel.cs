@@ -18,19 +18,6 @@ namespace RID.Models.Usuario
         public string Apellido { get; set; }
 
         [Required]
-        [Display(Name = "N° Identidad")]
-        //[StringLength(13, MinimumLength = 13, ErrorMessage = "No tiene el formato correcto (La identidad tiene que ser de 13 digitos)")]
-        public string Identidad { get; set; }
-
-        [Required]
-        [Display(Name = "Fecha de Nacimiento")]
-        public DateTime FechaNac { get; set; }
-
-        [Required]
-        [Display(Name = "N° de Telefono o Celular")]
-        public string Telefono { get; set; }
-
-        [Required]
         [StringLength(50)]
         [Display(Name = "Nombre de Usuario")]
         public string UserName { get; set; }
