@@ -67,7 +67,7 @@ namespace RID.Controllers
             {
                 ViewBag.ListaTipoUsuario = context.AspNetRoles.Where(x=>x.activo??false).Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
                 ViewBag.ListaUbicacion = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem {Value=x.id_ubicacion.ToString(), Text=x.descripcion }).ToList();
-                return View(new CrearUsuarioViewModel { });
+                return View();
             }
            
         }

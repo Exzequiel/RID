@@ -197,12 +197,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\ObjetoController.cs" />
     <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TecnicoController.cs" />
-    <Compile Include="Controllers\ObjetoController.cs" />
+    <Compile Include="Controllers\MaquinaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DB\AspNetRoles.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -223,6 +225,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\item.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\maquina.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\Model.Context.cs">
@@ -267,7 +272,13 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Base\MensajeRespuestaViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Item\CreateItemVIewModel.cs" />
+    <Compile Include="Models\Item\EditItemViewModel.cs" />
+    <Compile Include="Models\Item\ListItemViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Maquina\CreateMaquinaViewModel.cs" />
+    <Compile Include="Models\Maquina\EditMaquinaViewModel.cs" />
+    <Compile Include="Models\Maquina\ListMaquinaViewModel.cs" />
     <Compile Include="Models\Objeto\CreateObjetoViewModel.cs" />
     <Compile Include="Models\Objeto\EditObjetoViewModel.cs" />
     <Compile Include="Models\Objeto\ListObjetoViewModel.cs" />
@@ -6637,6 +6648,12 @@
     <Content Include="Views\Objeto\Create.cshtml" />
     <Content Include="Views\Objeto\Edit.cshtml" />
     <Content Include="Views\Objeto\Index.cshtml" />
+    <Content Include="Views\Item\Create.cshtml" />
+    <Content Include="Views\Item\Edit.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
+    <Content Include="Views\Maquina\Create.cshtml" />
+    <Content Include="Views\Maquina\Edit.cshtml" />
+    <Content Include="Views\Maquina\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

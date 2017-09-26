@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RID.Models.Objeto;
+using RID.Models.Maquina;
+
 namespace RID.Controllers
 {
     //[Authorize(Roles = "Administrador")]
-    public class ObjetoController : Controller
+    public class MaquinaController : Controller
     {
         public ActionResult Index()
         {
             using (var contextCm = new BodMantEntities())
             {
-                var list = contextCm.objeto.ToList().Select(x => new ListObjetoViewModel { CodObjeto = x.cod_objeto, Activo = x.activo, IdObjeto = x.id_objeto });
+                var list = contextCm.maquina.ToList().Select(x => new ListMaquinaViewModel { Descripcion = x.descripcion_maquina, CodMaquina = x.cod_maquina, Activo = x.activo, IdMaquina = x.id_maquina });
                 return View(list);
             }
 
@@ -26,14 +27,14 @@ namespace RID.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(CreateObjetoViewModel model)
+        public ActionResult Create(CreateMaquinaViewModel model)
         {
             using (var contextCm = new BodMantEntities())
             {
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
-                    contextCm.objeto.Add(new objeto { cod_objeto = model.CodObjeto, activo = true });
+                    contextCm.maquina.Add(new maquina { descripcion_maquina = model.Descripcion, cod_maquina = model.CodMaquina, activo = true });
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {
@@ -59,20 +60,21 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var model = contextCm.objeto.FirstOrDefault(x => x.id_objeto == id);
-                return View(new EditObjetoViewModel { IdObjeto = model.id_objeto, CodObjeto = model.cod_objeto });
+                var model = contextCm.maquina.FirstOrDefault(x => x.id_maquina == id);
+                return View(new EditMaquinaViewModel { IdMaquina = model.id_maquina, Descripcion = model.descripcion_maquina, CodMaquina = model.cod_maquina });
             }
         }
         [HttpPost]
-        public ActionResult Edit(EditObjetoViewModel model)
+        public ActionResult Edit(EditMaquinaViewModel model)
         {
             using (var contextCm = new BodMantEntities())
             {
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
-                    var modelDb = contextCm.objeto.FirstOrDefault(x => x.id_objeto == model.IdObjeto);
-                    modelDb.cod_objeto = model.CodObjeto;
+                    var modelDb = contextCm.maquina.FirstOrDefault(x => x.id_maquina == model.IdMaquina);
+                    modelDb.descripcion_maquina = model.Descripcion;
+                    modelDb.cod_maquina = model.CodMaquina;
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {
@@ -98,7 +100,7 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var modelDb = contextCm.objeto.FirstOrDefault(x => x.id_objeto == id);
+                var modelDb = contextCm.maquina.FirstOrDefault(x => x.id_maquina == id);
                 modelDb.activo = !modelDb.activo;
                 var result = contextCm.SaveChanges() > 0;
                 return RedirectToAction("Index");

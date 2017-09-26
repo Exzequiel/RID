@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RID.Models.Objeto.ListObjetoViewModel>
+﻿@model IEnumerable<RID.Models.Maquina.ListMaquinaViewModel>
 
 <div class="row">
 
@@ -7,7 +7,7 @@
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
-                    <a href="~/Objeto/Create" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Nuevo</a>
+                    <a href="~/Maquina/Create" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Nuevo</a>
                 </div>
                 <h4 class="panel-title">Objetos</h4>
             </div>
@@ -15,11 +15,11 @@
                 <table class="table" data-class="dataTable">
                     <thead>
                         <tr>
-                            @*<th>
-                                @Html.DisplayNameFor(model => model.Descripcion)
-                            </th>*@
                             <th>
-                                @Html.DisplayNameFor(model => model.CodObjeto)
+                                @Html.DisplayNameFor(model => model.Descripcion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CodMaquina)
                             </th>
                             <th></th>
                         </tr>
@@ -28,22 +28,22 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.Descripcion)
-                                </td>*@
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CodObjeto)
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdObjeto }) |
+                                    @Html.DisplayFor(modelItem => item.CodMaquina)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.CodMaquina }) |
                                     @if (Convert.ToBoolean(item.Activo))
                                     {
 
-                                        @Html.ActionLink("Desactivar", "Delete", new { id = item.IdObjeto })
+                                        @Html.ActionLink("Desactivar", "Delete", new { id = item.CodMaquina })
                                     }
                                     else
                                     {
-                                        @Html.ActionLink("Activar", "Delete", new { id = item.IdObjeto })
+                                        @Html.ActionLink("Activar", "Delete", new { id = item.CodMaquina })
                                     }
                                 </td>
                             </tr>

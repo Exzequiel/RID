@@ -8,10 +8,7 @@ namespace RID.Models.Objeto
 {
     public class CreateObjetoViewModel
     {
-        [Display(Name = "Descripción")]
-        [Required]
-        public string Descripcion { get; set; }
-        [Display(Name = "Cód. Máquina")]
+        [Display(Name = "Cód. Objeto")]
         [Required]
         public string CodObjeto { get; set; }
     }

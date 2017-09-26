@@ -20,7 +20,7 @@ namespace RID.DB
         public int cant_aentregar { get; set; }
         public bool activo { get; set; }
     
-        public virtual item item { get; set; }
         public virtual salida salida { get; set; }
+        public virtual item item { get; set; }
     }
 }

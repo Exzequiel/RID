@@ -12,28 +12,20 @@ namespace RID.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class salida
+    public partial class maquina
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public salida()
+        public maquina()
         {
-            this.salida_detalle = new HashSet<salida_detalle>();
+            this.salida = new HashSet<salida>();
         }
     
-        public int id_salida { get; set; }
-        public string nro_salida { get; set; }
-        public System.DateTime fecha_transaccion { get; set; }
-        public int id_ubicacion { get; set; }
-        public int id_objeto { get; set; }
-        public int id_tecnico { get; set; }
-        public bool activo { get; set; }
         public int id_maquina { get; set; }
+        public string descripcion_maquina { get; set; }
+        public string cod_maquina { get; set; }
+        public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<salida_detalle> salida_detalle { get; set; }
-        public virtual ubicacion ubicacion { get; set; }
-        public virtual tecnico tecnico { get; set; }
-        public virtual maquina maquina { get; set; }
-        public virtual objeto objeto { get; set; }
+        public virtual ICollection<salida> salida { get; set; }
     }
 }
