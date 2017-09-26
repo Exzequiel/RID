@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TecnicoController.cs" />
+    <Compile Include="Controllers\ObjetoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DB\AspNetRoles.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -267,6 +268,9 @@
     <Compile Include="Models\Base\MensajeRespuestaViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Objeto\CreateObjetoViewModel.cs" />
+    <Compile Include="Models\Objeto\EditObjetoViewModel.cs" />
+    <Compile Include="Models\Objeto\ListObjetoViewModel.cs" />
     <Compile Include="Models\Roles\CrearRolViewModel.cs" />
     <Compile Include="Models\Tecnico\CreateTecnicoViewModel.cs" />
     <Compile Include="Models\Tecnico\EditTecnicoViewModel.cs" />
@@ -6630,6 +6634,9 @@
     <Content Include="Views\Tecnico\Create.cshtml" />
     <Content Include="Views\Tecnico\Edit.cshtml" />
     <Content Include="Views\Tecnico\Index.cshtml" />
+    <Content Include="Views\Objeto\Create.cshtml" />
+    <Content Include="Views\Objeto\Edit.cshtml" />
+    <Content Include="Views\Objeto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

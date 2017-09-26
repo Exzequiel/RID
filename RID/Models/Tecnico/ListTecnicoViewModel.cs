@@ -18,7 +18,7 @@ namespace RID.Models.Tecnico
         public string apellido { get; set; }
 
         [Display(Name = "Perfil")]
-        public string Puesto { get; set; }
+        public string puesto { get; set; }
 
         [Display(Name = "Estado")]
         public bool? Activo { get; set; }
