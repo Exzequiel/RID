@@ -18,7 +18,6 @@ namespace RID.DB
         public objeto()
         {
             this.item = new HashSet<item>();
-            this.objeto_por_maquina = new HashSet<objeto_por_maquina>();
             this.salida = new HashSet<salida>();
         }
     
@@ -28,8 +27,6 @@ namespace RID.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<objeto_por_maquina> objeto_por_maquina { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<salida> salida { get; set; }
     }

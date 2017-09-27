@@ -105,63 +105,7 @@
                         </form>
                     </li>
                     <li class="dropdown">
-                        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle icon">
-                            @*<i class="ion-ios-bell"></i>*@
-                            @*<span class="label">5</span>*@
-                        </a>
-                        <ul class="dropdown-menu media-list pull-right animated fadeInDown">
-                            @*<li class="dropdown-header">Notifications (5)</li>*@
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="ion-ios-close-empty media-object bg-red"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Server Error Reports</h6>
-                                        <div class="text-muted f-s-11">3 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="assets/img/user-1.jpg" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">John Smith</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">25 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><img src="assets/img/user-2.jpg" class="media-object" alt="" /></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading">Olivia</h6>
-                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
-                                        <div class="text-muted f-s-11">35 minutes ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="ion-ios-plus-empty media-object bg-blue"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New User Registered</h6>
-                                        <div class="text-muted f-s-11">1 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="media">
-                                <a href="javascript:;">
-                                    <div class="media-left"><i class="ion-ios-email-outline media-object bg-blue"></i></div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"> New Email From John</h6>
-                                        <div class="text-muted f-s-11">2 hour ago</div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="dropdown-footer text-center">
-                                <a href="javascript:;">View more</a>
-                            </li>
-                        </ul>
+         
                     </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
@@ -189,7 +133,7 @@
                 <ul class="nav">
                     <li class="nav-profile">
                         <div class="image">
-                            <a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
+                            <a href="javascript:;"><img src="~/assets/img/user-13.jpg" alt="" /></a>
                         </div>
                         <div class="info">
                             @User.Identity.Name <br />
@@ -206,10 +150,6 @@
                             <i class="ion-ios-pulse-strong"></i>
                             <span>Operaciones</span>
                         </a>
-                        @*<ul class="sub-menu">
-                            <li><a href="index.html">Dashboard v1</a></li>
-                            <li class="active"><a href="index_v2.html">Dashboard v2</a></li>
-                        </ul>*@
                     </li>
 
                     <li class="has-sub">
@@ -299,111 +239,34 @@
         <!-- begin #content -->
         <div id="content" class="content">
             @RenderBody()
-
-            <!-- begin page-header -->
-            @*<h4 class="page-header">ESTADÍSTICA DE SALIDAS <small> </small></h4>*@
-            <!-- end page-header -->
-
-            <!-- begin row -->
-            <div class="row">
-                <!-- begin col-3 -->
-                <div class="col-md-13 col-sm-12">
-                    <div class="widget widget-stats bg-white text-inverse">
-                        <div class="stats-icon stats-icon-lg stats-icon-square bg-gradient-blue"><i class="ion-ios-download-outline"></i></div>
-                        <div class="stats-title">DIARIO DE BAJAS</div>
-                        <div class="stats-number">7,842,900</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 70.1%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (70.1%)</div>
-                    </div>
-                </div>
-                <!-- end col-3 -->
-                <!-- begin col-3 -->
-                <div class="col-md-13 col-sm-12">
-                    <div class="widget widget-stats bg-white text-inverse">
-                        <div class="stats-icon stats-icon-lg stats-icon-square bg-gradient-blue"><i class="ion-ios-pricetags-outline"></i></div>
-                        <div class="stats-title">ÍTEMS TOTALES</div>
-                        <div class="stats-number">180,200</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 40.5%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (40.5%)</div>
-                    </div>
-                </div>
-                <!-- end col-3 -->  
-                <!-- begin col-3 -->
-                <div class="col-md-13 col-sm-12">
-                    <div class="widget widget-stats bg-white text-inverse">
-                        <div class="stats-icon stats-icon-lg stats-icon-square bg-gradient-blue"><i class="ion-ios-cog-outline"></i></div>
-                        <div class="stats-title">MÁQUINAS TOTALES</div>
-                        <div class="stats-number">38,900</div>
-                        <div class="stats-progress progress">
-                            <div class="progress-bar" style="width: 76.3%;"></div>
-                        </div>
-                        <div class="stats-desc">Better than last week (76.3%)</div>
-                    </div>
-                </div>
-                <!-- end col-3 -->
-                <!-- begin col-3 -->
-                
-                <!-- end col-3 -->
-            </div>
-            <!-- end row -->
-            <!-- begin row -->
-            <div class="row">
-                
-                
-            </div>
-            <!-- end row -->
-            <!-- begin row -->
-            <div class="row">
-                <!-- begin col-4 -->
-                <div class="col-md-4">
-                    <!-- begin panel -->
-                   
-                    <!-- end panel -->
-                </div>
-                <!-- end col-4 -->
-                <!-- begin col-4 -->
-                <div class="col-md-4">
-                    <!-- begin panel -->
-                    
-                    <!-- end panel -->
-                </div>
-                <!-- end col-4 -->
-                <!-- begin col-4 -->
-                <div class="col-md-4">
-                    <!-- begin panel -->
-                    
-                    <!-- end panel -->
-                </div>
-                <!-- end col-4 -->
-            </div>
             <!-- end row -->
         </div>
         <!-- end #content -->
         <!-- begin theme-panel -->
-        
-
         <!-- end theme-panel -->
         <!-- begin scroll to top btn -->
         <a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
         <!-- end scroll to top btn -->
     </div>
+
+
+
     <!-- end page container -->
     <!-- ================== BEGIN BASE JS ================== -->
-    <script src="~/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    @*<script src="~/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
     <script src="~/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
     <script src="~/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>*@
+
     <!--[if lt IE 9]>
         <script src="assets/crossbrowserjs/html5shiv.js"></script>
         <script src="assets/crossbrowserjs/respond.min.js"></script>
         <script src="assets/crossbrowserjs/excanvas.min.js"></script>
     <![endif]-->
+
     <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="~/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+
     <!-- ================== END BASE JS ================== -->
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="~/assets/plugins/morris/raphael.min.js"></script>

@@ -72,4 +72,3 @@ C:\Users\DichterSS\Documents\GitHub\RID\RID\bin\Microsoft.AspNet.Identity.Entity
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csproj.CoreCompileInputs.cache
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.dll
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.pdb
-C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache

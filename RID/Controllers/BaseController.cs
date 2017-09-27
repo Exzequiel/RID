@@ -88,18 +88,18 @@ namespace RID.Controllers
 
 
 
-        public int ObtenerSemana()
-        {
-            decimal cantidadDias = (DateTime.Now - DateTime.Parse("2017-01-02")).Days;
-            decimal semana= cantidadDias > 365 ? Convert.ToInt32(Math.Ceiling((cantidadDias % 365) / 7)) : Convert.ToInt32(Math.Ceiling(cantidadDias / 7));
-            return Convert.ToInt32(Math.Ceiling(semana%4)+1);
-        }
+        //public int ObtenerSemana()
+        //{
+        //    decimal cantidadDias = (DateTime.Now - DateTime.Parse("2017-01-02")).Days;
+        //    decimal semana= cantidadDias > 365 ? Convert.ToInt32(Math.Ceiling((cantidadDias % 365) / 7)) : Convert.ToInt32(Math.Ceiling(cantidadDias / 7));
+        //    return Convert.ToInt32(Math.Ceiling(semana%4)+1);
+        //}
 
-        public int ObtenerPeriodo()
-        {
-            decimal cantidadDias = (DateTime.Now - DateTime.Parse("2017-01-02")).Days;
-            decimal semana= cantidadDias > 365 ? Convert.ToInt32(Math.Ceiling((cantidadDias % 365) / 7)) : Convert.ToInt32(Math.Ceiling(cantidadDias / 7));
-            return Convert.ToInt32( Math.Ceiling(semana / 4));
-        }
+        //public int ObtenerPeriodo()
+        //{
+        //    decimal cantidadDias = (DateTime.Now - DateTime.Parse("2017-01-02")).Days;
+        //    decimal semana= cantidadDias > 365 ? Convert.ToInt32(Math.Ceiling((cantidadDias % 365) / 7)) : Convert.ToInt32(Math.Ceiling(cantidadDias / 7));
+        //    return Convert.ToInt32( Math.Ceiling(semana / 4));
+        //}
     }
 }

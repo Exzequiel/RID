@@ -66,7 +66,8 @@ namespace RID.Controllers
                     //cant_disponible = x.item.cant_disponible - (x.item.entrega_detalle.Any(y => y.activo && y.entrega.confirmado == false) ? x.item.entrega_detalle.Where(y => y.activo && y.entrega.confirmado == false).Sum(z => z.cant_aentregar) : 0) - (x.item.requisa_detalle.Any(y => y.activo) ? x.item.requisa_detalle.Where(y => y.activo).Sum(z => z.cant_enviada) : 0),
                     ubicacion = x.item.ubicacion.descripcion,
                     descripcion =x.item.cod_item+" - "+ x.item.descripcion,
-                    objeto = x.item.objeto.cod_objeto,
+                    objeto = x.item.objeto.cod_objeto+" - "+x.maquina.cod_maquina,
+                    tecnico = x.salida.tecnico.nombre+" - "+x.salida.tecnico.apellido,
                     activo = x.activo
                 }).ToList();
                 var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
@@ -84,10 +85,12 @@ namespace RID.Controllers
             using (var conexion = new BodMantEntities())
             {
                 var IdUbicacion = ObtenerIdUbicacionPorUsuario();
-                ViewBag.ListaMaquina = conexion.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina }).ToList();
-                ViewBag.ListaObjeto = new List<SelectListItem>();
+                ViewBag.ListaMaquina = conexion.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina + " - " + x.cod_maquina }).ToList();
+                ViewBag.ListaTecnico = conexion.tecnico.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre + " " + x.apellido }).ToList();
+                //ViewBag.ListaObjeto = conexion.objeto.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_objeto.ToString(), Text = x.cod_objeto }).ToList();
+                //ViewBag.ListaObjeto = new List<SelectListItem>();
                 ViewBag.ListaItem = conexion.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Ubicación: " + x.ubicacion.descripcion + " | Objeto: " + x.objeto.cod_objeto + " |" }).ToList();
-                return View( new CrearSalidaViewModel {nro_salida = getConfiguracion("CorrelativoSalida"), fecha_transaccion = DateTime.Now, /*semana = ObtenerSemana(), periodo = ObtenerPeriodo(),*/ NombreUbicacion = ObtenerNombreUbicacionPorUsuario() });
+                return View( new CrearSalidaViewModel {nro_salida = getConfiguracion("CorrelativoSalida"), fecha_transaccion = DateTime.Now, NombreUbicacion = ObtenerNombreUbicacionPorUsuario() });
             }
         }
 
@@ -100,21 +103,19 @@ namespace RID.Controllers
                     nro_salida = getConfiguracion("CorrelativoSalida"),
                     fecha_transaccion = DateTime.Now,
                     id_ubicacion = ObtenerIdUbicacionPorUsuario(),
-                    id_maquina = model.id_maquina,
-                    id_tecnico = model.id_tecnico,
-                    //semana = ObtenerSemana(),
-                    //periodo = ObtenerPeriodo(),
+                    //id_maquina = model.id_maquina,
+                    //id_tecnico = model.id_tecnico,
                     activo =true,
                     confirmado = false,
                     
                 });
-                foreach (var IdObjeto in model.id_objeto.ToList())
-                {
-                    context.objeto_por_maquina.Add(new objeto_por_maquina {
-                        id_objeto = IdObjeto,
-                        id_maquina = NuevaSalida.id_salida
-                    });
-                }
+                //foreach (var IdObjeto in model.id_objeto.ToList())
+                //{
+                //    context.objeto_por_maquina.Add(new objeto_por_maquina {
+                //        id_objeto = IdObjeto,
+                //        id_maquina = NuevaSalida.id_maquina
+                //    });
+                //}
 
                 foreach(var detalle in model.ListaDetalle??new List<CrearDetalleSalidaViewModel>())
                 {
@@ -131,14 +132,14 @@ namespace RID.Controllers
             }
         }
 
-        public ActionResult ObtenerListaObjetosPorMaquina(int IdMaquina)
-        {
-            using (var context = new BodMantEntities())
-            {
-                var lista = context.objeto.Where(x => x.activo && x.id_objeto == IdMaquina).Select(x => new { id = x.id_objeto, text = x.cod_objeto }).ToList();
-                return Json(new { list = lista }, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //public ActionResult ObtenerListaObjetosPorMaquina(int IdMaquina)
+        //{
+        //    using (var context = new BodMantEntities())
+        //    {
+        //        var lista = context.objeto.Where(x => x.activo && x.id_objeto == IdMaquina).Select(x => new { id = x.id_objeto, text = x.cod_objeto }).ToList();
+        //        return Json(new { list = lista }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
 
         public ActionResult ObtenerInfoItem(int IdItem)
@@ -155,6 +156,7 @@ namespace RID.Controllers
                     ubicacion = model.ubicacion.descripcion,
                     objeto = model.objeto.cod_objeto,
                     descripcion = model.cod_item+" - "+ model.descripcion,
+
                 }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -169,7 +171,7 @@ namespace RID.Controllers
             {
                 var ModelSalida = context.salida.Find(IdSalida);
                 ViewBag.ListaMaquina = context.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina }).ToList();
-                ViewBag.ListaObjeto = context.objeto.Where(x => x.activo && x.id_objeto == ModelSalida.id_ubicacion).Select(x => new SelectListItem { Value = x.id_objeto.ToString(), Text = x.cod_objeto}).ToList();
+                ViewBag.ListaObjeto = context.objeto.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_objeto.ToString(), Text = x.cod_objeto}).ToList();
                 ViewBag.ListaItem = context.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Ubicación: " + x.ubicacion.descripcion + " | Objeto: " + x.objeto.cod_objeto + " |" }).ToList();
 
                 return View("CrearSalida", new CrearSalidaViewModel
@@ -180,9 +182,7 @@ namespace RID.Controllers
                     NombreUbicacion = ModelSalida.ubicacion.descripcion,
                     fecha_transaccion = ModelSalida.fecha_transaccion,
                     nro_salida = ModelSalida.nro_salida,
-                    //semana = ModelSalida.semana,
-                    //periodo = ModelSalida.periodo,
-                    id_tecnico = ModelSalida.id_tecnico,
+                    //id_tecnico = ModelSalida.id_tecnico,
                     EsEditar = true,
                 });
             }
@@ -194,12 +194,14 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 var ModelSalida = context.salida.Find(model.id_salida);
-                ModelSalida.id_maquina = model.id_maquina;
+                //ModelSalida.id_maquina = model.id_maquina;
                 ModelSalida.id_tecnico = model.id_tecnico;
                 //context.objeto_por_maquina.RemoveRange(ModelSalida.cable_por_entrega);
-                foreach(var idobjeto in model.id_objeto) { context.objeto_por_maquina.Add(new objeto_por_maquina { id_objeto = idobjeto, id_maquina = ModelSalida.id_maquina }); }
-                ModelSalida.salida_detalle.ToList().ForEach(x => x.activo=false);
-                foreach(var detalle in model.ListaDetalle)
+
+                //foreach (var idobjeto in model.id_objeto) { context.objeto_por_maquina.Add(new objeto_por_maquina { id_objeto = idobjeto, id_maquina = ModelSalida.id_maquina }); }
+                //ModelSalida.salida_detalle.ToList().ForEach(x => x.activo=false);
+
+                foreach (var detalle in model.ListaDetalle)
                 {
                     if (ModelSalida.salida_detalle.Any(x => x.id_detalle_salida == detalle.id_detalle_salida))
                     {

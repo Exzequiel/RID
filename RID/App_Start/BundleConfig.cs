@@ -51,10 +51,13 @@ namespace RID
                        "~/assets/plugins/select2/dist/js/select2.min.js",
                        "~/assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
 
+                       "~/assets/plugins/morris/raphael.min.js",
+                       "~/assets/plugins/morris/morris.js",
                        "~/assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js",
                        "~/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js",
                        "~/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js",
                        "~/assets/plugins/gritter/js/jquery.gritter.js",
+                       "~/assets/js/dashboard-v2.min.js",
 
                        "~/assets/js/apps.min.js",
 

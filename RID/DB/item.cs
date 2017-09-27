@@ -28,8 +28,8 @@ namespace RID.DB
         public bool activo { get; set; }
     
         public virtual ubicacion ubicacion { get; set; }
+        public virtual objeto objeto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<salida_detalle> salida_detalle { get; set; }
-        public virtual objeto objeto { get; set; }
     }
 }

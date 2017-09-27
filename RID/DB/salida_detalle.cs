@@ -17,10 +17,12 @@ namespace RID.DB
         public int id_detalle_salida { get; set; }
         public int id_salida { get; set; }
         public int id_item { get; set; }
+        public int id_maquina { get; set; }
         public int cant_aentregar { get; set; }
         public bool activo { get; set; }
     
         public virtual item item { get; set; }
+        public virtual maquina maquina { get; set; }
         public virtual salida salida { get; set; }
     }
 }

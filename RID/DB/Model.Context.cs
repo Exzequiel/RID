@@ -32,14 +32,13 @@ namespace RID.DB
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<ubicacion> ubicacion { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<configuracion> configuracion { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
-        public virtual DbSet<tecnico> tecnico { get; set; }
-        public virtual DbSet<salida> salida { get; set; }
         public virtual DbSet<item> item { get; set; }
-        public virtual DbSet<salida_detalle> salida_detalle { get; set; }
-        public virtual DbSet<objeto_por_maquina> objeto_por_maquina { get; set; }
-        public virtual DbSet<maquina> maquina { get; set; }
         public virtual DbSet<objeto> objeto { get; set; }
+        public virtual DbSet<maquina> maquina { get; set; }
+        public virtual DbSet<salida> salida { get; set; }
+        public virtual DbSet<salida_detalle> salida_detalle { get; set; }
+        public virtual DbSet<tecnico> tecnico { get; set; }
+        public virtual DbSet<configuracion> configuracion { get; set; }
     }
 }

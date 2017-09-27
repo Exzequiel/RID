@@ -15,9 +15,13 @@ namespace RID.Models.Salida
 
         public string ubicacion { get; set; }
         public string objeto { get; set; }
+
         public string maquina { get; set; }
+
         public string tecnico { get; set; }
+
         public string descripcion { get; set; }
+
         //public int cant_disponible { get; set; }
         public bool activo { get; set; }
     }

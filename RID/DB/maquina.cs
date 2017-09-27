@@ -17,8 +17,7 @@ namespace RID.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public maquina()
         {
-            this.objeto_por_maquina = new HashSet<objeto_por_maquina>();
-            this.salida = new HashSet<salida>();
+            this.salida_detalle = new HashSet<salida_detalle>();
         }
     
         public int id_maquina { get; set; }
@@ -27,8 +26,6 @@ namespace RID.DB
         public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<objeto_por_maquina> objeto_por_maquina { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<salida> salida { get; set; }
+        public virtual ICollection<salida_detalle> salida_detalle { get; set; }
     }
 }
