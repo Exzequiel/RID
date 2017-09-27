@@ -12,15 +12,13 @@ namespace RID.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class salida_detalle
+    public partial class objeto_por_maquina
     {
-        public int id_detalle_salida { get; set; }
-        public int id_salida { get; set; }
-        public int id_item { get; set; }
-        public int cant_aentregar { get; set; }
-        public bool activo { get; set; }
+        public int id_objeto_por_maquina { get; set; }
+        public int id_maquina { get; set; }
+        public int id_objeto { get; set; }
     
-        public virtual item item { get; set; }
-        public virtual salida salida { get; set; }
+        public virtual maquina maquina { get; set; }
+        public virtual objeto objeto { get; set; }
     }
 }

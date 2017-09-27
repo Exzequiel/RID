@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\SalidaController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ObjetoController.cs" />
     <Compile Include="Controllers\UbicacionController.cs" />
@@ -248,6 +249,9 @@
     <Compile Include="DB\objeto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\objeto_por_maquina.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\salida.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -283,6 +287,9 @@
     <Compile Include="Models\Objeto\EditObjetoViewModel.cs" />
     <Compile Include="Models\Objeto\ListObjetoViewModel.cs" />
     <Compile Include="Models\Roles\CrearRolViewModel.cs" />
+    <Compile Include="Models\Salida\CrearDetalleSalidaViewModel.cs" />
+    <Compile Include="Models\Salida\CrearSalidaViewModel.cs" />
+    <Compile Include="Models\Salida\ListaSalidaViewModel.cs" />
     <Compile Include="Models\Tecnico\CreateTecnicoViewModel.cs" />
     <Compile Include="Models\Tecnico\EditTecnicoViewModel.cs" />
     <Compile Include="Models\Tecnico\ListTecnicoViewModel.cs" />
@@ -6654,6 +6661,9 @@
     <Content Include="Views\Maquina\Create.cshtml" />
     <Content Include="Views\Maquina\Edit.cshtml" />
     <Content Include="Views\Maquina\Index.cshtml" />
+    <Content Include="Views\Salida\CrearSalida.cshtml" />
+    <Content Include="Views\Salida\Index.cshtml" />
+    <Content Include="Views\Salida\VerDetalleSalida.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

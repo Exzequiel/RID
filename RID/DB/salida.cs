@@ -26,13 +26,14 @@ namespace RID.DB
         public int id_ubicacion { get; set; }
         public int id_objeto { get; set; }
         public int id_tecnico { get; set; }
-        public bool activo { get; set; }
         public int id_maquina { get; set; }
+        public bool confirmado { get; set; }
+        public bool activo { get; set; }
     
+        public virtual tecnico tecnico { get; set; }
+        public virtual ubicacion ubicacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<salida_detalle> salida_detalle { get; set; }
-        public virtual ubicacion ubicacion { get; set; }
-        public virtual tecnico tecnico { get; set; }
         public virtual maquina maquina { get; set; }
         public virtual objeto objeto { get; set; }
     }

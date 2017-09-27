@@ -244,7 +244,9 @@
                             <span>Bajas</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="email_system.html">Generar Baja <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            @*<li><a href="email_system.html">Generar Baja <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            <li><a href="@Url.Action("Index","Entrega")">Entregas</a></li>*@
+                            <li><a href="@Url.Action("Index", "Salida")" title="Bajas"><span>Generar Baja</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                         </ul>
                     </li>
                     @*<li><a href="calendar.html"><i class="ion-ios-calendar-outline bg-pink"></i> <span>Calendar</span></a></li>*@

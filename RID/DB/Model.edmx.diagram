@@ -9,14 +9,10 @@
         <EntityTypeShape EntityType="BodMantModel.AspNetUserClaims" Width="1.5" PointX="6" PointY="15.125" />
         <EntityTypeShape EntityType="BodMantModel.AspNetUserLogins" Width="1.5" PointX="6" PointY="12.5" />
         <EntityTypeShape EntityType="BodMantModel.AspNetUsers" Width="1.5" PointX="3.75" PointY="12.75" />
-        <EntityTypeShape EntityType="BodMantModel.salida" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="BodMantModel.salida_detalle" Width="1.5" PointX="5.25" PointY="1.75" />
         <EntityTypeShape EntityType="BodMantModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="BodMantModel.ubicacion" Width="1.5" PointX="0.75" PointY="5.75" />
         <AssociationConnector Association="BodMantModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="BodMantModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="BodMantModel.FK_salida_detalle_salida" />
-        <AssociationConnector Association="BodMantModel.FK_salida_ubicacion" />
         <EntityTypeShape EntityType="BodMantModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="13.875" />
         <AssociationConnector Association="BodMantModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="BodMantModel.configuracion" Width="1.5" PointX="8.375" PointY="6.75" />
@@ -24,15 +20,22 @@
         <AssociationConnector Association="BodMantModel.FK_usuario_AspNetUsers" />
         <AssociationConnector Association="BodMantModel.FK_usuario_ubicacion" />
         <EntityTypeShape EntityType="BodMantModel.tecnico" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="BodMantModel.salida" Width="1.5" PointX="11.625" PointY="1.625" />
         <AssociationConnector Association="BodMantModel.FK_salida_tecnico" />
-        <EntityTypeShape EntityType="BodMantModel.maquina" Width="1.5" PointX="0.75" PointY="3" />
-        <EntityTypeShape EntityType="BodMantModel.objeto" Width="1.5" PointX="5.375" PointY="5.875" />
-        <AssociationConnector Association="BodMantModel.FK_salida_maquina" />
-        <AssociationConnector Association="BodMantModel.FK_salida_objeto" />
+        <AssociationConnector Association="BodMantModel.FK_salida_ubicacion" />
         <EntityTypeShape EntityType="BodMantModel.item" Width="1.5" PointX="10.625" PointY="6.5" />
-        <AssociationConnector Association="BodMantModel.FK_item_objeto" />
+        <EntityTypeShape EntityType="BodMantModel.salida_detalle" Width="1.5" PointX="13.875" PointY="2.25" />
         <AssociationConnector Association="BodMantModel.FK_item_ubicacion" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_item" />
+        <AssociationConnector Association="BodMantModel.FK_salida_detalle_salida" />
+        <EntityTypeShape EntityType="BodMantModel.objeto_por_maquina" Width="1.5" PointX="8.625" PointY="10.5" />
+        <EntityTypeShape EntityType="BodMantModel.maquina" Width="1.5" PointX="5.375" PointY="3" />
+        <EntityTypeShape EntityType="BodMantModel.objeto" Width="1.5" PointX="5.375" PointY="6" />
+        <AssociationConnector Association="BodMantModel.FK_item_objeto" />
+        <AssociationConnector Association="BodMantModel.FK_objeto_por_maquina_maquina" />
+        <AssociationConnector Association="BodMantModel.FK_salida_maquina" />
+        <AssociationConnector Association="BodMantModel.FK_objeto_por_maquina_objeto" />
+        <AssociationConnector Association="BodMantModel.FK_salida_objeto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

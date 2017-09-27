@@ -104,6 +104,14 @@
           <Property Name="cod_objeto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="objeto_por_maquina">
+          <Key>
+            <PropertyRef Name="id_objeto_por_maquina" />
+          </Key>
+          <Property Name="id_objeto_por_maquina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_maquina" Type="int" Nullable="false" />
+          <Property Name="id_objeto" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="salida">
           <Key>
             <PropertyRef Name="id_salida" />
@@ -115,6 +123,7 @@
           <Property Name="id_objeto" Type="int" Nullable="false" />
           <Property Name="id_tecnico" Type="int" Nullable="false" />
           <Property Name="id_maquina" Type="int" Nullable="false" />
+          <Property Name="confirmado" Type="bit" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="salida_detalle">
@@ -123,7 +132,7 @@
           </Key>
           <Property Name="id_detalle_salida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_salida" Type="int" Nullable="false" />
-          <Property Name="it_item" Type="int" Nullable="false" />
+          <Property Name="id_item" Type="int" Nullable="false" />
           <Property Name="cant_aentregar" Type="int" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
@@ -248,6 +257,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_objeto_por_maquina_maquina">
+          <End Role="maquina" Type="Self.maquina" Multiplicity="1" />
+          <End Role="objeto_por_maquina" Type="Self.objeto_por_maquina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maquina">
+              <PropertyRef Name="id_maquina" />
+            </Principal>
+            <Dependent Role="objeto_por_maquina">
+              <PropertyRef Name="id_maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_objeto_por_maquina_objeto">
+          <End Role="objeto" Type="Self.objeto" Multiplicity="1" />
+          <End Role="objeto_por_maquina" Type="Self.objeto_por_maquina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objeto">
+              <PropertyRef Name="id_objeto" />
+            </Principal>
+            <Dependent Role="objeto_por_maquina">
+              <PropertyRef Name="id_objeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_salida_detalle_item">
           <End Role="item" Type="Self.item" Multiplicity="1" />
           <End Role="salida_detalle" Type="Self.salida_detalle" Multiplicity="*" />
@@ -256,7 +289,7 @@
               <PropertyRef Name="id_item" />
             </Principal>
             <Dependent Role="salida_detalle">
-              <PropertyRef Name="it_item" />
+              <PropertyRef Name="id_item" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,6 +388,7 @@
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="maquina" EntityType="Self.maquina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="objeto" EntityType="Self.objeto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="objeto_por_maquina" EntityType="Self.objeto_por_maquina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="salida" EntityType="Self.salida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="salida_detalle" EntityType="Self.salida_detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -384,6 +418,14 @@
           <AssociationSet Name="FK_item_ubicacion" Association="Self.FK_item_ubicacion">
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_maquina_maquina" Association="Self.FK_objeto_por_maquina_maquina">
+            <End Role="maquina" EntitySet="maquina" />
+            <End Role="objeto_por_maquina" EntitySet="objeto_por_maquina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_maquina_objeto" Association="Self.FK_objeto_por_maquina_objeto">
+            <End Role="objeto" EntitySet="objeto" />
+            <End Role="objeto_por_maquina" EntitySet="objeto_por_maquina" />
           </AssociationSet>
           <AssociationSet Name="FK_salida_detalle_item" Association="Self.FK_salida_detalle_item">
             <End Role="item" EntitySet="item" />
@@ -427,8 +469,6 @@
           <EntitySet Name="AspNetUserClaims" EntityType="BodMantModel.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="BodMantModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="BodMantModel.AspNetUsers" />
-          <EntitySet Name="salida" EntityType="BodMantModel.salida" />
-          <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
           <EntitySet Name="sysdiagrams" EntityType="BodMantModel.sysdiagrams" />
           <EntitySet Name="ubicacion" EntityType="BodMantModel.ubicacion" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="BodMantModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -438,14 +478,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="BodMantModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_salida_detalle_salida" Association="BodMantModel.FK_salida_detalle_salida">
-            <End Role="salida" EntitySet="salida" />
-            <End Role="salida_detalle" EntitySet="salida_detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_salida_ubicacion" Association="BodMantModel.FK_salida_ubicacion">
-            <End Role="ubicacion" EntitySet="ubicacion" />
-            <End Role="salida" EntitySet="salida" />
           </AssociationSet>
           <EntitySet Name="AspNetRoles" EntityType="BodMantModel.AspNetRoles" />
           <AssociationSet Name="AspNetUserRoles" Association="BodMantModel.AspNetUserRoles">
@@ -463,25 +495,17 @@
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
           <EntitySet Name="tecnico" EntityType="BodMantModel.tecnico" />
+          <EntitySet Name="salida" EntityType="BodMantModel.salida" />
           <AssociationSet Name="FK_salida_tecnico" Association="BodMantModel.FK_salida_tecnico">
             <End Role="tecnico" EntitySet="tecnico" />
             <End Role="salida" EntitySet="salida" />
           </AssociationSet>
-          <EntitySet Name="maquina" EntityType="BodMantModel.maquina" />
-          <EntitySet Name="objeto" EntityType="BodMantModel.objeto" />
-          <AssociationSet Name="FK_salida_maquina" Association="BodMantModel.FK_salida_maquina">
-            <End Role="maquina" EntitySet="maquina" />
-            <End Role="salida" EntitySet="salida" />
-          </AssociationSet>
-          <AssociationSet Name="FK_salida_objeto" Association="BodMantModel.FK_salida_objeto">
-            <End Role="objeto" EntitySet="objeto" />
+          <AssociationSet Name="FK_salida_ubicacion" Association="BodMantModel.FK_salida_ubicacion">
+            <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="salida" EntitySet="salida" />
           </AssociationSet>
           <EntitySet Name="item" EntityType="BodMantModel.item" />
-          <AssociationSet Name="FK_item_objeto" Association="BodMantModel.FK_item_objeto">
-            <End Role="objeto" EntitySet="objeto" />
-            <End Role="item" EntitySet="item" />
-          </AssociationSet>
+          <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
           <AssociationSet Name="FK_item_ubicacion" Association="BodMantModel.FK_item_ubicacion">
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="item" EntitySet="item" />
@@ -489,6 +513,33 @@
           <AssociationSet Name="FK_salida_detalle_item" Association="BodMantModel.FK_salida_detalle_item">
             <End Role="item" EntitySet="item" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salida_detalle_salida" Association="BodMantModel.FK_salida_detalle_salida">
+            <End Role="salida" EntitySet="salida" />
+            <End Role="salida_detalle" EntitySet="salida_detalle" />
+          </AssociationSet>
+          <EntitySet Name="objeto_por_maquina" EntityType="BodMantModel.objeto_por_maquina" />
+          <EntitySet Name="maquina" EntityType="BodMantModel.maquina" />
+          <EntitySet Name="objeto" EntityType="BodMantModel.objeto" />
+          <AssociationSet Name="FK_item_objeto" Association="BodMantModel.FK_item_objeto">
+            <End Role="objeto" EntitySet="objeto" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_maquina_maquina" Association="BodMantModel.FK_objeto_por_maquina_maquina">
+            <End Role="maquina" EntitySet="maquina" />
+            <End Role="objeto_por_maquina" EntitySet="objeto_por_maquina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salida_maquina" Association="BodMantModel.FK_salida_maquina">
+            <End Role="maquina" EntitySet="maquina" />
+            <End Role="salida" EntitySet="salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_maquina_objeto" Association="BodMantModel.FK_objeto_por_maquina_objeto">
+            <End Role="objeto" EntitySet="objeto" />
+            <End Role="objeto_por_maquina" EntitySet="objeto_por_maquina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_salida_objeto" Association="BodMantModel.FK_salida_objeto">
+            <End Role="objeto" EntitySet="objeto" />
+            <End Role="salida" EntitySet="salida" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -543,36 +594,6 @@
           <NavigationProperty Name="AspNetRoles" Relationship="BodMantModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="usuario" Relationship="BodMantModel.FK_usuario_AspNetUsers" FromRole="AspNetUsers" ToRole="usuario" />
         </EntityType>
-        <EntityType Name="salida">
-          <Key>
-            <PropertyRef Name="id_salida" />
-          </Key>
-          <Property Name="id_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nro_salida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_transaccion" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="id_ubicacion" Type="Int32" Nullable="false" />
-          <Property Name="id_objeto" Type="Int32" Nullable="false" />
-          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida" ToRole="salida_detalle" />
-          <NavigationProperty Name="ubicacion" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="salida" ToRole="ubicacion" />
-          <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_tecnico" FromRole="salida" ToRole="tecnico" />
-          <Property Name="id_maquina" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_salida_maquina" FromRole="salida" ToRole="maquina" />
-          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_salida_objeto" FromRole="salida" ToRole="objeto" />
-        </EntityType>
-        <EntityType Name="salida_detalle">
-          <Key>
-            <PropertyRef Name="id_detalle_salida" />
-          </Key>
-          <Property Name="id_detalle_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_salida" Type="Int32" Nullable="false" />
-          <Property Name="it_item" Type="Int32" Nullable="false" />
-          <Property Name="cant_aentregar" Type="Int32" Nullable="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida_detalle" ToRole="salida" />
-          <NavigationProperty Name="item" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="salida_detalle" ToRole="item" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -590,8 +611,8 @@
           <Property Name="id_ubicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="ubicacion" ToRole="salida" />
           <NavigationProperty Name="usuario" Relationship="BodMantModel.FK_usuario_ubicacion" FromRole="ubicacion" ToRole="usuario" />
+          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="ubicacion" ToRole="salida" />
           <NavigationProperty Name="item" Relationship="BodMantModel.FK_item_ubicacion" FromRole="ubicacion" ToRole="item" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -619,30 +640,6 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_detalle_salida">
-          <End Type="BodMantModel.salida" Role="salida" Multiplicity="1" />
-          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="salida">
-              <PropertyRef Name="id_salida" />
-            </Principal>
-            <Dependent Role="salida_detalle">
-              <PropertyRef Name="id_salida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_ubicacion">
-          <End Type="BodMantModel.ubicacion" Role="ubicacion" Multiplicity="1" />
-          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ubicacion">
-              <PropertyRef Name="id_ubicacion" />
-            </Principal>
-            <Dependent Role="salida">
-              <PropertyRef Name="id_ubicacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -718,6 +715,25 @@
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_tecnico" FromRole="tecnico" ToRole="salida" />
         </EntityType>
+        <EntityType Name="salida">
+          <Key>
+            <PropertyRef Name="id_salida" />
+          </Key>
+          <Property Name="id_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nro_salida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_transaccion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_ubicacion" Type="Int32" Nullable="false" />
+          <Property Name="id_objeto" Type="Int32" Nullable="false" />
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
+          <Property Name="id_maquina" Type="Int32" Nullable="false" />
+          <Property Name="confirmado" Type="Boolean" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_tecnico" FromRole="salida" ToRole="tecnico" />
+          <NavigationProperty Name="ubicacion" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="salida" ToRole="ubicacion" />
+          <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida" ToRole="salida_detalle" />
+          <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_salida_maquina" FromRole="salida" ToRole="maquina" />
+          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_salida_objeto" FromRole="salida" ToRole="objeto" />
+        </EntityType>
         <Association Name="FK_salida_tecnico">
           <End Type="BodMantModel.tecnico" Role="tecnico" Multiplicity="1" />
           <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
@@ -730,47 +746,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="maquina">
-          <Key>
-            <PropertyRef Name="id_maquina" />
-          </Key>
-          <Property Name="id_maquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcion_maquina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cod_maquina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_maquina" FromRole="maquina" ToRole="salida" />
-        </EntityType>
-        <EntityType Name="objeto">
-          <Key>
-            <PropertyRef Name="id_objeto" />
-          </Key>
-          <Property Name="id_objeto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cod_objeto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_objeto" FromRole="objeto" ToRole="salida" />
-          <NavigationProperty Name="item" Relationship="BodMantModel.FK_item_objeto" FromRole="objeto" ToRole="item" />
-        </EntityType>
-        <Association Name="FK_salida_maquina">
-          <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
+        <Association Name="FK_salida_ubicacion">
+          <End Type="BodMantModel.ubicacion" Role="ubicacion" Multiplicity="1" />
           <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="maquina">
-              <PropertyRef Name="id_maquina" />
+            <Principal Role="ubicacion">
+              <PropertyRef Name="id_ubicacion" />
             </Principal>
             <Dependent Role="salida">
-              <PropertyRef Name="id_maquina" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_objeto">
-          <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
-          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="objeto">
-              <PropertyRef Name="id_objeto" />
-            </Principal>
-            <Dependent Role="salida">
-              <PropertyRef Name="id_objeto" />
+              <PropertyRef Name="id_ubicacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -784,22 +768,22 @@
           <Property Name="id_objeto" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_item_objeto" FromRole="item" ToRole="objeto" />
           <NavigationProperty Name="ubicacion" Relationship="BodMantModel.FK_item_ubicacion" FromRole="item" ToRole="ubicacion" />
           <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="item" ToRole="salida_detalle" />
+          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_item_objeto" FromRole="item" ToRole="objeto" />
         </EntityType>
-        <Association Name="FK_item_objeto">
-          <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
-          <End Type="BodMantModel.item" Role="item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="objeto">
-              <PropertyRef Name="id_objeto" />
-            </Principal>
-            <Dependent Role="item">
-              <PropertyRef Name="id_objeto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="salida_detalle">
+          <Key>
+            <PropertyRef Name="id_detalle_salida" />
+          </Key>
+          <Property Name="id_detalle_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_salida" Type="Int32" Nullable="false" />
+          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="cant_aentregar" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="salida_detalle" ToRole="item" />
+          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida_detalle" ToRole="salida" />
+        </EntityType>
         <Association Name="FK_item_ubicacion">
           <End Type="BodMantModel.ubicacion" Role="ubicacion" Multiplicity="1" />
           <End Type="BodMantModel.item" Role="item" Multiplicity="*" />
@@ -820,7 +804,111 @@
               <PropertyRef Name="id_item" />
             </Principal>
             <Dependent Role="salida_detalle">
-              <PropertyRef Name="it_item" />
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salida_detalle_salida">
+          <End Type="BodMantModel.salida" Role="salida" Multiplicity="1" />
+          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salida">
+              <PropertyRef Name="id_salida" />
+            </Principal>
+            <Dependent Role="salida_detalle">
+              <PropertyRef Name="id_salida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="objeto_por_maquina">
+          <Key>
+            <PropertyRef Name="id_objeto_por_maquina" />
+          </Key>
+          <Property Name="id_objeto_por_maquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_maquina" Type="Int32" Nullable="false" />
+          <Property Name="id_objeto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_objeto_por_maquina_maquina" FromRole="objeto_por_maquina" ToRole="maquina" />
+          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_objeto_por_maquina_objeto" FromRole="objeto_por_maquina" ToRole="objeto" />
+        </EntityType>
+        <EntityType Name="maquina">
+          <Key>
+            <PropertyRef Name="id_maquina" />
+          </Key>
+          <Property Name="id_maquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_maquina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cod_maquina" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="objeto_por_maquina" Relationship="BodMantModel.FK_objeto_por_maquina_maquina" FromRole="maquina" ToRole="objeto_por_maquina" />
+          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_maquina" FromRole="maquina" ToRole="salida" />
+        </EntityType>
+        <EntityType Name="objeto">
+          <Key>
+            <PropertyRef Name="id_objeto" />
+          </Key>
+          <Property Name="id_objeto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_objeto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="BodMantModel.FK_item_objeto" FromRole="objeto" ToRole="item" />
+          <NavigationProperty Name="objeto_por_maquina" Relationship="BodMantModel.FK_objeto_por_maquina_objeto" FromRole="objeto" ToRole="objeto_por_maquina" />
+          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_objeto" FromRole="objeto" ToRole="salida" />
+        </EntityType>
+        <Association Name="FK_item_objeto">
+          <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
+          <End Type="BodMantModel.item" Role="item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objeto">
+              <PropertyRef Name="id_objeto" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="id_objeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_objeto_por_maquina_maquina">
+          <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
+          <End Type="BodMantModel.objeto_por_maquina" Role="objeto_por_maquina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maquina">
+              <PropertyRef Name="id_maquina" />
+            </Principal>
+            <Dependent Role="objeto_por_maquina">
+              <PropertyRef Name="id_maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salida_maquina">
+          <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
+          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maquina">
+              <PropertyRef Name="id_maquina" />
+            </Principal>
+            <Dependent Role="salida">
+              <PropertyRef Name="id_maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_objeto_por_maquina_objeto">
+          <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
+          <End Type="BodMantModel.objeto_por_maquina" Role="objeto_por_maquina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objeto">
+              <PropertyRef Name="id_objeto" />
+            </Principal>
+            <Dependent Role="objeto_por_maquina">
+              <PropertyRef Name="id_objeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salida_objeto">
+          <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
+          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objeto">
+              <PropertyRef Name="id_objeto" />
+            </Principal>
+            <Dependent Role="salida">
+              <PropertyRef Name="id_objeto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -874,31 +962,6 @@
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="salida">
-            <EntityTypeMapping TypeName="BodMantModel.salida">
-              <MappingFragment StoreEntitySet="salida">
-                <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-                <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-                <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
-                <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
-                <ScalarProperty Name="nro_salida" ColumnName="nro_salida" />
-                <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="salida_detalle">
-            <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
-              <MappingFragment StoreEntitySet="salida_detalle">
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
-                <ScalarProperty Name="it_item" ColumnName="it_item" />
-                <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-                <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -974,6 +1037,53 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="salida">
+            <EntityTypeMapping TypeName="BodMantModel.salida">
+              <MappingFragment StoreEntitySet="salida">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="confirmado" ColumnName="confirmado" />
+                <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
+                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+                <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
+                <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
+                <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
+                <ScalarProperty Name="nro_salida" ColumnName="nro_salida" />
+                <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item">
+            <EntityTypeMapping TypeName="BodMantModel.item">
+              <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
+                <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
+                <ScalarProperty Name="cod_item" ColumnName="cod_item" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salida_detalle">
+            <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
+              <MappingFragment StoreEntitySet="salida_detalle">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+                <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="objeto_por_maquina">
+            <EntityTypeMapping TypeName="BodMantModel.objeto_por_maquina">
+              <MappingFragment StoreEntitySet="objeto_por_maquina">
+                <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
+                <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
+                <ScalarProperty Name="id_objeto_por_maquina" ColumnName="id_objeto_por_maquina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="maquina">
             <EntityTypeMapping TypeName="BodMantModel.maquina">
               <MappingFragment StoreEntitySet="maquina">
@@ -990,18 +1100,6 @@
                 <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="cod_objeto" ColumnName="cod_objeto" />
                 <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="item">
-            <EntityTypeMapping TypeName="BodMantModel.item">
-              <MappingFragment StoreEntitySet="item">
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-                <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
-                <ScalarProperty Name="cod_item" ColumnName="cod_item" />
-                <ScalarProperty Name="id_item" ColumnName="id_item" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
