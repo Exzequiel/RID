@@ -16,7 +16,7 @@ namespace RID.DB
     {
         public int id_usuario { get; set; }
         public string IdAspnetUser { get; set; }
-        public int id_ubicacion { get; set; }
+        public int id_departamento { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string cuenta_usuario { get; set; }
@@ -24,6 +24,6 @@ namespace RID.DB
         public bool activo { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual ubicacion ubicacion { get; set; }
+        public virtual departamento departamento { get; set; }
     }
 }

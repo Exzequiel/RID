@@ -200,6 +200,7 @@
     <Compile Include="Controllers\SalidaController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ObjetoController.cs" />
+    <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -225,6 +226,9 @@
     <Compile Include="DB\C__MigrationHistory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\departamento.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\item.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -247,6 +251,9 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="DB\objeto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\objeto_por_salida.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\salida.cs">
@@ -293,6 +300,9 @@
     <Compile Include="Models\TipoUsuario\CreateTipoUsuarioViewModel.cs" />
     <Compile Include="Models\TipoUsuario\EditTipoUsuarioViewModel.cs" />
     <Compile Include="Models\TipoUsuario\ListTipoUsuarioViewModel.cs" />
+    <Compile Include="Models\Departamento\CreateDepartamentoViewModel.cs" />
+    <Compile Include="Models\Departamento\EditDepartamentoViewModel.cs" />
+    <Compile Include="Models\Departamento\ListDepartamentoViewModel.cs" />
     <Compile Include="Models\Ubicacion\CreateUbicacionViewModel.cs" />
     <Compile Include="Models\Ubicacion\EditUbicacionViewModel.cs" />
     <Compile Include="Models\Ubicacion\ListUbicacionVIewModel.cs" />
@@ -6660,6 +6670,9 @@
     <Content Include="Views\Salida\CrearSalida.cshtml" />
     <Content Include="Views\Salida\Index.cshtml" />
     <Content Include="Views\Salida\VerDetalleSalida.cshtml" />
+    <Content Include="Views\Departamento\Create.cshtml" />
+    <Content Include="Views\Departamento\Edit.cshtml" />
+    <Content Include="Views\Departamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

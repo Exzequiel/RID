@@ -25,7 +25,7 @@ namespace RID.Models.Usuario
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
 
-        [Display(Name = "Ubicación")]
-        public string NombreUbicacion { get; set; }
+        [Display(Name = "Departamentos")]
+        public string NombreDepartamento { get; set; }
     }
 }

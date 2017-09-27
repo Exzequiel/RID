@@ -26,19 +26,21 @@ namespace RID.DB
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<ubicacion> ubicacion { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<configuracion> configuracion { get; set; }
+        public virtual DbSet<departamento> departamento { get; set; }
         public virtual DbSet<item> item { get; set; }
-        public virtual DbSet<objeto> objeto { get; set; }
         public virtual DbSet<maquina> maquina { get; set; }
+        public virtual DbSet<objeto> objeto { get; set; }
+        public virtual DbSet<objeto_por_salida> objeto_por_salida { get; set; }
         public virtual DbSet<salida> salida { get; set; }
         public virtual DbSet<salida_detalle> salida_detalle { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tecnico> tecnico { get; set; }
-        public virtual DbSet<configuracion> configuracion { get; set; }
+        public virtual DbSet<ubicacion> ubicacion { get; set; }
+        public virtual DbSet<usuario> usuario { get; set; }
     }
 }

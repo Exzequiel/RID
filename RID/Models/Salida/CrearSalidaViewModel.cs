@@ -31,7 +31,7 @@ namespace RID.Models.Salida
         [Display(Name = "Objeto")]
         public int[] id_objeto { get; set; }
 
-        public string NombreUbicacion { get; set; }
+        public string NombreDepartamento { get; set; }
 
         public List<CrearDetalleSalidaViewModel> ListaDetalle { get; set; }
 

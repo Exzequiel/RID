@@ -70,19 +70,19 @@ namespace RID.Controllers
             }
         }
 
-        public int ObtenerIdUbicacionPorUsuario()
+        public int ObtenerIdDepartamentoPorUsuario()
         {
             using (var context = new RID.DB.BodMantEntities())
             {
-                return context.usuario.FirstOrDefault(x => x.AspNetUsers.UserName == User.Identity.Name)?.id_ubicacion ?? 0; 
+                return context.usuario.FirstOrDefault(x => x.AspNetUsers.UserName == User.Identity.Name)?.id_departamento ?? 0; 
             }
         }
 
-        public string ObtenerNombreUbicacionPorUsuario()
+        public string ObtenerNombreDepartamentoPorUsuario()
         {
             using (var context = new RID.DB.BodMantEntities())
             {
-                return context.usuario.FirstOrDefault(x => x.AspNetUsers.UserName == User.Identity.Name)?.ubicacion?.descripcion??"";
+                return context.usuario.FirstOrDefault(x => x.AspNetUsers.UserName == User.Identity.Name)?.departamento?.descripcion??"";
             }
         }
 

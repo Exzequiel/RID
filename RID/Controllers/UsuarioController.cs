@@ -45,7 +45,7 @@ namespace RID.Controllers
                         Estado = x.activo,
                         Perfil = x.AspNetUsers.AspNetRoles.Any() ? x.AspNetUsers.AspNetRoles.FirstOrDefault().Name : "",
                         UserName = x.AspNetUsers.UserName,
-                        NombreUbicacion = x.ubicacion!=null?x.ubicacion.descripcion:""
+                        NombreDepartamento = x.departamento!=null?x.departamento.descripcion:""
                         //esAdmin = x.AspNetUsers.AspNetRoles.Any(z=>z.Name=="Administrador")
                     }).ToList();
 
@@ -66,7 +66,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 ViewBag.ListaTipoUsuario = context.AspNetRoles.Where(x=>x.activo??false).Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
-                ViewBag.ListaUbicacion = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem {Value=x.id_ubicacion.ToString(), Text=x.descripcion }).ToList();
+                ViewBag.ListaDepartamento = context.departamento.Where(x => x.activo).Select(x => new SelectListItem {Value=x.id_departamento.ToString(), Text=x.descripcion }).ToList();
                 return View();
             }
            
@@ -92,7 +92,7 @@ namespace RID.Controllers
                             activo=true,
                             cuenta_usuario = model.UserName,
                             email = model.Email,
-                            id_ubicacion = model.IdUbicacion
+                            id_departamento  = model.IdDepartamento
                           
                         });
 
@@ -152,7 +152,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 ViewBag.ListaTipoUsuario = context.AspNetRoles.Where(x=>x.activo??false).Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
-                ViewBag.ListaUbicacion = context.ubicacion.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_ubicacion.ToString(), Text = x.descripcion }).ToList();
+                ViewBag.ListaDeprtamento = context.departamento.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_departamento.ToString(), Text = x.descripcion }).ToList();
                 var usuario = context.usuario.Find(Id);
                 return PartialView(new CrearUsuarioViewModel
                 {
@@ -162,7 +162,7 @@ namespace RID.Controllers
                     IdAspNetUser = usuario.IdAspnetUser,
                     RoleUsuario = usuario.AspNetUsers.AspNetRoles.FirstOrDefault()?.Id??"",  
                     Estado = usuario.activo,
-                    IdUbicacion = usuario.id_ubicacion
+                    IdDepartamento = usuario.id_departamento
                 });
 
             }
@@ -180,7 +180,7 @@ namespace RID.Controllers
                     usuario.AspNetUsers.UserName = model.UserName;
                     usuario.AspNetUsers.Email = model.Email;
                     usuario.activo = model.Estado;
-                    usuario.id_ubicacion = model.IdUbicacion;
+                    usuario.id_departamento = model.IdDepartamento;
                     context.Entry(usuario).State = EntityState.Modified;
                     var roles = await UserManager.GetRolesAsync(usuario.AspNetUsers.Id);
                     await UserManager.RemoveFromRolesAsync(usuario.AspNetUsers.Id, roles.ToArray());

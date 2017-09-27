@@ -18,15 +18,15 @@
         <table class="table table-bordered table-responsive" style="width: 100%;">
             <thead>
                 <tr class="success">
-                    <th class="text-center">Numero Salida</th>
-                    <th class="text-center">Ubicacion</th>
-                    <th class="text-center">Fecha Transaccion</th>
+                    <th class="text-center"># Salida</th>
+                    <th class="text-center">Departamento</th>
+                    <th class="text-center">Fecha Transacción</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="text-center">
                     <td>@Model.nro_salida</td>
-                    <td>@Model.NombreUbicacion</td>
+                    <td>@Model.NombreDepartamento</td>
                     <td>@Model.fecha_transaccion.ToShortDateString()</td>
                 </tr>
             </tbody>
@@ -35,20 +35,20 @@
             <fieldset>
                 @*<legend class="pull-left width-full"><b class="text-info"># Entrega: @Model.nro_entrega</b><small class="pull-right">Periodo: @Model.periodo      Semana: @Model.semana</small></legend>*@
                 <div class="row">
-                    <div class="col-md-4">
+                    @*<div class="col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.id_maquina, htmlAttributes: new { @class = "control-label" })
                             @Html.DropDownListFor(model => model.id_maquina, ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control select2", style = "width:100%;" })
                             @Html.ValidationMessageFor(model => model.id_maquina, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="col-md-8">
+                    </div>*@
+                    @*<div class="col-md-8">
                         <div class="form-group">
                             @Html.LabelFor(model => model.id_tecnico, htmlAttributes: new { @class = "control-label" })
                             @Html.DropDownListFor(model => model.id_tecnico, ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control select2", style = "width:100%;" })
                             @Html.ValidationMessageFor(model => model.id_tecnico, "", new { @class = "text-danger" })
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 @*<div class="row">
                     <div class="col-md-12">
@@ -66,6 +66,16 @@
                             @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, null, new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, null, new { @class = "form-control", style = "width:100%;" })
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, null, new { @class = "form-control", style = "width:100%;" })
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <button type="button" class="btn btn-primary" onclick="AgregarFila()">+ Agregar Item</button>
@@ -80,7 +90,7 @@
                         <th>Acciones</th>
                         <th>Cantidad</th>
                         <th>Descripcion Item</th>
-                        <th>Ubicacion</th>
+                        <th>Ubicación</th>
                         <th>Máquina / Objeto</th>
                         <th>Técnico</th>
                     </tr>
@@ -179,19 +189,18 @@
                           return opciones;
                       }
                   },
+                  //{
+                  //    data: null,
+                  //    render: function(data){
+                  //        return '<input type="number" name="InputCantidad" min="1" max="'+data.cant_disponible+'" class="form-control" required value="'+data.cant_aentregar+'" /> '+
+                  //               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
+                  //    }
                   {
-                      data: null,
-                      render: function(data){
-                          return '<input type="number" name="InputCantidad" min="1" max="'+data.cant_disponible+'" class="form-control" required value="'+data.cant_aentregar+'" /> '+
-                                 '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
-                      }
+                      data: "cant_aentregar"
                   },
                   {
                       data: "descripcion"
                   },
-                  //{
-                  //    data: "cant_disponible"
-                  //},
                   {
                       data: "ubicacion"
                   },
@@ -201,6 +210,7 @@
                   {
                       data: "tecnico"
                   }
+
             ]
         });
 
@@ -224,9 +234,9 @@
 
             var obj = {
                 id_salida: @Model.id_salida,
-                id_maquina: $("#id_maquina").val(),
-                id_tecnico: $("#id_tecnico").val(),
-                id_objeto : $("#id_objeto").val(),
+                //id_maquina: $("#id_maquina").val(),
+                //id_tecnico: $("#id_tecnico").val(),
+                //id_objeto : $("#id_objeto").val(),
                 ListaDetalle: Tablelist
             }
 
