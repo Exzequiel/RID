@@ -18,6 +18,7 @@ namespace RID.DB
         public int id_salida { get; set; }
         public int id_objeto { get; set; }
     
+        public virtual objeto objeto { get; set; }
         public virtual salida salida { get; set; }
     }
 }

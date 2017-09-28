@@ -24,18 +24,14 @@ namespace RID.DB
         public int id_salida { get; set; }
         public string nro_salida { get; set; }
         public System.DateTime fecha_transaccion { get; set; }
-        public int id_ubicacion { get; set; }
-        public int id_objeto { get; set; }
         public int id_departamento { get; set; }
         public bool confirmado { get; set; }
         public bool activo { get; set; }
     
         public virtual departamento departamento { get; set; }
-        public virtual objeto objeto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<objeto_por_salida> objeto_por_salida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<salida_detalle> salida_detalle { get; set; }
-        public virtual ubicacion ubicacion { get; set; }
     }
 }

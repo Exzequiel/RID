@@ -127,8 +127,6 @@
           <Property Name="id_salida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nro_salida" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="fecha_transaccion" Type="date" Nullable="false" />
-          <Property Name="id_ubicacion" Type="int" Nullable="false" />
-          <Property Name="id_objeto" Type="int" Nullable="false" />
           <Property Name="id_departamento" Type="int" Nullable="false" />
           <Property Name="confirmado" Type="bit" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
@@ -266,6 +264,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_objeto_por_salida_objeto">
+          <End Role="objeto" Type="Self.objeto" Multiplicity="1" />
+          <End Role="objeto_por_salida" Type="Self.objeto_por_salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="objeto">
+              <PropertyRef Name="id_objeto" />
+            </Principal>
+            <Dependent Role="objeto_por_salida">
+              <PropertyRef Name="id_objeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_objeto_por_salida_salida">
           <End Role="salida" Type="Self.salida" Multiplicity="1" />
           <End Role="objeto_por_salida" Type="Self.objeto_por_salida" Multiplicity="*" />
@@ -338,30 +348,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_salida_objeto">
-          <End Role="objeto" Type="Self.objeto" Multiplicity="1" />
-          <End Role="salida" Type="Self.salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="objeto">
-              <PropertyRef Name="id_objeto" />
-            </Principal>
-            <Dependent Role="salida">
-              <PropertyRef Name="id_objeto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_ubicacion">
-          <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="1" />
-          <End Role="salida" Type="Self.salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ubicacion">
-              <PropertyRef Name="id_ubicacion" />
-            </Principal>
-            <Dependent Role="salida">
-              <PropertyRef Name="id_ubicacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_usuario_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
@@ -429,6 +415,10 @@
             <End Role="ubicacion" EntitySet="ubicacion" />
             <End Role="item" EntitySet="item" />
           </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_salida_objeto" Association="Self.FK_objeto_por_salida_objeto">
+            <End Role="objeto" EntitySet="objeto" />
+            <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
+          </AssociationSet>
           <AssociationSet Name="FK_objeto_por_salida_salida" Association="Self.FK_objeto_por_salida_salida">
             <End Role="salida" EntitySet="salida" />
             <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
@@ -452,14 +442,6 @@
           <AssociationSet Name="FK_salida_detalle_tecnico" Association="Self.FK_salida_detalle_tecnico">
             <End Role="tecnico" EntitySet="tecnico" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_salida_objeto" Association="Self.FK_salida_objeto">
-            <End Role="objeto" EntitySet="objeto" />
-            <End Role="salida" EntitySet="salida" />
-          </AssociationSet>
-          <AssociationSet Name="FK_salida_ubicacion" Association="Self.FK_salida_ubicacion">
-            <End Role="ubicacion" EntitySet="ubicacion" />
-            <End Role="salida" EntitySet="salida" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_AspNetUsers" Association="Self.FK_usuario_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -528,9 +510,9 @@
             <End Role="maquina" EntitySet="maquina" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
           </AssociationSet>
-          <AssociationSet Name="FK_salida_objeto" Association="BodMantModel.FK_salida_objeto">
+          <AssociationSet Name="FK_objeto_por_salida_objeto" Association="BodMantModel.FK_objeto_por_salida_objeto">
             <End Role="objeto" EntitySet="objeto" />
-            <End Role="salida" EntitySet="salida" />
+            <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
           </AssociationSet>
           <AssociationSet Name="FK_objeto_por_salida_salida" Association="BodMantModel.FK_objeto_por_salida_salida">
             <End Role="salida" EntitySet="salida" />
@@ -539,10 +521,6 @@
           <AssociationSet Name="FK_salida_detalle_salida" Association="BodMantModel.FK_salida_detalle_salida">
             <End Role="salida" EntitySet="salida" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
-          </AssociationSet>
-          <AssociationSet Name="FK_salida_ubicacion" Association="BodMantModel.FK_salida_ubicacion">
-            <End Role="ubicacion" EntitySet="ubicacion" />
-            <End Role="salida" EntitySet="salida" />
           </AssociationSet>
           <AssociationSet Name="FK_salida_detalle_tecnico" Association="BodMantModel.FK_salida_detalle_tecnico">
             <End Role="tecnico" EntitySet="tecnico" />
@@ -665,7 +643,7 @@
           <Property Name="cod_objeto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="item" Relationship="BodMantModel.FK_item_objeto" FromRole="objeto" ToRole="item" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_objeto" FromRole="objeto" ToRole="salida" />
+          <NavigationProperty Name="objeto_por_salida" Relationship="BodMantModel.FK_objeto_por_salida_objeto" FromRole="objeto" ToRole="objeto_por_salida" />
         </EntityType>
         <EntityType Name="objeto_por_salida">
           <Key>
@@ -674,6 +652,7 @@
           <Property Name="id_objeto_por_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_salida" Type="Int32" Nullable="false" />
           <Property Name="id_objeto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_objeto_por_salida_objeto" FromRole="objeto_por_salida" ToRole="objeto" />
           <NavigationProperty Name="salida" Relationship="BodMantModel.FK_objeto_por_salida_salida" FromRole="objeto_por_salida" ToRole="salida" />
         </EntityType>
         <EntityType Name="salida">
@@ -683,16 +662,12 @@
           <Property Name="id_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nro_salida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha_transaccion" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="id_ubicacion" Type="Int32" Nullable="false" />
-          <Property Name="id_objeto" Type="Int32" Nullable="false" />
           <Property Name="id_departamento" Type="Int32" Nullable="false" />
           <Property Name="confirmado" Type="Boolean" Nullable="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="departamento" Relationship="BodMantModel.FK_salida_departamento" FromRole="salida" ToRole="departamento" />
-          <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_salida_objeto" FromRole="salida" ToRole="objeto" />
           <NavigationProperty Name="objeto_por_salida" Relationship="BodMantModel.FK_objeto_por_salida_salida" FromRole="salida" ToRole="objeto_por_salida" />
           <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida" ToRole="salida_detalle" />
-          <NavigationProperty Name="ubicacion" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="salida" ToRole="ubicacion" />
         </EntityType>
         <EntityType Name="salida_detalle">
           <Key>
@@ -739,7 +714,6 @@
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="item" Relationship="BodMantModel.FK_item_ubicacion" FromRole="ubicacion" ToRole="item" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_ubicacion" FromRole="ubicacion" ToRole="salida" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -868,14 +842,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_salida_objeto">
+        <Association Name="FK_objeto_por_salida_objeto">
           <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
-          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
+          <End Type="BodMantModel.objeto_por_salida" Role="objeto_por_salida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="objeto">
               <PropertyRef Name="id_objeto" />
             </Principal>
-            <Dependent Role="salida">
+            <Dependent Role="objeto_por_salida">
               <PropertyRef Name="id_objeto" />
             </Dependent>
           </ReferentialConstraint>
@@ -901,18 +875,6 @@
             </Principal>
             <Dependent Role="salida_detalle">
               <PropertyRef Name="id_salida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_ubicacion">
-          <End Type="BodMantModel.ubicacion" Role="ubicacion" Multiplicity="1" />
-          <End Type="BodMantModel.salida" Role="salida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ubicacion">
-              <PropertyRef Name="id_ubicacion" />
-            </Principal>
-            <Dependent Role="salida">
-              <PropertyRef Name="id_ubicacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1059,8 +1021,6 @@
                 <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="confirmado" ColumnName="confirmado" />
                 <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
-                <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-                <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
                 <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
                 <ScalarProperty Name="nro_salida" ColumnName="nro_salida" />
                 <ScalarProperty Name="id_salida" ColumnName="id_salida" />

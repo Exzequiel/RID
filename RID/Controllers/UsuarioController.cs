@@ -152,7 +152,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 ViewBag.ListaTipoUsuario = context.AspNetRoles.Where(x=>x.activo??false).Select(x => new SelectListItem { Value = x.Id, Text = x.Name }).ToList();
-                ViewBag.ListaDeprtamento = context.departamento.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_departamento.ToString(), Text = x.descripcion }).ToList();
+                ViewBag.ListaDepartamento = context.departamento.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_departamento.ToString(), Text = x.descripcion }).ToList();
                 var usuario = context.usuario.Find(Id);
                 return PartialView(new CrearUsuarioViewModel
                 {

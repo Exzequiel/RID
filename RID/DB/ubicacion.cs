@@ -18,7 +18,6 @@ namespace RID.DB
         public ubicacion()
         {
             this.item = new HashSet<item>();
-            this.salida = new HashSet<salida>();
         }
     
         public int id_ubicacion { get; set; }
@@ -27,7 +26,5 @@ namespace RID.DB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> item { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<salida> salida { get; set; }
     }
 }

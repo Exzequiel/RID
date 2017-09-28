@@ -29,9 +29,8 @@ namespace RID.Controllers
                     fecha_transaccion = x.fecha_transaccion,
                     confirmado = x.confirmado,
                     id_departamento = x.id_departamento,
+                    departamento = x.departamento.descripcion,
                     activo = x.activo,
-                    //id_tecnico = x.id_tecnico,
-                    //ubicacion = x.ubicacion.descripcion,
 
                 }).ToList();
 
@@ -67,9 +66,9 @@ namespace RID.Controllers
                     //cant_disponible = x.item.cant_disponible - (x.item.entrega_detalle.Any(y => y.activo && y.entrega.confirmado == false) ? x.item.entrega_detalle.Where(y => y.activo && y.entrega.confirmado == false).Sum(z => z.cant_aentregar) : 0) - (x.item.requisa_detalle.Any(y => y.activo) ? x.item.requisa_detalle.Where(y => y.activo).Sum(z => z.cant_enviada) : 0),
                     ubicacion = x.item.ubicacion.descripcion,
                     descripcion =x.item.cod_item+" - "+ x.item.descripcion,
-                    objeto = x.item.objeto.cod_objeto,/*+" - "+x.maquina.cod_maquina,*/
-                    maquina = x.maquina.descripcion_maquina+ " - " + x.maquina.cod_maquina,
-                    tecnico = x.tecnico.nombre+" - "+x.tecnico.apellido,
+                    objeto = x.item.objeto.cod_objeto,
+                    maquina = x.maquina.cod_maquina,
+                    tecnico = x.tecnico.nombre,
                     activo = x.activo
                 }).ToList();
                 var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
@@ -105,21 +104,19 @@ namespace RID.Controllers
                     nro_salida = getConfiguracion("CorrelativoSalida"),
                     fecha_transaccion = DateTime.Now,
                     id_departamento = ObtenerIdDepartamentoPorUsuario(),
-                    //id_maquina = model.id_maquina,
-                    //id_tecnico = model.id_tecnico,
-                    activo =true,
                     confirmado = false,
+                    activo =true,
                     
                 });
 
-                foreach (var IdObjeto in model.id_objeto.ToList())
-                {
-                    context.objeto_por_salida.Add(new objeto_por_salida
-                    {
-                        id_objeto = IdObjeto,
-                        id_salida = NuevaSalida.id_salida
-                    });
-                }
+                //foreach (var IdObjeto in model.id_objeto.ToString())
+                //{
+                //    context.objeto_por_salida.Add(new objeto_por_salida
+                //    {
+                //        id_objeto = IdObjeto,
+                //        id_salida = NuevaSalida.id_salida
+                //    });
+                //}
 
                 foreach (var detalle in model.ListaDetalle??new List<CrearDetalleSalidaViewModel>())
                 {
@@ -127,6 +124,8 @@ namespace RID.Controllers
                         cant_aentregar = detalle.cant_aentregar,
                         id_salida = NuevaSalida.id_salida,
                         id_item = detalle.id_item,
+                        id_maquina = detalle.id_maquina,
+                        id_tecnico = detalle.id_tecnico,
                         activo = true
                     });
                 }
@@ -136,14 +135,14 @@ namespace RID.Controllers
             }
         }
 
-        public ActionResult ObtenerListaObjetosPorSalida(int IdSalida)
-        {
-            using (var context = new BodMantEntities())
-            {
-                var lista = context.objeto.Where(x => x.activo && x.id_objeto == IdSalida).Select(x => new { id = x.id_objeto, text = x.cod_objeto }).ToList();
-                return Json(new { list = lista }, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //public ActionResult ObtenerListaObjetosPorSalida(int IdSalida)
+        //{
+        //    using (var context = new BodMantEntities())
+        //    {
+        //        var lista = context.objeto.Where(x => x.activo && x.id_objeto == IdSalida).Select(x => new { id = x.id_objeto, text = x.cod_objeto }).ToList();
+        //        return Json(new { list = lista }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
 
         public ActionResult ObtenerInfoItem(int IdItem)
@@ -180,11 +179,9 @@ namespace RID.Controllers
                 return View("CrearSalida", new CrearSalidaViewModel
                 {
                     id_salida = ModelSalida.id_salida,
-                    id_objeto = ModelSalida.objeto_por_salida.Select(x=>x.id_objeto).ToArray(),
+                    nro_salida = ModelSalida.nro_salida,
                     NombreDepartamento = ModelSalida.departamento.descripcion,
                     fecha_transaccion = ModelSalida.fecha_transaccion,
-                    nro_salida = ModelSalida.nro_salida,
-                    //id_tecnico = ModelSalida.id_tecnico,
                     EsEditar = true,
                 });
             }
@@ -201,8 +198,8 @@ namespace RID.Controllers
 
                 context.objeto_por_salida.RemoveRange(ModelSalida.objeto_por_salida);
 
-                foreach (var idobjeto in model.id_objeto) { context.objeto_por_salida.Add(new objeto_por_salida { id_objeto = idobjeto, id_salida = ModelSalida.id_salida }); }
-                ModelSalida.salida_detalle.ToList().ForEach(x => x.activo = false);
+                //foreach (var idobjeto in model.id_objeto) { context.objeto_por_salida.Add(new objeto_por_salida { id_objeto = idobjeto, id_salida = ModelSalida.id_salida }); }
+                //ModelSalida.salida_detalle.ToList().ForEach(x => x.activo = false);
 
                 foreach (var detalle in model.ListaDetalle)
                 {
@@ -217,6 +214,8 @@ namespace RID.Controllers
                             id_salida = ModelSalida.id_salida,
                             id_item = detalle.id_item,
                             cant_aentregar = detalle.cant_aentregar,
+                            id_maquina = detalle.id_maquina,
+                            id_tecnico = detalle.id_tecnico,
                             activo = true,
                         });
                     }
