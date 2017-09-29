@@ -1,0 +1,52 @@
+﻿<table class="table table-bordered table-responsive" id="IdTabla-@ViewBag.Id" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Cantidad</th>
+            <th>Descripcion Item</th>
+            <th>Ubicación</th>
+            <th>Máquina / Objeto</th>
+            <th>Técnico</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    $("#IdTabla-" + '@ViewBag.Id').dataTable({
+        responsive: true,
+        sDom:"",
+        ajax:{
+            url: "/Salida/CargarTablaDetalleSalida",
+            data: {IdSalida: '@ViewBag.Id'},
+            type: "GET",
+            global: false,
+            dataSrc: function (data) { return data; }
+        },
+        columns: [
+              //{
+              //    data: null,
+              //    render: function(data){
+              //        return '<input type="number" name="InputCantidad" min="1" max="'+data.cant_disponible+'" class="form-control" required value="'+data.cant_aentregar+'" /> '+
+              //               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
+              //    }
+              //},
+              {
+                  data: "cant_aentregar"
+              },
+              {
+                  data: "descripcion"
+              },
+              {
+                  data: "ubicacion"
+              },
+              {
+                  data: "objeto"
+              }
+              {
+                  data: "tecnico"
+              }
+        ]
+    });
+
+</script>

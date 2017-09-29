@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Europlast | Control de Stock</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    @Styles.Render("~/bundles/CSS")
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="~/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/assets/css/animate.min.css" rel="stylesheet" />
+    <link href="~/assets/css/style.min.css" rel="stylesheet" />
+    <link href="~/assets/css/style-responsive.min.css" rel="stylesheet" />
+    <link href="~/assets/css/theme/default.css" rel="stylesheet" id="theme" />
+    <!-- ================== END BASE CSS STYLE ================== -->
+    <!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
+    <link href="~/assets/plugins/jquery-jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap-calendar/css/bootstrap_calendar.css" rel="stylesheet" />
+    <link href="~/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="~/assets/plugins/morris/morris.css" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL CSS STYLE ================== -->
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="~/assets/plugins/pace/pace.min.js"></script>
+    <!-- ================== END BASE JS ================== -->
+</head>
+<body>
+
+    <div id="MyModal" class="modal fade" role="dialog" data-backdrop='static' data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"> <big>&times;</big></button>
+                    <h4 class="modal-title" id="MyModalTitle">Modal Header</h4>
+                </div>
+                <div class="modal-body" id="MyModalBody">
+                    <p>Some text in the modal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="MyModalLG" class="modal fade" role="dialog" data-backdrop='static' data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"> <big>&times;</big></button>
+                    <h4 class="modal-title" id="MyModalTitleLG">Modal Header</h4>
+                </div>
+                <div class="modal-body" id="MyModalBodyLG">
+                    <p>Some text in the modal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalWaitingTime" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="">
+        <div class="modal-dialog" role="document" style="margin-top: 15%;">
+            <div class="modal-body text-center">
+                <div class="material-loader">
+                    <svg class="circular" viewBox="25 25 50 50" style="color: #fff;">
+                        <circle style="color: #fff;" class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                    </svg>
+                    <h1 class="message" style="color: #fff;">Cargando...</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style type="text/css"></style>
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    <!-- begin #page-container -->
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+        <!-- begin #header -->
+        <div id="header" class="header navbar navbar-default navbar-fixed-top">
+            <!-- begin container-fluid -->
+            <div class="container-fluid">
+                <!-- begin mobile sidebar expand / collapse button -->
+                <div class="navbar-header">
+                    <a href="" class="navbar-brand"><span class="navbar-logo"><i class="ion-compose"></i></span><b>Registro</b> Salidas</a>
+                    @*<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>*@
+                </div>
+                <!-- end mobile sidebar expand / collapse button -->
+                <!-- begin header navigation right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form class="navbar-form full-width">
+                            <div class="form-group">
+                                
+                                @*<button type="submit" class="btn btn-search"><i class="ion-ios-search-strong"></i></button>*@
+                            </div>
+                        </form>
+                    </li>
+                    <li class="dropdown">
+         
+                    </li>
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="assets/img/user-13.jpg" alt="" />
+                            <span class="hidden-xs">Bienvenido, @User.Identity.Name</span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInLeft">
+                            <li class="arrow"></li>
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("LogOff", "Account")">Cerrar Sesion</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <!-- end header navigation right -->
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end #header -->
+        <!-- begin #sidebar -->
+        <div id="sidebar" class="sidebar">
+            <!-- begin sidebar scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+                <!-- begin sidebar user -->
+                <ul class="nav">
+                    <li class="nav-profile">
+                        <div class="image">
+                            <a href="javascript:;"><img src="~/assets/img/user-13.jpg" alt="" /></a>
+                        </div>
+                        <div class="info">
+                            @User.Identity.Name <br />
+                        </div>
+                    </li>
+                </ul>
+                <!-- end sidebar user -->
+                <!-- begin sidebar nav -->
+                <ul class="nav">
+                    @*<li class="nav-header">Procesos</li>*@
+                    <li class="has-sub active">
+                        <a href="javascript:;">
+                            @*<b class="caret pull-right"></b>*@
+                            <i class="ion-ios-pulse-strong"></i>
+                            <span>Operaciones</span>
+                        </a>
+                    </li>
+
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="ion-android-people bg-purple"></i>
+                            <span>Técnicos <span class="label label-theme m-l-5"></span></span>
+                        </a>
+                        <ul class="sub-menu">
+                            @*<li><a href="ui_general.html">Listar Técnicos <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
+                            <li><a href="@Url.Action("Index", "Tecnico")" title="Técnico"><span>Listar Técnicos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="ion-ios-briefcase-outline bg-gradient-purple"></i>
+                            <span>Productos <span class="label label-theme m-l-5"></span></span>
+                        </a>
+                        <ul class="sub-menu">
+                            @*<li><a href="form_elements.html">Listar Productos <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
+                            <li><a href="@Url.Action("Index", "Item")" title="Productos"><span>Listar Productos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+
+                        </ul>
+                    </li>
+                    
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="ion-ios-download-outline bg-gradient-blue"></i>
+                            <span>Bajas</span>
+                        </a>
+                        <ul class="sub-menu">
+                            @*<li><a href="email_system.html">Generar Baja <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            <li><a href="@Url.Action("Index","Entrega")">Entregas</a></li>*@
+                            <li><a href="@Url.Action("Index", "Salida")" title="Bajas"><span>Generar Baja</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                        </ul>
+                    </li>
+                    @*<li><a href="calendar.html"><i class="ion-ios-calendar-outline bg-pink"></i> <span>Calendar</span></a></li>*@
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="ion-ios-location bg-pink"></i>
+                            <span>Áreas</span>
+                        </a>
+                        <ul class="sub-menu">
+                            @*<li><a href="map_vector.html">Listar Ubicaciones <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
+                            <li><a href="@Url.Action("Index", "Ubicacion")" title="Ubicaciones"><span>Listar Ubicación</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            <li><a href="@Url.Action("Index", "Departamento")" title="Departamentos"><span>Listar Departamento</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="ion-ios-cog-outline"></i>
+                            <span>Máquinas</span>
+                        </a>
+                        <ul class="sub-menu">
+                            @*<li><a href="gallery.html">Listar Máquinas <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
+                            <li><a href="@Url.Action("Index", "Maquina")" title="Máquinas"><span>Listar Máquinas</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            <li><a href="@Url.Action("Index", "Objeto")" title="Objetos"><span>Listar Objetos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="has-sub">
+                        <a href="javascript:;">
+                            <b class="caret pull-right"></b>
+                            <i class="ion-ios-locked-outline"></i>
+                            <span>Gestión de Usuarios</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="@Url.Action("Index", "Usuario")" title="Lista de Usuarios"><span>Listar Usuarios</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            <li><a href="@Url.Action("Index", "Role")" title="Tipos"><span>Listar Tipo de Usuarios</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- begin sidebar minify button -->
+                    <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="ion-ios-arrow-left"></i> <span>Collapse</span></a></li>
+                    <!-- end sidebar minify button -->
+                </ul>
+                <!-- end sidebar nav -->
+            </div>
+            <!-- end sidebar scrollbar -->
+        </div>
+        <div class="sidebar-bg"></div>
+        <!-- end #sidebar -->
+        <!-- begin #content -->
+        <div id="content" class="content">
+            @RenderBody()
+            <!-- end row -->
+        </div>
+        <!-- end #content -->
+        <!-- begin theme-panel -->
+        <!-- end theme-panel -->
+        <!-- begin scroll to top btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+        <!-- end scroll to top btn -->
+    </div>
+
+
+
+    <!-- end page container -->
+    <!-- ================== BEGIN BASE JS ================== -->
+    @*<script src="~/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="~/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+    <script src="~/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>*@
+
+    <!--[if lt IE 9]>
+        <script src="assets/crossbrowserjs/html5shiv.js"></script>
+        <script src="assets/crossbrowserjs/respond.min.js"></script>
+        <script src="assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+
+    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+
+    <!-- ================== END BASE JS ================== -->
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="~/assets/plugins/morris/raphael.min.js"></script>
+    <script src="~/assets/plugins/morris/morris.js"></script>
+    <script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>
+    <script src="~/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
+    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="~/assets/js/dashboard-v2.min.js"></script>
+    <script src="~/assets/js/apps.min.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+    @Scripts.Render("~/bundles/ColorAdmin")
+    @RenderSection("scripts", required: false)
+
+    <script>
+		$(document).ready(function() {
+			App.init();
+			//DashboardV2.init();
+		});
+    </script>
+</body>
+</html>

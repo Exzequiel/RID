@@ -1,0 +1,81 @@
+﻿@model IEnumerable<RID.Models.Item.ListItemViewModel>
+
+<div class="row">
+    <div class="col-md-12 ui-sortable">
+        <!-- begin panel -->
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="~/Item/Create" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Producto</a>
+                </div>
+                <h4 class="panel-title">Productos</h4>
+            </div>
+            <div class="panel-body">
+                <table class="table" data-class="dataTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cod_item)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Descripcion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdUbicacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdObjeto)
+                            </th>
+                            @*<th>
+                                @Html.DisplayNameFor(model => model.CantidadDisponible)
+                            </th>*@
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cod_item)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ubicacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Objeto)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.CantidadDisponible)
+                                </td>*@
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdItem }) |
+                                    @if (Convert.ToBoolean(item.Activo))
+                                    {
+
+                                    @Html.ActionLink("Desactivar", "Delete", new { id = item.IdItem })
+                                    }
+                                    else
+                                    {
+                                    @Html.ActionLink("Activar", "Delete", new { id = item.IdItem })
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('table').dataTable();
+    </script>
+}
