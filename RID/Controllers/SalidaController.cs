@@ -8,9 +8,13 @@ using System.Web.Mvc;
 
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador,UsuarioFincaPrincipal,UsuarioFincaNormal")]
+    [Authorize(Roles = "Administrador,Standard,Supervisor")]
     public class SalidaController : BaseController
     {
+        public SalidaController()
+        {
+            ViewBag.ControllerName = "Salida";
+        }
         #region Listar
 
         [HttpGet]
@@ -156,9 +160,11 @@ namespace RID.Controllers
                     id_salida = 0,
                     id_item = IdItem,
                     //cant_disponible = model.cant_disponible - (model.entrega_detalle.Any(y => y.activo && y.entrega.confirmado == false) ? model.entrega_detalle.Where(y => y.activo && y.entrega.confirmado == false).Sum(z => z.cant_aentregar) : 0) - (model.requisa_detalle.Any(y => y.activo) ? model.requisa_detalle.Where(y => y.activo).Sum(z => z.cant_enviada) : 0),
+                    cod_item = model.cod_item,
+                    descripcion = model.descripcion,
                     ubicacion = model.ubicacion.descripcion,
                     objeto = model.objeto.cod_objeto,
-                    descripcion = model.cod_item+" - "+ model.descripcion,                   
+
                 }, JsonRequestBehavior.AllowGet);
             }
         }

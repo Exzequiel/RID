@@ -12,6 +12,7 @@ namespace RID.Models.Salida
         public string maquina { get; set; }
         public string tecnico { get; set; }
         public string descripcion { get; set; }
+        public string cod_item { get; set; }
         public int id_detalle_salida { get; set; }
         public int id_salida { get; set; }
         public int id_item { get; set; }

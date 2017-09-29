@@ -7,7 +7,7 @@ using RID.DB;
 using RID.Models.Departamento;
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public class DepartamentoController : Controller
     {
         public ActionResult Index()

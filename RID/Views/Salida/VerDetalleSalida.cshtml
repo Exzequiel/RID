@@ -2,9 +2,11 @@
     <thead>
         <tr>
             <th>Cantidad</th>
-            <th>Descripcion Item</th>
+            <th>Cód. Ítem</th>
+            <th>Descripción Ítem</th>
             <th>Ubicación</th>
-            <th>Máquina / Objeto</th>
+            <th>Objeto</th>
+            <th>Máquina</th>
             <th>Técnico</th>
         </tr>
     </thead>
@@ -17,22 +19,25 @@
         responsive: true,
         sDom:"",
         ajax:{
-            url: "/Salida/CargarTablaDetalleSalida",
+            url: "/" + '@ViewBag.ControllerName' + "CargarTablaDetalleSalida",
             data: {IdSalida: '@ViewBag.Id'},
             type: "GET",
             global: false,
             dataSrc: function (data) { return data; }
         },
         columns: [
+              {
+                  data: null,
+                  render: function(data){
+                      return '<input type="number" name="InputCantidad" min="1" max="'+data.cant_disponible+'" class="form-control" required value="'+data.cant_aentregar+'" /> '+
+                             '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
+                  }
+              },
               //{
-              //    data: null,
-              //    render: function(data){
-              //        return '<input type="number" name="InputCantidad" min="1" max="'+data.cant_disponible+'" class="form-control" required value="'+data.cant_aentregar+'" /> '+
-              //               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
-              //    }
+              //    data: "cant_aentregar"
               //},
               {
-                  data: "cant_aentregar"
+                  data: "cod_item"
               },
               {
                   data: "descripcion"
@@ -42,7 +47,10 @@
               },
               {
                   data: "objeto"
-              }
+              },
+              {
+                  data: "maquina"
+              },
               {
                   data: "tecnico"
               }

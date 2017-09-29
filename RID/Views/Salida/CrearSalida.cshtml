@@ -8,7 +8,7 @@
 <div class="panel panel-inverse">
     <div class="panel-heading">
         <div class="panel-heading-btn">
-            <a href="~/Salida/Index" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
+            <a href="~/@ViewBag.ControllerName/Index" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
         </div>
         @if (Model.EsEditar) { <h4 class="panel-title">Editar Salida</h4> }
         else {  <h4 class="panel-title">Nueva Salida</h4>}
@@ -63,7 +63,8 @@
                     <tr>
                         <th>Acciones</th>
                         <th>Cantidad</th>
-                        <th>Descripcion Item</th>
+                        <th>Cód. Ítem</th>
+                        <th>Descripción Item</th>
                         <th>Ubicación</th>
                         <th>Objeto</th>
                         <th>Máquina</th>
@@ -129,9 +130,9 @@
             if(!validate){  ShowNotification(false,"Item ya seleccionado", "Seleccione otro"); return;}
 
             $.ajax({
-                url: "/Salida/ObtenerInfoItem", 
+                url: "/" + '@ViewBag.ControllerName'+'ObtenerInfoItem',
                 type: "Get",
-                data: { IdItem:  IdItem},
+                data: { IdItem: IdItem },
                 success: function (data) {
                     $.fn.dataTable.Api("#IdTabla").row.add(data).draw(false);
                 },
@@ -139,17 +140,21 @@
             });
         }
 
+
+
         $("#IdTabla tbody").on("keyup","tr input",function() {
             var tabla = $.fn.dataTable.Api("#IdTabla");
             DataFilaActual = tabla.row($(this).closest("tr")).data();
-            DataFilaActual.cant_aentregar =  $(this).closest("tr").find("[name=InputCantidad]").val();
+            DataFilaActual.cant_aentregar = $(this).closest("tr").find("[name=InputCantidad]").val();
+            //DataFilaActual.IdTecnico = $(this).closest("tr").find("[name=InputTecnico]").val();
+            //DataFilaActual.IdMaquina = $(this).closest("tr").find("[name=InputMaquina]").val();
         });
 
         $("#IdTabla").dataTable({
             responsive: true,
             sDom:"",
             ajax:{
-                url: "/Salida/CargarTablaDetalleSalida",
+                url: "/" + '@ViewBag.ControllerName'+'CargarTablaDetalleSalida',
                 data: {IdSalida: @Model.id_salida},
                 type: "GET",
                 dataSrc: function (data) { return data; }
@@ -172,6 +177,9 @@
                       }
                   },
                   {
+                      data: "cod_item"
+                  },
+                  {
                       data: "descripcion"
                   },
 
@@ -182,6 +190,13 @@
                   {
                       data: "objeto"
                   },
+
+                  //{
+                  //    data: null,
+                  //    render: function (data) {
+                  //        return '<input type="name" name="InputMaquina"  class="form-control" required value="' + data.IdMaquina + '" /> '
+                  //     }
+                  //},
 
                   {
                       data: "maquina"
@@ -221,9 +236,9 @@
             }
 
             console.log(obj);
-            var url = '/Salida/CrearSalida';           
+            var url = "/" + '@ViewBag.ControllerName'+'CrearSalida';
             if (str2bool('@Model.EsEditar')) {
-                url = '/Salida/EditarSalida';
+                url = "/" + '@ViewBag.ControllerName'+'EditarSalida';
             }
             $.ajax({
                 url: url,
@@ -238,7 +253,7 @@
                             text: data.Mensaje,
                             type: "success",
                             showCancelButton: true,
-                            confirmButtonText: 'Crear Nuevo',
+                            confirmButtonText: 'Crear Baja',
                             cancelButtonColor: '#739e73',
                             cancelButtonText: 'Ir a Lista',
                             allowOutsideClick: false
@@ -248,8 +263,8 @@
                         },
                          function (dismiss) {
                              if (dismiss === 'cancel') {
-                                 window.location.href = "/Salida/Index";
-                                 LoadWaitNotification();  
+                                 window.location.href = "/" + '@ViewBag.ControllerName'+"Index";
+                                 LoadWaitNotification();
                              }
                          });
                         RefreshCurrentLanguage();

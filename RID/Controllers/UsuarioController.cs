@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador")]
     public class UsuarioController : BaseController
     {
         private ApplicationUserManager _userManager;

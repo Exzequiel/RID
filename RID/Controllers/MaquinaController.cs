@@ -8,7 +8,7 @@ using RID.Models.Maquina;
 
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Supervisor")]
     public class MaquinaController : Controller
     {
         public ActionResult Index()

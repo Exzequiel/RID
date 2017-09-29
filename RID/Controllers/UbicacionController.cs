@@ -7,7 +7,7 @@ using RID.DB;
 using RID.Models.Ubicacion;
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Standard,Supervisor")]
     public class UbicacionController : Controller
     {
         public ActionResult Index()

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using RID.Models.Objeto;
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Standard,Supervisor")]
     public class ObjetoController : Controller
     {
         public ActionResult Index()

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using RID.Models.Tecnico;
 namespace RID.Controllers
 {
-    //[Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador,Standard,Supervisor")]
     public class TecnicoController : Controller
     {
         public ActionResult Index()
