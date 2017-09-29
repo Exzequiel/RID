@@ -10,15 +10,19 @@
         <div class="panel-heading-btn">
             <a href="~/@ViewBag.ControllerName/Index" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
         </div>
-        @if (Model.EsEditar) { <h4 class="panel-title">Editar Salida</h4> }
-        else {  <h4 class="panel-title">Nueva Salida</h4>}
+        @*@if (Model.EsEditar) { <h4 class="panel-title">Editar Salida</h4> }
+        else {  <h4 class="panel-title">Nueva Salida</h4>}*@
+        @if (Model.EsEditar)
+        { <h4 class="panel-title">Editar @ViewBag.ControllerName</h4> }
+        else
+        { <h4 class="panel-title">Nueva @ViewBag.ControllerName</h4>}
        
     </div>
     <div class="panel-body p-0 ">
         <table class="table table-bordered table-responsive" style="width: 100%;">
             <thead>
                 <tr class="success">
-                    <th class="text-center"># Salida</th>
+                    <th class="text-center"># @ViewBag.ControllerName</th>
                     <th class="text-center">Departamento</th>
                     <th class="text-center">Fecha Transacción</th>
                 </tr>
@@ -84,7 +88,7 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar Salida</button>
+                        <button type="button" class="btn btn-success pull-right" @*onclick="Guardar()"*@ >Guardar @ViewBag.ControllerName</button>
                     </div>
                 </div>
             </div>
@@ -130,7 +134,7 @@
             if(!validate){  ShowNotification(false,"Item ya seleccionado", "Seleccione otro"); return;}
 
             $.ajax({
-                url: "/" + '@ViewBag.ControllerName'+'ObtenerInfoItem',
+                url: "/"+'@ViewBag.ControllerName'+'/ObtenerInfoItem',
                 type: "Get",
                 data: { IdItem: IdItem },
                 success: function (data) {
@@ -154,7 +158,7 @@
             responsive: true,
             sDom:"",
             ajax:{
-                url: "/" + '@ViewBag.ControllerName'+'CargarTablaDetalleSalida',
+                url: "/"+'@ViewBag.ControllerName'+'/CargarTablaDetalleSalida',
                 data: {IdSalida: @Model.id_salida},
                 type: "GET",
                 dataSrc: function (data) { return data; }
@@ -172,7 +176,7 @@
                   {
                       data: null,
                       render: function (data) {
-                          return '<input type="number" name="InputCantidad" min="1" max="' + data.cant_disponible + '" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
+                          return '<input type="number" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
                       }
                   },
@@ -236,9 +240,9 @@
             }
 
             console.log(obj);
-            var url = "/" + '@ViewBag.ControllerName'+'CrearSalida';
+            var url = '/'+'@ViewBag.ControllerName'+'/CrearSalida';
             if (str2bool('@Model.EsEditar')) {
-                url = "/" + '@ViewBag.ControllerName'+'EditarSalida';
+                url = '/'+'@ViewBag.ControllerName'+'/EditarSalida';
             }
             $.ajax({
                 url: url,
@@ -263,7 +267,7 @@
                         },
                          function (dismiss) {
                              if (dismiss === 'cancel') {
-                                 window.location.href = "/" + '@ViewBag.ControllerName'+"Index";
+                                 window.location.href = "/"+'@ViewBag.ControllerName'+"/Index";
                                  LoadWaitNotification();
                              }
                          });

@@ -3,13 +3,12 @@
         <div class="panel-heading-btn">
             @if (User.IsInRole("Administrador") || User.IsInRole("Standard"))
             {
-                <a href="~/@ViewBag.ControllerName/Crear" class="btn btn-xs btn-primary" data-original-title="Crear" title="Crear"><i class="fa fa-plus"></i> Crear Baja</a>
+                <a href="~/@ViewBag.ControllerName/CrearSalida" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Baja</a>
             }
-            @*<a href="~/Salida/CrearSalida" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Baja</a>*@
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title="" data-init="true"><i class="fa fa-expand"></i></a>
             
         </div>
-        <h4 class="panel-title">Salidas</h4>
+        <h4 class="panel-title">@ViewBag.ControllerName</h4>
     </div>
     <div class="panel-body">
         <table class="table table-bordered table-responsive table-hover" id="IdTabla" style="width: 100%;">
