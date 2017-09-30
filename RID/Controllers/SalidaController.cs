@@ -40,8 +40,8 @@ namespace RID.Controllers
 
                 if (Convert.ToInt32(getConfiguracion("Departamento_BodMant")) != ObtenerIdDepartamentoPorUsuario())
                 {
-                    var departamento = ObtenerIdDepartamentoPorUsuario();
-                    list = list.Where(x => x.id_departamento == departamento).ToList();
+                    //var departamento = ObtenerIdDepartamentoPorUsuario();
+                    //list = list.Where(x => x.id_departamento == departamento).ToList();
                 }
                 var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
                 jsonResult.MaxJsonLength = Int32.MaxValue;
@@ -85,6 +85,7 @@ namespace RID.Controllers
 
         #region Crear
         [HttpGet]
+        [Authorize(Roles = "Administrador,Standard")]
         public ActionResult CrearSalida()
         {
             using (var conexion = new BodMantEntities())
@@ -166,7 +167,7 @@ namespace RID.Controllers
                     descripcion = model.descripcion,
                     ubicacion = model.ubicacion.descripcion,
                     maquina = model.objeto.cod_objeto+", "+modelMaquina.cod_maquina,
-                    tecnico = modelTecnico.nombre +" "+modelTecnico.apellido +" - "+ modelTecnico.puesto,
+                    tecnico = modelTecnico.nombre +" "+modelTecnico.apellido,
                     id_tecnico = IdTecnico,
                     id_maquina = IdMaquina
 
@@ -183,8 +184,8 @@ namespace RID.Controllers
             using(var context = new BodMantEntities())
             {
                 var ModelSalida = context.salida.Find(IdSalida);
-                ViewBag.ListaMaquina = context.maquina.Where(x => x.activo ).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina }).ToList();
-                ViewBag.ListaTecnico = context.tecnico.Where(x => x.activo ).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre /*+ x.apellido */}).ToList();
+                ViewBag.ListaMaquina = context.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina + " - " + x.cod_maquina }).ToList();
+                ViewBag.ListaTecnico = context.tecnico.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre + " " + x.apellido }).ToList();
                 ViewBag.ListaItem = context.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Ubicación: " + x.ubicacion.descripcion + " | Objeto: " + x.objeto.cod_objeto + " |" }).ToList();
 
                 return View("CrearSalida", new CrearSalidaViewModel

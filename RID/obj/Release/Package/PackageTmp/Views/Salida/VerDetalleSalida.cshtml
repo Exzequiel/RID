@@ -2,9 +2,10 @@
     <thead>
         <tr>
             <th>Cantidad</th>
-            <th>Descripcion Item</th>
+            <th>Cód. Ítem</th>
+            <th>Descripción Ítem</th>
             <th>Ubicación</th>
-            <th>Máquina / Objeto</th>
+            <th>Máquina</th>
             <th>Técnico</th>
         </tr>
     </thead>
@@ -17,7 +18,7 @@
         responsive: true,
         sDom:"",
         ajax:{
-            url: "/Salida/CargarTablaDetalleSalida",
+            url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",
             data: {IdSalida: '@ViewBag.Id'},
             type: "GET",
             global: false,
@@ -35,14 +36,17 @@
                   data: "cant_aentregar"
               },
               {
+                  data: "cod_item"
+              },
+              {
                   data: "descripcion"
               },
               {
                   data: "ubicacion"
               },
               {
-                  data: "objeto"
-              }
+                  data: "maquina"
+              },
               {
                   data: "tecnico"
               }

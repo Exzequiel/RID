@@ -86,7 +86,7 @@
             <div class="container-fluid">
                 <!-- begin mobile sidebar expand / collapse button -->
                 <div class="navbar-header">
-                    <a href="" class="navbar-brand"><span class="navbar-logo"><i class="ion-compose"></i></span><b>Registro</b> Salidas</a>
+                    <a href="javascript:;" class="navbar-brand"><span class="navbar-logo"><i class="ion-compose"></i></span><b>Registro</b> Salidas</a>
                     @*<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -109,8 +109,9 @@
                     </li>
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="assets/img/user-13.jpg" alt="" />
+                            @*<img src="assets/img/user-13.jpg" alt="" />*@
                             <span class="hidden-xs">Bienvenido, @User.Identity.Name</span>
+                            @*<span class="hidden-xs">Bienvenido, @User.Identity.Name</span>*@
                         </a>
                         <ul class="dropdown-menu animated fadeInLeft">
                             <li class="arrow"></li>
@@ -132,11 +133,12 @@
                 <!-- begin sidebar user -->
                 <ul class="nav">
                     <li class="nav-profile">
-                        <div class="image">
+                        @*<div class="image">
                             <a href="javascript:;"><img src="~/assets/img/user-13.jpg" alt="" /></a>
-                        </div>
-                        <div class="info">
-                            @User.Identity.Name <br />
+                        </div>*@
+                        <div class="info center">
+                            @User.Identity.Name</span>  
+                            @*@User.Identity.Name*@ @*<br/>*@
                         </div>
                     </li>
                 </ul>
@@ -145,13 +147,15 @@
                 <ul class="nav">
                     @*<li class="nav-header">Procesos</li>*@
                     <li class="has-sub active">
-                        <a href="javascript:;">
-                            @*<b class="caret pull-right"></b>*@
+                        <a href="@Url.Action("Index", "Home")" 
+                             class="ion-ios-pulse-strong">
                             <i class="ion-ios-pulse-strong"></i>
                             <span>Operaciones</span>
                         </a>
                     </li>
 
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Supervisor"))
+                    {
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -159,11 +163,15 @@
                             <span>Técnicos <span class="label label-theme m-l-5"></span></span>
                         </a>
                         <ul class="sub-menu">
-                            @*<li><a href="ui_general.html">Listar Técnicos <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
+
                             <li><a href="@Url.Action("Index", "Tecnico")" title="Técnico"><span>Listar Técnicos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
 
                         </ul>
                     </li>
+                    }
+
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Standard") || User.IsInRole("Supervisor"))
+                    {
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -171,12 +179,11 @@
                             <span>Productos <span class="label label-theme m-l-5"></span></span>
                         </a>
                         <ul class="sub-menu">
-                            @*<li><a href="form_elements.html">Listar Productos <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
                             <li><a href="@Url.Action("Index", "Item")" title="Productos"><span>Listar Productos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
-
+                            <li><a href="@Url.Action("Index", "Objeto")" title="Objetos"><span>Listar Objetos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                         </ul>
                     </li>
-                    
+
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -184,12 +191,11 @@
                             <span>Bajas</span>
                         </a>
                         <ul class="sub-menu">
-                            @*<li><a href="email_system.html">Generar Baja <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
-                            <li><a href="@Url.Action("Index","Entrega")">Entregas</a></li>*@
                             <li><a href="@Url.Action("Index", "Salida")" title="Bajas"><span>Generar Baja</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                         </ul>
                     </li>
-                    @*<li><a href="calendar.html"><i class="ion-ios-calendar-outline bg-pink"></i> <span>Calendar</span></a></li>*@
+                    }
+
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -197,11 +203,19 @@
                             <span>Áreas</span>
                         </a>
                         <ul class="sub-menu">
-                            @*<li><a href="map_vector.html">Listar Ubicaciones <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Standard") || User.IsInRole("Supervisor"))
+                            {
                             <li><a href="@Url.Action("Index", "Ubicacion")" title="Ubicaciones"><span>Listar Ubicación</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            }
+                            @if (User.IsInRole("Administrador"))
+                            {
                             <li><a href="@Url.Action("Index", "Departamento")" title="Departamentos"><span>Listar Departamento</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            }
                         </ul>
                     </li>
+
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Supervisor"))
+                    {
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -209,12 +223,13 @@
                             <span>Máquinas</span>
                         </a>
                         <ul class="sub-menu">
-                            @*<li><a href="gallery.html">Listar Máquinas <i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>*@
                             <li><a href="@Url.Action("Index", "Maquina")" title="Máquinas"><span>Listar Máquinas</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
-                            <li><a href="@Url.Action("Index", "Objeto")" title="Objetos"><span>Listar Objetos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                         </ul>
                     </li>
-                    
+                    }
+
+                    @if (User.IsInRole("Administrador"))
+                    {
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -226,7 +241,10 @@
                             <li><a href="@Url.Action("Index", "Role")" title="Tipos"><span>Listar Tipo de Usuarios</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                         </ul>
                     </li>
-                    
+                    }
+
+
+
                     <!-- begin sidebar minify button -->
                     <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="ion-ios-arrow-left"></i> <span>Collapse</span></a></li>
                     <!-- end sidebar minify button -->

@@ -40,19 +40,19 @@
                 <div class="row">
                     @*<hr />*@
                     <div class="col-md-2">
-                        Tecnico
+                        Técnico
                         <div class="form-group">
                             @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
                     <div class="col-md-3">
-                        Maquina
+                        Máquina
                         <div class="form-group">
                             @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
                     <div class="col-md-6">
-                        Item
+                        ítem
                         <div class="form-group">
                             @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
@@ -161,8 +161,7 @@
             var tabla = $.fn.dataTable.Api("#IdTabla");
             DataFilaActual = tabla.row($(this).closest("tr")).data();
             DataFilaActual.cant_aentregar = $(this).closest("tr").find("[name=InputCantidad]").val();
-            //DataFilaActual.IdTecnico = $(this).closest("tr").find("[name=InputTecnico]").val();
-            //DataFilaActual.IdMaquina = $(this).closest("tr").find("[name=InputMaquina]").val();
+
         });
 
         $("#IdTabla").dataTable({
