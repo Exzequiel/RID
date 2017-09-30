@@ -69,10 +69,10 @@ namespace RID.Controllers
                     cant_aentregar = x.cant_aentregar,
                     //cant_disponible = x.item.cant_disponible - (x.item.entrega_detalle.Any(y => y.activo && y.entrega.confirmado == false) ? x.item.entrega_detalle.Where(y => y.activo && y.entrega.confirmado == false).Sum(z => z.cant_aentregar) : 0) - (x.item.requisa_detalle.Any(y => y.activo) ? x.item.requisa_detalle.Where(y => y.activo).Sum(z => z.cant_enviada) : 0),
                     ubicacion = x.item.ubicacion.descripcion,
-                    descripcion =x.item.cod_item+" - "+ x.item.descripcion,
-                    objeto = x.item.objeto.cod_objeto,
-                    maquina = x.maquina.cod_maquina,
-                    tecnico = x.tecnico.nombre,
+                    cod_item = x.item.cod_item,
+                    descripcion = x.item.descripcion,
+                    maquina = x.item.objeto.cod_objeto+", "+ x.maquina.cod_maquina,
+                    tecnico = x.tecnico.nombre +" "+x.tecnico.apellido,
                     activo = x.activo
                 }).ToList();
                 var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
@@ -109,7 +109,7 @@ namespace RID.Controllers
                     fecha_transaccion = DateTime.Now,
                     id_departamento = ObtenerIdDepartamentoPorUsuario(),
                     confirmado = false,
-                    activo =true,
+                    activo =true
                     
                 });
 
@@ -149,11 +149,13 @@ namespace RID.Controllers
         //}
 
 
-        public ActionResult ObtenerInfoItem(int IdItem)
+        public ActionResult ObtenerInfoItem(int IdItem, int IdTecnico, int IdMaquina)
         {
             using (var context = new BodMantEntities())
             {
                 var model = context.item.Find(IdItem);
+                var modelTecnico = context.tecnico.Find(IdTecnico);
+                var modelMaquina = context.maquina.Find(IdMaquina);
                 return Json(new CrearDetalleSalidaViewModel {
                     id_detalle_salida = 0,
                     cant_aentregar = 0,
@@ -163,7 +165,10 @@ namespace RID.Controllers
                     cod_item = model.cod_item,
                     descripcion = model.descripcion,
                     ubicacion = model.ubicacion.descripcion,
-                    objeto = model.objeto.cod_objeto,
+                    maquina = model.objeto.cod_objeto+", "+modelMaquina.cod_maquina,
+                    tecnico = modelTecnico.nombre +" "+modelTecnico.apellido +" - "+ modelTecnico.puesto,
+                    id_tecnico = IdTecnico,
+                    id_maquina = IdMaquina
 
                 }, JsonRequestBehavior.AllowGet);
             }
@@ -202,10 +207,10 @@ namespace RID.Controllers
                 //ModelSalida.id_maquina = model.id_maquina;
                 //ModelSalida.id_tecnico = model.id_tecnico;
 
-                context.objeto_por_salida.RemoveRange(ModelSalida.objeto_por_salida);
+              //  context.objeto_por_salida.RemoveRange(ModelSalida.objeto_por_salida);
 
                 //foreach (var idobjeto in model.id_objeto) { context.objeto_por_salida.Add(new objeto_por_salida { id_objeto = idobjeto, id_salida = ModelSalida.id_salida }); }
-                //ModelSalida.salida_detalle.ToList().ForEach(x => x.activo = false);
+                ModelSalida.salida_detalle.ToList().ForEach(x => x.activo = false);
 
                 foreach (var detalle in model.ListaDetalle)
                 {
@@ -222,7 +227,7 @@ namespace RID.Controllers
                             cant_aentregar = detalle.cant_aentregar,
                             id_maquina = detalle.id_maquina,
                             id_tecnico = detalle.id_tecnico,
-                            activo = true,
+                            activo = true
                         });
                     }
                 }
@@ -253,7 +258,7 @@ namespace RID.Controllers
                 model.salida_detalle.ToList().ForEach(x => { x.activo = false; });
                 model.activo = false;
                 var resultado = context.SaveChanges() > 0;
-                return Json(EnviarResultado(resultado, "Deshabilitar Entrega"), JsonRequestBehavior.AllowGet);
+                return Json(EnviarResultado(resultado, "Deshabilitar Salida"), JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -264,11 +269,11 @@ namespace RID.Controllers
             {
                 var model = context.salida.Find(Id);
                 model.confirmado = true;
-                foreach(var detalle in model.salida_detalle.Where(x=>x.activo).ToList())
-                {
-                    //detalle.item.cant_disponible = detalle.item.cant_disponible - detalle.cant_aentregar;
-                    detalle.cant_aentregar = detalle.cant_aentregar;
-                }
+                //foreach(var detalle in model.salida_detalle.Where(x=>x.activo).ToList())
+                //{
+                //    //detalle.item.cant_disponible = detalle.item.cant_disponible - detalle.cant_aentregar;
+                //    detalle.cant_aentregar = detalle.cant_aentregar;
+                //}
                 var resultado = context.SaveChanges() > 0;
                 return Json(EnviarResultado(resultado, "Confirmar Entrega"), JsonRequestBehavior.AllowGet);
             }

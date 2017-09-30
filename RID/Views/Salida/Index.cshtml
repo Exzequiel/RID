@@ -19,7 +19,6 @@
                     <th># @ViewBag.ControllerName</th>
                     <th>Fecha Transacción</th>
                     <th>Departamento</th>
-                    <th>Técnico</th>
                     <th>Estado</th>
                     <th>Activo </th>
                 </tr>
@@ -73,7 +72,7 @@
                 allowOutsideClick: false
             }).then(function () {
                 $.ajax({
-                    url: '/'+'@ViewBag.ControllerName'+'Deshabilitar',
+                    url: '/'+'@ViewBag.ControllerName'+'/Deshabilitar',
                     type: "get",
                     data: { Id: Id },
                     success: function (data) {
@@ -92,18 +91,19 @@
 
 
        var table= $("#IdTabla").dataTable({
-            responsive: true,
+           // responsive: true,
             ajax: {
                 url: "@Url.Action("CargarTablaListaSalida", @ViewBag.ControllerName)",
                 global:false,
                 type: "GET",
+                scrollx:true,
                 dataSrc: function (data) {
         return data;
     }
 },
            columns: [
                 {
-                    "className": 'details-control',
+                    "className": 'details-control2',
                     "orderable": false,
                     "data": null,
                     "defaultContent": ''
@@ -123,19 +123,17 @@
                 {
                         data: "nro_salida"
                 },
+                {
+                    data: null,
+                    render: function (data) {
+                        return moment(data.fecha_transaccion).format("DD/MM/YYYY");
+                    }
+                },
 
                 {
-                        data: "id_tecnico"
+                        data: "departamento"
                 },
-                 {
-                        data: null,
-                     render: function (data) {
-                            return moment(data.fecha_transaccion).format("DD/MM/YYYY");
-                        }
-                    },
-                {
-                        data: "ubicacion"
-                },
+
                   {
                         data: null,
                       render: function (data) {
@@ -151,7 +149,7 @@
             ]
         });
 
-        $('#IdTabla tbody').on('click','td.details-control', function () {
+        $('#IdTabla tbody').on('click','td.details-control2', function () {
         var tabla = $.fn.dataTable.Api("#IdTabla");
         var tr = $(this).closest('tr');
         var row = tabla.row(tr);
@@ -162,7 +160,7 @@
         } else {
             tr.addClass('shown');
             $.ajax({
-                url: '/'+'@ViewBag.ControllerName'+'VerDetalleSalida',
+                url: '/'+'@ViewBag.ControllerName'+'/VerDetalleSalida',
                 type: "get",
                 global: false,
                 data: { Id: row.data().id_salida },

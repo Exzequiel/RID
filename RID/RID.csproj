@@ -354,6 +354,7 @@
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\invoice-print.css" />
     <Content Include="assets\css\invoice-print.min.css" />
+    <Content Include="assets\css\MiEstilo.css" />
     <Content Include="assets\css\style-bs4.css" />
     <Content Include="assets\css\style-bs4.min.css" />
     <Content Include="assets\css\style-responsive.css" />

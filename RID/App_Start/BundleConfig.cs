@@ -14,7 +14,7 @@ namespace RID
                 "~/assets/plugins/font-awesome/css/font-awesome.min.css",
                 "~/assets/css/animate.min.css",
                 "~/assets/css/style.min.css",
-                "~/assets/css/MyStyle.css",
+                "~/assets/css/MiEstilo.css",
                 "~/assets/css/style-responsive.min.css",
                 "~/assets/css/theme/default.css",
                 "~/assets/plugins/jquery-jvectormap/jquery-jvectormap.css",

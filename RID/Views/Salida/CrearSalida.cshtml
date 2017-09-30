@@ -40,18 +40,21 @@
                 <div class="row">
                     @*<hr />*@
                     <div class="col-md-2">
+                        Tecnico
                         <div class="form-group">
-                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, null, new { @class = "form-control", style = "width:100%;" })
+                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
                     <div class="col-md-3">
+                        Maquina
                         <div class="form-group">
-                            @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, null, new { @class = "form-control", style = "width:100%;" })
+                            @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        Item
                         <div class="form-group">
-                            @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, null, new { @class = "form-control", style = "width:100%;" })
+                            @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -70,7 +73,6 @@
                         <th>Cód. Ítem</th>
                         <th>Descripción Item</th>
                         <th>Ubicación</th>
-                        <th>Objeto</th>
                         <th>Máquina</th>
                         <th>Técnico</th>
                     </tr>
@@ -88,7 +90,7 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right" @*onclick="Guardar()"*@ >Guardar @ViewBag.ControllerName</button>
+                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()" >Guardar @ViewBag.ControllerName</button>
                     </div>
                 </div>
             </div>
@@ -126,6 +128,15 @@
         function AgregarFila()
         {
             var IdItem = $("#IdItem").val();
+            var IdTecnico = $("#IdTecnico").val();
+            var IdMaquina = $("#IdMaquina").val();
+            console.log(IdItem);
+
+            if (IdItem == "" || IdTecnico == "" || IdMaquina == "")
+            {
+                ShowNotification(false, "Seleccion de campos Requerida", "Revise los campos"); return;
+            }
+
             var table = $.fn.dataTable.Api("#IdTabla");
             var validate = true;
             table.rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -136,7 +147,7 @@
             $.ajax({
                 url: "/"+'@ViewBag.ControllerName'+'/ObtenerInfoItem',
                 type: "Get",
-                data: { IdItem: IdItem },
+                data: { IdItem: IdItem, IdTecnico: IdTecnico, IdMaquina:IdMaquina },
                 success: function (data) {
                     $.fn.dataTable.Api("#IdTabla").row.add(data).draw(false);
                 },
@@ -190,17 +201,6 @@
                   {
                       data: "ubicacion"
                   },
-
-                  {
-                      data: "objeto"
-                  },
-
-                  //{
-                  //    data: null,
-                  //    render: function (data) {
-                  //        return '<input type="name" name="InputMaquina"  class="form-control" required value="' + data.IdMaquina + '" /> '
-                  //     }
-                  //},
 
                   {
                       data: "maquina"
