@@ -54,7 +54,7 @@ namespace RID.Controllers
                     return jsonResult;
                 }
             }
-            catch(Exception e) {
+            catch(Exception) {
                 return View();
             }
         }
@@ -195,7 +195,7 @@ namespace RID.Controllers
                     }, JsonRequestBehavior.AllowGet);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Json(new MensajeRespuestaViewModel
                 {
