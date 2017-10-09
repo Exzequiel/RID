@@ -10,9 +10,6 @@ namespace RID.Models.Salida
     {
         public string lote { get; set; }
         public string maquina { get; set; }
-
-        
-
         public string tecnico { get; set; }
         public string descripcion { get; set; }
         public string cod_item { get; set; }

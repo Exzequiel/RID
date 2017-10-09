@@ -97,7 +97,7 @@ namespace RID.Controllers
                 ViewBag.ListaTecnico = conexion.tecnico.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre + " " + x.apellido }).ToList();
                 //ViewBag.ListaObjeto = conexion.objeto.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_objeto.ToString(), Text = x.cod_objeto }).ToList();
                 //ViewBag.ListaObjeto = new List<SelectListItem>();
-                ViewBag.ListaItem = conexion.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.objeto.cod_objeto + " |" }).ToList();
+                ViewBag.ListaItem = conexion.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.objeto.cod_objeto }).ToList();
                 return View( new CrearSalidaViewModel {nro_salida = getConfiguracion("CorrelativoSalida"), fecha_transaccion = DateTime.Now, NombreDepartamento = ObtenerNombreDepartamentoPorUsuario() });
             }
         }

@@ -80,7 +80,7 @@ namespace RID.Controllers
                     if (!ModelState.IsValid) return View(model);
                     if (contextCm.lote.Where(x=>x.id_lote!=model.IdLote).Any(x => x.cod_lote == model.CodLote.Trim()))
                     {
-                        ModelState.AddModelError("", "Ubicación ya existente, escriba uno diferente");
+                        ModelState.AddModelError("", "Lote ya existente, escriba uno diferente");
                         return View(model);
                     }
                     var modelDb = contextCm.lote.FirstOrDefault(x => x.id_lote == model.IdLote);

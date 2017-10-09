@@ -147,7 +147,7 @@
           <Property Name="id_item" Type="int" Nullable="false" />
           <Property Name="id_maquina" Type="int" Nullable="false" />
           <Property Name="id_tecnico" Type="int" Nullable="false" />
-          <Property Name="id_lote" Type="int" />
+          <Property Name="id_lote" Type="int" Nullable="false" />
           <Property Name="cant_aentregar" Type="int" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
@@ -301,7 +301,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_salida_detalle_lote">
-          <End Role="lote" Type="Self.lote" Multiplicity="0..1" />
+          <End Role="lote" Type="Self.lote" Multiplicity="1" />
           <End Role="salida_detalle" Type="Self.salida_detalle" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lote">
@@ -457,18 +457,20 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BodMantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BodMantEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AspNetUserClaims" EntityType="BodMantModel.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="BodMantModel.AspNetUserLogins" />
           <EntitySet Name="C__MigrationHistory" EntityType="BodMantModel.C__MigrationHistory" />
           <EntitySet Name="AspNetRoles" EntityType="BodMantModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="BodMantModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="BodMantModel.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="BodMantModel.AspNetUsers" />
           <EntitySet Name="configuracion" EntityType="BodMantModel.configuracion" />
           <EntitySet Name="departamento" EntityType="BodMantModel.departamento" />
           <EntitySet Name="item" EntityType="BodMantModel.item" />
+          <EntitySet Name="lote" EntityType="BodMantModel.lote" />
           <EntitySet Name="maquina" EntityType="BodMantModel.maquina" />
           <EntitySet Name="objeto" EntityType="BodMantModel.objeto" />
           <EntitySet Name="objeto_por_salida" EntityType="BodMantModel.objeto_por_salida" />
           <EntitySet Name="salida" EntityType="BodMantModel.salida" />
+          <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
           <EntitySet Name="sysdiagrams" EntityType="BodMantModel.sysdiagrams" />
           <EntitySet Name="tecnico" EntityType="BodMantModel.tecnico" />
           <EntitySet Name="usuario" EntityType="BodMantModel.usuario" />
@@ -496,20 +498,6 @@
             <End Role="objeto" EntitySet="objeto" />
             <End Role="item" EntitySet="item" />
           </AssociationSet>
-          <AssociationSet Name="FK_objeto_por_salida_objeto" Association="BodMantModel.FK_objeto_por_salida_objeto">
-            <End Role="objeto" EntitySet="objeto" />
-            <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
-          </AssociationSet>
-          <AssociationSet Name="FK_objeto_por_salida_salida" Association="BodMantModel.FK_objeto_por_salida_salida">
-            <End Role="salida" EntitySet="salida" />
-            <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="BodMantModel.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="lote" EntityType="BodMantModel.lote" />
-          <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
           <AssociationSet Name="FK_salida_detalle_item" Association="BodMantModel.FK_salida_detalle_item">
             <End Role="item" EntitySet="item" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
@@ -522,6 +510,14 @@
             <End Role="maquina" EntitySet="maquina" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
           </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_salida_objeto" Association="BodMantModel.FK_objeto_por_salida_objeto">
+            <End Role="objeto" EntitySet="objeto" />
+            <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_objeto_por_salida_salida" Association="BodMantModel.FK_objeto_por_salida_salida">
+            <End Role="salida" EntitySet="salida" />
+            <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
+          </AssociationSet>
           <AssociationSet Name="FK_salida_detalle_salida" Association="BodMantModel.FK_salida_detalle_salida">
             <End Role="salida" EntitySet="salida" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
@@ -530,7 +526,30 @@
             <End Role="tecnico" EntitySet="tecnico" />
             <End Role="salida_detalle" EntitySet="salida_detalle" />
           </AssociationSet>
-          </EntityContainer>
+          <AssociationSet Name="AspNetUserRoles" Association="BodMantModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="AspNetUsers" Relationship="BodMantModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
@@ -551,25 +570,6 @@
           <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="BodMantModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="activo" Type="Boolean" />
-          <NavigationProperty Name="AspNetUsers" Relationship="BodMantModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -623,6 +623,15 @@
           <NavigationProperty Name="objeto" Relationship="BodMantModel.FK_item_objeto" FromRole="item" ToRole="objeto" />
           <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="item" ToRole="salida_detalle" />
         </EntityType>
+        <EntityType Name="lote">
+          <Key>
+            <PropertyRef Name="id_lote" />
+          </Key>
+          <Property Name="id_lote" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_lote" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_lote" FromRole="lote" ToRole="salida_detalle" />
+        </EntityType>
         <EntityType Name="maquina">
           <Key>
             <PropertyRef Name="id_maquina" />
@@ -666,6 +675,24 @@
           <NavigationProperty Name="departamento" Relationship="BodMantModel.FK_salida_departamento" FromRole="salida" ToRole="departamento" />
           <NavigationProperty Name="objeto_por_salida" Relationship="BodMantModel.FK_objeto_por_salida_salida" FromRole="salida" ToRole="objeto_por_salida" />
           <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida" ToRole="salida_detalle" />
+        </EntityType>
+        <EntityType Name="salida_detalle">
+          <Key>
+            <PropertyRef Name="id_detalle_salida" />
+          </Key>
+          <Property Name="id_detalle_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_salida" Type="Int32" Nullable="false" />
+          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="id_maquina" Type="Int32" Nullable="false" />
+          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
+          <Property Name="id_lote" Type="Int32" Nullable="false" />
+          <Property Name="cant_aentregar" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="salida_detalle" ToRole="item" />
+          <NavigationProperty Name="lote" Relationship="BodMantModel.FK_salida_detalle_lote" FromRole="salida_detalle" ToRole="lote" />
+          <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_salida_detalle_maquina" FromRole="salida_detalle" ToRole="maquina" />
+          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida_detalle" ToRole="salida" />
+          <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_detalle_tecnico" FromRole="salida_detalle" ToRole="tecnico" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -779,6 +806,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_salida_detalle_item">
+          <End Type="BodMantModel.item" Role="item" Multiplicity="1" />
+          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="id_item" />
+            </Principal>
+            <Dependent Role="salida_detalle">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salida_detalle_lote">
+          <End Type="BodMantModel.lote" Role="lote" Multiplicity="1" />
+          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lote">
+              <PropertyRef Name="id_lote" />
+            </Principal>
+            <Dependent Role="salida_detalle">
+              <PropertyRef Name="id_lote" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_salida_detalle_maquina">
+          <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
+          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="maquina">
+              <PropertyRef Name="id_maquina" />
+            </Principal>
+            <Dependent Role="salida_detalle">
+              <PropertyRef Name="id_maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_objeto_por_salida_objeto">
           <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
           <End Type="BodMantModel.objeto_por_salida" Role="objeto_por_salida" Multiplicity="*" />
@@ -800,73 +863,6 @@
             </Principal>
             <Dependent Role="objeto_por_salida">
               <PropertyRef Name="id_salida" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="BodMantModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="BodMantModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityType Name="lote">
-          <Key>
-            <PropertyRef Name="id_lote" />
-          </Key>
-          <Property Name="id_lote" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cod_lote" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_lote" FromRole="lote" ToRole="salida_detalle" />
-        </EntityType>
-        <EntityType Name="salida_detalle">
-          <Key>
-            <PropertyRef Name="id_detalle_salida" />
-          </Key>
-          <Property Name="id_detalle_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_salida" Type="Int32" Nullable="false" />
-          <Property Name="id_item" Type="Int32" Nullable="false" />
-          <Property Name="id_maquina" Type="Int32" Nullable="false" />
-          <Property Name="id_tecnico" Type="Int32" Nullable="false" />
-          <Property Name="id_lote" Type="Int32" />
-          <Property Name="cant_aentregar" Type="Int32" Nullable="false" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="item" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="salida_detalle" ToRole="item" />
-          <NavigationProperty Name="lote" Relationship="BodMantModel.FK_salida_detalle_lote" FromRole="salida_detalle" ToRole="lote" />
-          <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_salida_detalle_maquina" FromRole="salida_detalle" ToRole="maquina" />
-          <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida_detalle" ToRole="salida" />
-          <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_detalle_tecnico" FromRole="salida_detalle" ToRole="tecnico" />
-        </EntityType>
-        <Association Name="FK_salida_detalle_item">
-          <End Type="BodMantModel.item" Role="item" Multiplicity="1" />
-          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="item">
-              <PropertyRef Name="id_item" />
-            </Principal>
-            <Dependent Role="salida_detalle">
-              <PropertyRef Name="id_item" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_detalle_lote">
-          <End Type="BodMantModel.lote" Role="lote" Multiplicity="0..1" />
-          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lote">
-              <PropertyRef Name="id_lote" />
-            </Principal>
-            <Dependent Role="salida_detalle">
-              <PropertyRef Name="id_lote" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_salida_detalle_maquina">
-          <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
-          <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="maquina">
-              <PropertyRef Name="id_maquina" />
-            </Principal>
-            <Dependent Role="salida_detalle">
-              <PropertyRef Name="id_maquina" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -894,31 +890,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="BodMantModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="BodMantModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BodMantModelStoreContainer" CdmEntityContainer="BodMantEntities">
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="BodMantModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="BodMantModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="BodMantModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -935,6 +916,25 @@
                 <ScalarProperty Name="activo" ColumnName="activo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="BodMantModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="BodMantModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -986,6 +986,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="lote">
+            <EntityTypeMapping TypeName="BodMantModel.lote">
+              <MappingFragment StoreEntitySet="lote">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="cod_lote" ColumnName="cod_lote" />
+                <ScalarProperty Name="id_lote" ColumnName="id_lote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="maquina">
             <EntityTypeMapping TypeName="BodMantModel.maquina">
               <MappingFragment StoreEntitySet="maquina">
@@ -1023,6 +1032,20 @@
                 <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
                 <ScalarProperty Name="nro_salida" ColumnName="nro_salida" />
                 <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salida_detalle">
+            <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
+              <MappingFragment StoreEntitySet="salida_detalle">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
+                <ScalarProperty Name="id_lote" ColumnName="id_lote" />
+                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+                <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+                <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1070,30 +1093,7 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="lote">
-            <EntityTypeMapping TypeName="BodMantModel.lote">
-              <MappingFragment StoreEntitySet="lote">
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="cod_lote" ColumnName="cod_lote" />
-                <ScalarProperty Name="id_lote" ColumnName="id_lote" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="salida_detalle">
-            <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
-              <MappingFragment StoreEntitySet="salida_detalle">
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
-                <ScalarProperty Name="id_lote" ColumnName="id_lote" />
-                <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-                <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
-                <ScalarProperty Name="id_item" ColumnName="id_item" />
-                <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-                <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

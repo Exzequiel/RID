@@ -142,7 +142,7 @@
     <Property Name="id_item" Type="int" Nullable="false" />
     <Property Name="id_maquina" Type="int" Nullable="false" />
     <Property Name="id_tecnico" Type="int" Nullable="false" />
-    <Property Name="id_lote" Type="int" />
+    <Property Name="id_lote" Type="int" Nullable="false" />
     <Property Name="cant_aentregar" Type="int" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
@@ -296,7 +296,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_salida_detalle_lote">
-    <End Role="lote" Type="Self.lote" Multiplicity="0..1" />
+    <End Role="lote" Type="Self.lote" Multiplicity="1" />
     <End Role="salida_detalle" Type="Self.salida_detalle" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="lote">
