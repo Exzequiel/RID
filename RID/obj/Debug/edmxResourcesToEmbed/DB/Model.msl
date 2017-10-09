@@ -1,25 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="BodMantModelStoreContainer" CdmEntityContainer="BodMantEntities">
-    <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="BodMantModel.C__MigrationHistory">
-        <MappingFragment StoreEntitySet="__MigrationHistory">
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="BodMantModel.AspNetRoles">
-        <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
       <EntityTypeMapping TypeName="BodMantModel.AspNetUserClaims">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
@@ -36,6 +17,25 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="BodMantModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="BodMantModel.AspNetRoles">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -82,7 +82,6 @@
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-          <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
           <ScalarProperty Name="cod_item" ColumnName="cod_item" />
           <ScalarProperty Name="id_item" ColumnName="id_item" />
         </MappingFragment>
@@ -128,19 +127,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="salida_detalle">
-      <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
-        <MappingFragment StoreEntitySet="salida_detalle">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
-          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-          <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
-          <ScalarProperty Name="id_item" ColumnName="id_item" />
-          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-          <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="BodMantModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -160,15 +146,6 @@
           <ScalarProperty Name="apellido" ColumnName="apellido" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ubicacion">
-      <EntityTypeMapping TypeName="BodMantModel.ubicacion">
-        <MappingFragment StoreEntitySet="ubicacion">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -194,5 +171,28 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="lote">
+      <EntityTypeMapping TypeName="BodMantModel.lote">
+        <MappingFragment StoreEntitySet="lote">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="cod_lote" ColumnName="cod_lote" />
+          <ScalarProperty Name="id_lote" ColumnName="id_lote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salida_detalle">
+      <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
+        <MappingFragment StoreEntitySet="salida_detalle">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
+          <ScalarProperty Name="id_lote" ColumnName="id_lote" />
+          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+          <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+          <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

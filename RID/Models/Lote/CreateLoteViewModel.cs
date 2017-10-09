@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace RID.Models.Ubicacion
+namespace RID.Models.Lote
 {
-    public class CreateUbicacionViewModel
+    public class CreateLoteViewModel
     {
-        [Display(Name = "Ubicación")]
+        [Display(Name = "N° de Lote")]
         [Required]
-        public string Description { get; set; }
+        public string CodLote { get; set; }
     }
 }

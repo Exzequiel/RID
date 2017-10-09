@@ -37,10 +37,10 @@
             <fieldset>
                 <div class="row">
                     @*<hr />*@
-                    <div class="col-md-2">
-                        Técnico
+                    <div class="col-md-4">
+                        ítem
                         <div class="form-group">
-                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                            @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -49,12 +49,19 @@
                             @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        ítem
+                    <div class="col-md-3">
+                        Lote
                         <div class="form-group">
-                            @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                            @Html.DropDownList("IdLote", ViewBag.ListaLote as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        Técnico
+                        <div class="form-group">
+                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                        </div>
+                    </div>
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <button type="button" class="btn btn-primary" onclick="AgregarFila()">+ Agregar</button>
@@ -67,11 +74,11 @@
                 <thead>
                     <tr>
                         <th>Acciones</th>
-                        <th>Cantidad</th>
                         <th>Cód. Ítem</th>
-                        <th>Descripción Item</th>
-                        <th>Ubicación</th>
-                        <th>Máquina</th>
+                        <th>Unidades</th>
+                        <th>Descripción</th>
+                        <th>Objeto/Máquina</th>
+                        <th>Lote</th>
                         <th>Técnico</th>
                     </tr>
                 </thead>
@@ -105,34 +112,18 @@
             $(this).valid();
         });
 
-        //Cuando selecciona la finca carga los cables
-        //$("#id_grupo").on("select2:select", function (e) {
-        //    var Id = $(this).val();
-        //    $.ajax({
-        //        url: "/Entrega/ObtenerListaCablesPorGrupo",
-        //        type: "Get",
-        //        data: { IdGrupo:  Id},
-        //        success: function (data) {
-        //            $("#id_cable").empty();
-        //            $("#id_cable").select2({data: data.list}).trigger('change');
-        //        },
-        //        error: function () { alert("Error de red"); }
-        //    });
-
-        //});
-
-
         //funcion para obtener los datos del item al agregar la fila
         function AgregarFila()
         {
             var IdItem = $("#IdItem").val();
             var IdTecnico = $("#IdTecnico").val();
             var IdMaquina = $("#IdMaquina").val();
+            var IdLote = $("#IdLote").val();
             console.log(IdItem);
 
-            if (IdItem == "" || IdTecnico == "" || IdMaquina == "")
+            if (IdItem == "" || IdTecnico == "" || IdMaquina == "" || IdLote == "")
             {
-                ShowNotification(false, "Seleccion de campos Requerida", "Revise los campos"); return;
+                ShowNotification(false, "Seleccion de campos Requerido", "Revise los campos"); return;
             }
 
             var table = $.fn.dataTable.Api("#IdTabla");
@@ -146,7 +137,7 @@
                 @*url: "/" + '@ViewBag.ControllerName' + '/ObtenerInfoItem',*@
                 url: '@Url.Action("ObtenerInfoItem", @ViewBag.ControllerName)',
                 type: "Get",
-                data: { IdItem: IdItem, IdTecnico: IdTecnico, IdMaquina:IdMaquina },
+                data: { IdItem:IdItem, IdTecnico:IdTecnico, IdMaquina:IdMaquina, IdLote:IdLote },
                 success: function (data) {
                     $.fn.dataTable.Api("#IdTabla").row.add(data).draw(false);
                 },
@@ -184,25 +175,26 @@
                       }
                   },
                   {
+                      data: "cod_item"
+                  },
+                  {
                       data: null,
                       render: function (data) {
                           return '<input type="number" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
                       }
                   },
-                  {
-                      data: "cod_item"
-                  },
+                  
                   {
                       data: "descripcion"
                   },
 
                   {
-                      data: "ubicacion"
+                      data: "maquina"
                   },
 
                   {
-                      data: "maquina"
+                      data: "lote"
                   },
 
                   {

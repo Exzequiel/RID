@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RID.Models.Ubicacion.ListUbicacionVIewModel>
+﻿@model IEnumerable<RID.Models.Lote.ListLoteVIewModel>
 
 
 
@@ -9,16 +9,16 @@
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
-                    <a href="~/Ubicacion/Create" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Ubicación</a>
+                    <a href="~/Lote/Create" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear #Lote</a>
                 </div>
-                <h4 class="panel-title">Ubicaciones</h4>
+                <h4 class="panel-title">Números de Lotes</h4>
             </div>
             <div class="panel-body">
                 <table class="table" data-class="dataTable">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Description)
+                                @Html.DisplayNameFor(model => model.CodLote)
                             </th>
                             <th></th>
                         </tr>
@@ -28,18 +28,18 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
+                                    @Html.DisplayFor(modelItem => item.CodLote)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdUbicacion }) |
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IdLote }) |
                                     @if (Convert.ToBoolean(item.Activo))
                                     {
 
-                                        @Html.ActionLink("Desactivar", "Delete", new { id = item.IdUbicacion })
+                                        @Html.ActionLink("Desactivar", "Delete", new { id = item.IdLote })
                                     }
                                     else
                                     {
-                                        @Html.ActionLink("Activar", "Delete", new { id = item.IdUbicacion })
+                                        @Html.ActionLink("Activar", "Delete", new { id = item.IdLote })
                                     }
                                 </td>
                             </tr>

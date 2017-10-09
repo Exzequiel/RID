@@ -4,17 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RID.DB;
-using RID.Models.Ubicacion;
+using RID.Models.Lote;
 namespace RID.Controllers
 {
     [Authorize(Roles = "Administrador,Standard,Supervisor")]
-    public class UbicacionController : Controller
+    public class LoteController : Controller
     {
         public ActionResult Index()
         {
             using (var contextCm = new BodMantEntities())
             {
-                var list = contextCm.ubicacion.ToList().Select(x => new ListUbicacionVIewModel { Description = x.descripcion, Activo =  x.activo, IdUbicacion = x.id_ubicacion });
+                var list = contextCm.lote.ToList().Select(x => new ListLoteVIewModel { CodLote = x.cod_lote, Activo =  x.activo, IdLote = x.id_lote });
                 return View(list);
             }
 
@@ -26,21 +26,21 @@ namespace RID.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(CreateUbicacionViewModel model)
+        public ActionResult Create(CreateLoteViewModel model)
         {
             using (var contextCm = new BodMantEntities())
             {
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
-                    if (contextCm.ubicacion.Any(x => x.descripcion == model.Description.Trim()))
+                    if (contextCm.lote.Any(x => x.cod_lote == model.CodLote.Trim()))
                     {
-                        ModelState.AddModelError("", "Ubicación ya existente, escriba uno diferente");
+                        ModelState.AddModelError("", "Lote ya existente, escriba uno diferente");
                         return View(model);
 
                     }
 
-                    contextCm.ubicacion.Add(new ubicacion { descripcion = model.Description, activo = true });
+                    contextCm.lote.Add(new lote { cod_lote = model.CodLote, activo = true });
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {
@@ -66,25 +66,25 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var model = contextCm.ubicacion.FirstOrDefault(x => x.id_ubicacion == id);
-                return View(new EditUbicacionViewModel { IdUbicacion = model.id_ubicacion, Description = model.descripcion });
+                var model = contextCm.lote.FirstOrDefault(x => x.id_lote == id);
+                return View(new EditLoteViewModel { IdLote = model.id_lote, CodLote = model.cod_lote });
             }
         }
         [HttpPost]
-        public ActionResult Edit(EditUbicacionViewModel model)
+        public ActionResult Edit(EditLoteViewModel model)
         {
             using (var contextCm = new BodMantEntities())
             {
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
-                    if (contextCm.ubicacion.Where(x=>x.id_ubicacion!=model.IdUbicacion).Any(x => x.descripcion == model.Description.Trim()))
+                    if (contextCm.lote.Where(x=>x.id_lote!=model.IdLote).Any(x => x.cod_lote == model.CodLote.Trim()))
                     {
                         ModelState.AddModelError("", "Ubicación ya existente, escriba uno diferente");
                         return View(model);
                     }
-                    var modelDb = contextCm.ubicacion.FirstOrDefault(x => x.id_ubicacion == model.IdUbicacion);
-                    modelDb.descripcion = model.Description;
+                    var modelDb = contextCm.lote.FirstOrDefault(x => x.id_lote == model.IdLote);
+                    modelDb.cod_lote = model.CodLote;
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {
@@ -110,7 +110,7 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var modelDb = contextCm.ubicacion.FirstOrDefault(x => x.id_ubicacion == id);
+                var modelDb = contextCm.lote.FirstOrDefault(x => x.id_lote == id);
                 modelDb.activo = !modelDb.activo;
                 var result = contextCm.SaveChanges() > 0;
                 return RedirectToAction("Index");

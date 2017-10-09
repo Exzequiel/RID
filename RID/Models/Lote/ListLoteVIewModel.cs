@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RID.Models.Ubicacion
+namespace RID.Models.Lote
 {
-    public class ListUbicacionVIewModel : CreateUbicacionViewModel
+    public class ListLoteVIewModel : CreateLoteViewModel
     {
-        public int IdUbicacion { get; set; }
+        public int IdLote { get; set; }
         public bool? Activo { get; set; }
     }
 }

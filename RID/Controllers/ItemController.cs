@@ -14,7 +14,7 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var list = contextCm.item.ToList().Select(x => new ListItemViewModel { Objeto = x.objeto.cod_objeto, Descripcion = x.descripcion, Ubicacion = x.ubicacion.descripcion, Activo = x.activo, IdItem = x.id_item, cod_item = x.cod_item }).ToList();
+                var list = contextCm.item.ToList().Select(x => new ListItemViewModel { Objeto = x.objeto.cod_objeto, Descripcion = x.descripcion, Activo = x.activo, IdItem = x.id_item, cod_item = x.cod_item }).ToList();
                 return View(list);
             }
 
@@ -26,7 +26,7 @@ namespace RID.Controllers
             using (var contextCm = new BodMantEntities())
             {
                 ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
-                ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+                //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
                 return View();
             }
         }
@@ -36,7 +36,7 @@ namespace RID.Controllers
             using (var contextCm = new BodMantEntities())
             {
                 ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
-                ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+                //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
@@ -47,7 +47,7 @@ namespace RID.Controllers
 
                     }
 
-                    contextCm.item.Add(new item { descripcion = model.Descripcion, id_ubicacion = model.IdUbicacion, id_objeto = model.IdObjeto, activo = true, cod_item = model.cod_item});
+                    contextCm.item.Add(new item { descripcion = model.Descripcion, id_objeto = model.IdObjeto, activo = true, cod_item = model.cod_item});
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {
@@ -75,10 +75,10 @@ namespace RID.Controllers
             using (var contextCm = new BodMantEntities())
             {
                 ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
-                ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+                //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
 
                 var model = contextCm.item.Find(id);
-                return View(new EditItemViewModel {  IdItem = model.id_item,  Descripcion = model.descripcion, cod_item = model.cod_item, IdUbicacion = model.id_ubicacion, IdObjeto = model.id_objeto });
+                return View(new EditItemViewModel {  IdItem = model.id_item,  Descripcion = model.descripcion, cod_item = model.cod_item, IdObjeto = model.id_objeto });
             }
         }
         [HttpPost]
@@ -90,7 +90,7 @@ namespace RID.Controllers
                 {
 
                     ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
-                    ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+                    //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
 
                     if (!ModelState.IsValid) return View(model);
                     if (contextCm.item.Where(x => x.id_item != model.IdItem).Any(x => x.cod_item == model.cod_item.Trim()))
@@ -100,7 +100,7 @@ namespace RID.Controllers
                     }
                     var modelDb = contextCm.item.FirstOrDefault(x => x.id_item == model.IdItem);
                     modelDb.descripcion = model.Descripcion;
-                    modelDb.id_ubicacion = model.IdUbicacion;
+                    //modelDb.id_ubicacion = model.IdUbicacion;
                     modelDb.id_objeto = model.IdObjeto;
                     modelDb.cod_item = model.cod_item;
                     var result = contextCm.SaveChanges() > 0;

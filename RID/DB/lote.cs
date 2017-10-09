@@ -12,19 +12,19 @@ namespace RID.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class ubicacion
+    public partial class lote
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ubicacion()
+        public lote()
         {
-            this.item = new HashSet<item>();
+            this.salida_detalle = new HashSet<salida_detalle>();
         }
     
-        public int id_ubicacion { get; set; }
-        public string descripcion { get; set; }
+        public int id_lote { get; set; }
+        public string cod_lote { get; set; }
         public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<item> item { get; set; }
+        public virtual ICollection<salida_detalle> salida_detalle { get; set; }
     }
 }

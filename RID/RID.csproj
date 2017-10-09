@@ -203,7 +203,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ObjetoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
-    <Compile Include="Controllers\UbicacionController.cs" />
+    <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -232,6 +232,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\item.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\lote.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\maquina.cs">
@@ -270,9 +273,6 @@
     <Compile Include="DB\tecnico.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\ubicacion.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DB\usuario.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -305,9 +305,9 @@
     <Compile Include="Models\Departamento\CreateDepartamentoViewModel.cs" />
     <Compile Include="Models\Departamento\EditDepartamentoViewModel.cs" />
     <Compile Include="Models\Departamento\ListDepartamentoViewModel.cs" />
-    <Compile Include="Models\Ubicacion\CreateUbicacionViewModel.cs" />
-    <Compile Include="Models\Ubicacion\EditUbicacionViewModel.cs" />
-    <Compile Include="Models\Ubicacion\ListUbicacionVIewModel.cs" />
+    <Compile Include="Models\Lote\CreateLoteViewModel.cs" />
+    <Compile Include="Models\Lote\EditLoteViewModel.cs" />
+    <Compile Include="Models\Lote\ListLoteVIewModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\Usuario\CambiarContrasenaViewModel.cs" />
     <Compile Include="Models\Usuario\CrearUsuarioViewModel.cs" />
@@ -6656,9 +6656,9 @@
     <Content Include="Views\Usuario\EditarInfoUsuario.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\ResetContrasena.cshtml" />
-    <Content Include="Views\Ubicacion\Create.cshtml" />
-    <Content Include="Views\Ubicacion\Edit.cshtml" />
-    <Content Include="Views\Ubicacion\Index.cshtml" />
+    <Content Include="Views\Lote\Create.cshtml" />
+    <Content Include="Views\Lote\Edit.cshtml" />
+    <Content Include="Views\Lote\Index.cshtml" />
     <Content Include="Views\Tecnico\Create.cshtml" />
     <Content Include="Views\Tecnico\Edit.cshtml" />
     <Content Include="Views\Tecnico\Index.cshtml" />
