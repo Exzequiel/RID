@@ -9,8 +9,7 @@
             <th>Técnico</th>
         </tr>
     </thead>
-    <tbody>
-    </tbody>
+    <tbody></tbody>
 </table>
 
 <script>
@@ -18,7 +17,8 @@
         responsive: true,
         sDom:"",
         ajax:{
-            url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",
+            @*url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",*@
+            url: '@Url.Action("CargarTablaDetalleSalida", @ViewBag.ControllerName)',
             data: {IdSalida: '@ViewBag.Id'},
             type: "GET",
             global: false,

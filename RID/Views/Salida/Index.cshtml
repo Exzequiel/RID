@@ -6,7 +6,7 @@
                 <a href="~/@ViewBag.ControllerName/CrearSalida" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Baja</a>
             }
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title="" data-init="true"><i class="fa fa-expand"></i></a>
-            
+
         </div>
         <h4 class="panel-title">@ViewBag.ControllerName</h4>
     </div>
@@ -44,7 +44,8 @@
                 allowOutsideClick: false
             }).then(function () {
                 $.ajax({
-                    url: '/'+'@ViewBag.ControllerName'+'/ConfirmarSalida',
+                    @*url: '/' + '@ViewBag.ControllerName' + '/ConfirmarSalida',*@
+                    url: '@Url.Action("ConfirmarSalida", @ViewBag.ControllerName)',
                     type: "get",
                     data: { Id: Id },
                     success: function (data) {
@@ -72,7 +73,8 @@
                 allowOutsideClick: false
             }).then(function () {
                 $.ajax({
-                    url: '/'+'@ViewBag.ControllerName'+'/Deshabilitar',
+                    @*url: '/' + '@ViewBag.ControllerName' + '/Deshabilitar',*@
+                    url: '@Url.Action("Deshabilitar", @ViewBag.ControllerName)',
                     type: "get",
                     data: { Id: Id },
                     success: function (data) {
@@ -113,7 +115,7 @@
                     render: function (data) {
                             var opciones='<div class="btn-group m-r-5 m-b-5 "><a href="javascript:;" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="false">Acciones <span class="caret"></span></a><ul class="dropdown-menu">';
                             opciones += str2bool('@User.IsInRole("Administrador")') || str2bool('@User.IsInRole("Standard")') ? !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="ConfirmarSalida(' + data.id_salida + ')"> Confirmar Salida</a></li>':"";
-                            opciones += !data.activo || data.confirmado ? '' : '<li><a href="/' + '@ViewBag.ControllerName' + '/EditarSalida?IdSalida=' + data.id_salida + '"> Editar Salida</a></li>';
+                            opciones += !data.activo || data.confirmado ? '' : '<li><a href="@Url.Action("EditarSalida", "Salida")?IdSalida=' + data.id_salida + '"> Editar Salida</a></li>';
                             opciones += !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="DeshabilitarSalida(' + data.id_salida + ')"> Deshabilitar</a></li>';
                             opciones += '</ul></div>';
                             return opciones;
@@ -160,7 +162,8 @@
         } else {
             tr.addClass('shown');
             $.ajax({
-                url: '/'+'@ViewBag.ControllerName'+'/VerDetalleSalida',
+                @*url: '/' + '@ViewBag.ControllerName' + '/VerDetalleSalida',*@
+                url: "@Url.Action("VerDetalleSalida", @ViewBag.ControllerName)",
                 type: "get",
                 global: false,
                 data: { Id: row.data().id_salida },

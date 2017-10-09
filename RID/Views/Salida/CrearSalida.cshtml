@@ -10,13 +10,11 @@
         <div class="panel-heading-btn">
             <a href="~/@ViewBag.ControllerName/Index" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
         </div>
-        @*@if (Model.EsEditar) { <h4 class="panel-title">Editar Salida</h4> }
-        else {  <h4 class="panel-title">Nueva Salida</h4>}*@
         @if (Model.EsEditar)
-        { <h4 class="panel-title">Editar @ViewBag.ControllerName</h4> }
+        {<h4 class="panel-title">Editar @ViewBag.ControllerName</h4> }
         else
-        { <h4 class="panel-title">Nueva @ViewBag.ControllerName</h4>}
-       
+        {<h4 class="panel-title">Nueva @ViewBag.ControllerName</h4>}
+
     </div>
     <div class="panel-body p-0 ">
         <table class="table table-bordered table-responsive" style="width: 100%;">
@@ -90,7 +88,7 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()" >Guardar @ViewBag.ControllerName</button>
+                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar @ViewBag.ControllerName</button>
                     </div>
                 </div>
             </div>
@@ -145,7 +143,8 @@
             if(!validate){  ShowNotification(false,"Item ya seleccionado", "Seleccione otro"); return;}
 
             $.ajax({
-                url: "/"+'@ViewBag.ControllerName'+'/ObtenerInfoItem',
+                @*url: "/" + '@ViewBag.ControllerName' + '/ObtenerInfoItem',*@
+                url: '@Url.Action("ObtenerInfoItem", @ViewBag.ControllerName)',
                 type: "Get",
                 data: { IdItem: IdItem, IdTecnico: IdTecnico, IdMaquina:IdMaquina },
                 success: function (data) {
@@ -168,7 +167,8 @@
             responsive: true,
             sDom:"",
             ajax:{
-                url: "/"+'@ViewBag.ControllerName'+'/CargarTablaDetalleSalida',
+                @*url: "/" + '@ViewBag.ControllerName' + '/CargarTablaDetalleSalida',*@
+                url: '@Url.Action("CargarTablaDetalleSalida", @ViewBag.ControllerName)',
                 data: {IdSalida: @Model.id_salida},
                 type: "GET",
                 dataSrc: function (data) { return data; }
@@ -239,9 +239,11 @@
             }
 
             console.log(obj);
-            var url = '/'+'@ViewBag.ControllerName'+'/CrearSalida';
+            @*var url = '/' + '@ViewBag.ControllerName' + '/CrearSalida';*@
+            var url = '@Url.Action("CrearSalida", @ViewBag.ControllerName)';
             if (str2bool('@Model.EsEditar')) {
-                url = '/'+'@ViewBag.ControllerName'+'/EditarSalida';
+                @*url = '/' + '@ViewBag.ControllerName' + '/EditarSalida';*@
+                url = '@Url.Action("EditarSalida", @ViewBag.ControllerName)';
             }
             $.ajax({
                 url: url,
@@ -266,7 +268,8 @@
                         },
                          function (dismiss) {
                              if (dismiss === 'cancel') {
-                                 window.location.href = "/"+'@ViewBag.ControllerName'+"/Index";
+                                 @*window.location.href = "/" + '@ViewBag.ControllerName' + "/Index";*@
+                                 window.location.href ='@Url.Action("Index", ViewBag.ControllerName)';
                                  LoadWaitNotification();
                              }
                          });
