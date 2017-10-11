@@ -5,7 +5,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>\\192.168.1.43\Mant</_PublishTargetUrl>
+    <_PublishTargetUrl>\\192.168.1.43\rid</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -18789,10 +18789,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2012 13:00:52</publishTime>
     </File>
     <File Include="bin/RID.dll">
-      <publishTime>09/30/2017 11:48:58</publishTime>
+      <publishTime>10/11/2017 09:51:24</publishTime>
     </File>
     <File Include="bin/RID.pdb">
-      <publishTime>09/30/2017 11:48:58</publishTime>
+      <publishTime>10/11/2017 09:51:24</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>07/28/2017 08:15:02</publishTime>
@@ -18941,6 +18941,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
       <publishTime>07/19/2017 10:01:30</publishTime>
     </File>
+    <File Include="bin/System.Web.Extensions.dll">
+      <publishTime>11/05/2015 20:36:48</publishTime>
+    </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
@@ -18993,7 +18996,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2017 09:55:04</publishTime>
     </File>
     <File Include="DB/Model.edmx.diagram">
-      <publishTime>09/28/2017 08:07:12</publishTime>
+      <publishTime>10/10/2017 15:19:06</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>09/23/2017 09:55:04</publishTime>
@@ -19107,7 +19110,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 11:18:53</publishTime>
     </File>
     <File Include="Views/Departamento/Edit.cshtml">
-      <publishTime>09/27/2017 13:28:37</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Departamento/Index.cshtml">
       <publishTime>09/27/2017 13:51:18</publishTime>
@@ -19122,13 +19125,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 07:12:50</publishTime>
     </File>
     <File Include="Views/Item/Create.cshtml">
-      <publishTime>09/30/2017 11:39:40</publishTime>
+      <publishTime>10/10/2017 13:05:11</publishTime>
     </File>
     <File Include="Views/Item/Edit.cshtml">
-      <publishTime>09/26/2017 08:55:58</publishTime>
+      <publishTime>10/10/2017 13:05:11</publishTime>
     </File>
     <File Include="Views/Item/Index.cshtml">
-      <publishTime>09/28/2017 08:07:12</publishTime>
+      <publishTime>10/10/2017 13:05:11</publishTime>
+    </File>
+    <File Include="Views/Lote/Create.cshtml">
+      <publishTime>10/10/2017 13:05:11</publishTime>
+    </File>
+    <File Include="Views/Lote/Edit.cshtml">
+      <publishTime>10/10/2017 13:05:11</publishTime>
+    </File>
+    <File Include="Views/Lote/Index.cshtml">
+      <publishTime>10/10/2017 18:10:25</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>09/23/2017 09:55:10</publishTime>
@@ -19176,13 +19188,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/25/2017 07:03:37</publishTime>
     </File>
     <File Include="Views/Salida/CrearSalida.cshtml">
-      <publishTime>09/30/2017 11:48:58</publishTime>
+      <publishTime>10/10/2017 15:18:17</publishTime>
     </File>
     <File Include="Views/Salida/Index.cshtml">
-      <publishTime>09/30/2017 11:48:58</publishTime>
+      <publishTime>10/10/2017 15:07:53</publishTime>
     </File>
     <File Include="Views/Salida/VerDetalleSalida.cshtml">
-      <publishTime>09/30/2017 11:48:58</publishTime>
+      <publishTime>10/10/2017 14:44:31</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>09/23/2017 09:55:10</publishTime>
@@ -19194,7 +19206,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2017 09:55:10</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/29/2017 07:12:53</publishTime>
+      <publishTime>10/11/2017 09:51:02</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>09/23/2017 09:55:10</publishTime>
@@ -19208,32 +19220,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Tecnico/Index.cshtml">
       <publishTime>09/28/2017 08:07:12</publishTime>
     </File>
-    <File Include="Views/Ubicacion/Create.cshtml">
-      <publishTime>09/25/2017 07:11:43</publishTime>
-    </File>
-    <File Include="Views/Ubicacion/Edit.cshtml">
-      <publishTime>09/25/2017 07:11:43</publishTime>
-    </File>
-    <File Include="Views/Ubicacion/Index.cshtml">
-      <publishTime>09/25/2017 07:11:43</publishTime>
-    </File>
     <File Include="Views/Usuario/CrearUsuario.cshtml">
-      <publishTime>09/27/2017 13:54:56</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Usuario/DetalleUsuario.cshtml">
-      <publishTime>09/25/2017 07:11:43</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Usuario/EditarCuentaUsuario.cshtml">
-      <publishTime>09/27/2017 14:02:37</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Usuario/EditarInfoUsuario.cshtml">
-      <publishTime>09/25/2017 09:21:57</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Usuario/Index.cshtml">
-      <publishTime>09/29/2017 07:12:53</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Usuario/ResetContrasena.cshtml">
-      <publishTime>09/27/2017 13:37:29</publishTime>
+      <publishTime>10/09/2017 09:00:14</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>09/23/2017 09:55:04</publishTime>
@@ -19242,7 +19245,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2017 09:55:04</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/30/2017 12:05:40</publishTime>
+      <publishTime>10/11/2017 09:51:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

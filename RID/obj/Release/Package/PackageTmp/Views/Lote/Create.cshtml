@@ -1,4 +1,4 @@
-﻿@model RID.Models.Ubicacion.CreateUbicacionViewModel
+﻿@model RID.Models.Lote.CreateLoteViewModel
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
@@ -10,9 +10,9 @@
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
-                    <a href="~/Ubicacion/Index" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-lisr"></i> Listado</a>
+                    <a href="~/Lote/Index" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-lisr"></i> Listado</a>
                 </div>
-                <h4 class="panel-title">Nueva Ubicación</h4>
+                <h4 class="panel-title">Nuevo #Lote</h4>
             </div>
             <div class="panel-body">
                 @using (Html.BeginForm())
@@ -23,10 +23,10 @@
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.CodLote, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CodLote, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CodLote, "", new { @class = "text-danger" })
                             </div>
                         </div>
 

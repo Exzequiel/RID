@@ -1,5 +1,6 @@
 ﻿using RID.DB;
 using RID.Models.Salida;
+using RID.Models.Reporte;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,8 +68,6 @@ namespace RID.Controllers
                     id_item = x.id_item,
                     id_detalle_salida = x.id_detalle_salida,
                     cant_aentregar = x.cant_aentregar,
-                    //cant_disponible = x.item.cant_disponible - (x.item.entrega_detalle.Any(y => y.activo && y.entrega.confirmado == false) ? x.item.entrega_detalle.Where(y => y.activo && y.entrega.confirmado == false).Sum(z => z.cant_aentregar) : 0) - (x.item.requisa_detalle.Any(y => y.activo) ? x.item.requisa_detalle.Where(y => y.activo).Sum(z => z.cant_enviada) : 0),
-                    //ubicacion = x.item.ubicacion.descripcion,
                     cod_item = x.item.cod_item,
                     descripcion = x.item.descripcion,
                     maquina = x.maquina.cod_maquina+","+x.item.objeto.cod_objeto,
@@ -96,8 +95,6 @@ namespace RID.Controllers
                 ViewBag.ListaMaquina = conexion.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina + " - " + x.cod_maquina }).ToList();
                 ViewBag.ListaLote = conexion.lote.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_lote.ToString(), Text = x.cod_lote }).ToList();
                 ViewBag.ListaTecnico = conexion.tecnico.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre + " " + x.apellido }).ToList();
-                //ViewBag.ListaObjeto = conexion.objeto.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_objeto.ToString(), Text = x.cod_objeto }).ToList();
-                //ViewBag.ListaObjeto = new List<SelectListItem>();
                 ViewBag.ListaItem = conexion.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.objeto.cod_objeto }).ToList();
                 return View( new CrearSalidaViewModel {nro_salida = getConfiguracion("CorrelativoSalida"), fecha_transaccion = DateTime.Now, NombreDepartamento = ObtenerNombreDepartamentoPorUsuario() });
             }
@@ -148,11 +145,8 @@ namespace RID.Controllers
                     cant_aentregar = 0,
                     id_salida = 0,
                     id_item = IdItem,
-                    //cant_disponible = model.cant_disponible - (model.entrega_detalle.Any(y => y.activo && y.entrega.confirmado == false) ? model.entrega_detalle.Where(y => y.activo && y.entrega.confirmado == false).Sum(z => z.cant_aentregar) : 0) - (model.requisa_detalle.Any(y => y.activo) ? model.requisa_detalle.Where(y => y.activo).Sum(z => z.cant_enviada) : 0),
                     cod_item = model.cod_item,
                     descripcion = model.descripcion,
-                    //ubicacion = model.ubicacion.descripcion,
-                    //maquina = model.objeto.cod_objeto+", "+modelMaquina.cod_maquina,
                     maquina = modelMaquina.cod_maquina+","+model.objeto.cod_objeto,
                     lote = modelIdLote==null?"": modelIdLote.cod_lote,
                     tecnico = modelTecnico.nombre +" "+modelTecnico.apellido,
@@ -195,12 +189,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 var ModelSalida = context.salida.Find(model.id_salida);
-                //ModelSalida.id_maquina = model.id_maquina;
-                //ModelSalida.id_tecnico = model.id_tecnico;
 
-              //  context.objeto_por_salida.RemoveRange(ModelSalida.objeto_por_salida);
-
-                //foreach (var idobjeto in model.id_objeto) { context.objeto_por_salida.Add(new objeto_por_salida { id_objeto = idobjeto, id_salida = ModelSalida.id_salida }); }
                 ModelSalida.salida_detalle.ToList().ForEach(x => x.activo = false);
 
                 foreach (var detalle in model.ListaDetalle)
@@ -261,15 +250,12 @@ namespace RID.Controllers
             {
                 var model = context.salida.Find(Id);
                 model.confirmado = true;
-                //foreach(var detalle in model.salida_detalle.Where(x=>x.activo).ToList())
-                //{
-                //    //detalle.item.cant_disponible = detalle.item.cant_disponible - detalle.cant_aentregar;
-                //    detalle.cant_aentregar = detalle.cant_aentregar;
-                //}
+
                 var resultado = context.SaveChanges() > 0;
                 return Json(EnviarResultado(resultado, "Confirmar Entrega"), JsonRequestBehavior.AllowGet);
             }
         }
 
+       
     }
 }

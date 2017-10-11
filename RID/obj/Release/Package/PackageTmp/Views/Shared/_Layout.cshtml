@@ -154,7 +154,7 @@
                         </a>
                     </li>
 
-                    @if (User.IsInRole("Administrador") || User.IsInRole("Supervisor"))
+                    @if (User.IsInRole("Administrador") || User.IsInRole("Standard") || User.IsInRole("Supervisor"))
                     {
                     <li class="has-sub">
                         <a href="javascript:;">
@@ -181,6 +181,8 @@
                         <ul class="sub-menu">
                             <li><a href="@Url.Action("Index", "Item")" title="Productos"><span>Listar Productos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                             <li><a href="@Url.Action("Index", "Objeto")" title="Objetos"><span>Listar Objetos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+                            <li><a href="@Url.Action("Index", "Lote")" title="Lotes"><span>Listar Lotes</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
+
                         </ul>
                     </li>
 
@@ -196,6 +198,8 @@
                     </li>
                     }
 
+                    @if (User.IsInRole("Administrador"))
+                    {
                     <li class="has-sub">
                         <a href="javascript:;">
                             <b class="caret pull-right"></b>
@@ -203,16 +207,10 @@
                             <span>Áreas</span>
                         </a>
                         <ul class="sub-menu">
-                            @if (User.IsInRole("Administrador") || User.IsInRole("Standard") || User.IsInRole("Supervisor"))
-                            {
-                            <li><a href="@Url.Action("Index", "Ubicacion")" title="Ubicaciones"><span>Listar Ubicación</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
-                            }
-                            @if (User.IsInRole("Administrador"))
-                            {
-                            <li><a href="@Url.Action("Index", "Departamento")" title="Departamentos"><span>Listar Departamento</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
-                            }
+                            <li><a href="@Url.Action("Index", "Departamento")" title="Departamentos"><span>Listar Departamento</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li> 
                         </ul>
                     </li>
+                    }
 
                     @if (User.IsInRole("Administrador") || User.IsInRole("Supervisor"))
                     {

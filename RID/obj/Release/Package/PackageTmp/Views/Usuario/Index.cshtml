@@ -38,17 +38,18 @@
     </div>
     <!-- end col-10 -->
 </div>
-    
 
-                
+
+
 @section Scripts {
-<script>
+    <script>
 
     function MostrarEditarCuenta(id)
     {
         LoadWaitNotification();
         $.ajax({
-            url: "/Usuario/EditarCuentaUsuario",
+            //url: "/Usuario/EditarCuentaUsuario",
+            url: '@Url.Action("EditarCuentaUsuario", "Usuario")',
             type: 'get',
             data: { Id: id },
             success: function (data) {
@@ -67,7 +68,8 @@
     function MostrarEditarInfo(id) {
         LoadWaitNotification();
         $.ajax({
-            url: "/Usuario/EditarInfoUsuario",
+            //url: "/Usuario/EditarInfoUsuario",
+            url: '@Url.Action("EditarInfoUsuario", "Usuario")',
             type: 'get',
             data: { Id: id },
             success: function (data) {
@@ -87,7 +89,8 @@
     {
         LoadWaitNotification();
         $.ajax({
-            url: "/Usuario/ResetContrasena",
+            //url: "/Usuario/ResetContrasena",
+            url: '@Url.Action("ResetContrasena", "Usuario")',
             type: 'get',
             data: { Id: id },
             success: function (data) {
@@ -113,7 +116,8 @@
         });
         LoadWaitNotification();
         $.ajax({
-            url: "/Usuario/"+ActionName,
+            //url: "/Usuario/" + ActionName,
+            url: '@Url.Action(@ViewBag.ActionName, "Usuario")',
             type: "POST",
             data: { Lista: listcheckedrows, IdPersona: idPersona },
             success: function (data) {
@@ -170,13 +174,6 @@
                 {
                     data: "Apellido"
                 },
-
-                //{
-                //    data: null,
-                //    render: function (data) {
-                //        return moment(data.FechaNac).format("DD/MM/YYYY");
-                //    }
-                //},
                 {
                     data: "Email"
                 },
@@ -196,5 +193,5 @@
         });
     });
 
-                            </script>
-                        }
+    </script>
+}

@@ -292,6 +292,7 @@
     <Compile Include="Models\Objeto\CreateObjetoViewModel.cs" />
     <Compile Include="Models\Objeto\EditObjetoViewModel.cs" />
     <Compile Include="Models\Objeto\ListObjetoViewModel.cs" />
+    <Compile Include="Models\Reporte\ListarReporteSalida.cs" />
     <Compile Include="Models\Roles\CrearRolViewModel.cs" />
     <Compile Include="Models\Salida\CrearDetalleSalidaViewModel.cs" />
     <Compile Include="Models\Salida\CrearSalidaViewModel.cs" />
@@ -6588,7 +6589,7 @@
     <Content Include="DB\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\Mant.pubxml" />
+    <None Include="Properties\PublishProfiles\RID.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -6677,6 +6678,7 @@
     <Content Include="Views\Departamento\Create.cshtml" />
     <Content Include="Views\Departamento\Edit.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

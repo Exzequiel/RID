@@ -17,9 +17,9 @@ namespace RID.Models.Item
         [Required]
         public string Descripcion { get; set; }
 
-        [Display(Name = "Ubicación")]
-        [Required]
-        public int IdUbicacion { get; set; }
+        //[Display(Name = "Ubicación")]
+        //[Required]
+        //public int IdUbicacion { get; set; }
 
         [Display(Name = "Objeto")]
         [Required]

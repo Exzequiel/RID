@@ -5,7 +5,7 @@
 {
 
     <div class="form-horizontal">
-       @Html.HiddenFor(model =>model.IdUser)
+        @Html.HiddenFor(model => model.IdUser)
 
         <div class="form-group">
             @Html.LabelFor(model => model.NewPassword, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -36,7 +36,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 <script>
-      
+
 
     function EditarContrasena() {
 
@@ -44,7 +44,8 @@
 
             LoadWaitNotification();
                 $.ajax({
-                    url: "/Usuario/ResetContrasena",
+                    //url: "/Usuario/ResetContrasena",
+                    url: '@Url.Action("ResetContrasena", "Usuario")',
                     type: 'POST',
                     dataType: 'json',
                     data: $('#FormContrasenaUsuario').serialize(),
@@ -64,8 +65,5 @@
                 });
 
         };
-
-
-
 
 </script>

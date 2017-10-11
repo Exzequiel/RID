@@ -8,21 +8,19 @@
 <div class="panel panel-inverse">
     <div class="panel-heading">
         <div class="panel-heading-btn">
-            <a href="~/@ViewBag.ControllerName/Index" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
+            <a href="@Url.Action("Index", "Salida")" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
         </div>
-        @*@if (Model.EsEditar) { <h4 class="panel-title">Editar Salida</h4> }
-        else {  <h4 class="panel-title">Nueva Salida</h4>}*@
         @if (Model.EsEditar)
-        { <h4 class="panel-title">Editar @ViewBag.ControllerName</h4> }
+        {<h4 class="panel-title">Editar @ViewBag.ControllerName</h4> }
         else
-        { <h4 class="panel-title">Nueva @ViewBag.ControllerName</h4>}
-       
+        {<h4 class="panel-title">Nueva @ViewBag.ControllerName</h4>}
+
     </div>
     <div class="panel-body p-0 ">
         <table class="table table-bordered table-responsive" style="width: 100%;">
             <thead>
                 <tr class="success">
-                    <th class="text-center"># @ViewBag.ControllerName</th>
+                    <th class="text-center"># Salida</th>
                     <th class="text-center">Departamento</th>
                     <th class="text-center">Fecha Transacción</th>
                 </tr>
@@ -39,24 +37,31 @@
             <fieldset>
                 <div class="row">
                     @*<hr />*@
-                    <div class="col-md-2">
-                        Tecnico
-                        <div class="form-group">
-                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        Maquina
-                        <div class="form-group">
-                            @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        Item
+                    <div class="col-md-4">
+                        ítem
                         <div class="form-group">
                             @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        Máquina
+                        <div class="form-group">
+                            @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        Lote
+                        <div class="form-group">
+                            @Html.DropDownList("IdLote", ViewBag.ListaLote as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        Técnico
+                        <div class="form-group">
+                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                        </div>
+                    </div>
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <button type="button" class="btn btn-primary" onclick="AgregarFila()">+ Agregar</button>
@@ -69,11 +74,11 @@
                 <thead>
                     <tr>
                         <th>Acciones</th>
-                        <th>Cantidad</th>
                         <th>Cód. Ítem</th>
-                        <th>Descripción Item</th>
-                        <th>Ubicación</th>
-                        <th>Máquina</th>
+                        <th>Unidades</th>
+                        <th>Descripción</th>
+                        <th>Objeto/Máquina</th>
+                        <th>Lote</th>
                         <th>Técnico</th>
                     </tr>
                 </thead>
@@ -90,7 +95,7 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()" >Guardar @ViewBag.ControllerName</button>
+                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar Salida</button>
                     </div>
                 </div>
             </div>
@@ -107,34 +112,18 @@
             $(this).valid();
         });
 
-        //Cuando selecciona la finca carga los cables
-        //$("#id_grupo").on("select2:select", function (e) {
-        //    var Id = $(this).val();
-        //    $.ajax({
-        //        url: "/Entrega/ObtenerListaCablesPorGrupo",
-        //        type: "Get",
-        //        data: { IdGrupo:  Id},
-        //        success: function (data) {
-        //            $("#id_cable").empty();
-        //            $("#id_cable").select2({data: data.list}).trigger('change');
-        //        },
-        //        error: function () { alert("Error de red"); }
-        //    });
-
-        //});
-
-
         //funcion para obtener los datos del item al agregar la fila
         function AgregarFila()
         {
             var IdItem = $("#IdItem").val();
             var IdTecnico = $("#IdTecnico").val();
             var IdMaquina = $("#IdMaquina").val();
+            var IdLote = $("#IdLote").val();
             console.log(IdItem);
 
-            if (IdItem == "" || IdTecnico == "" || IdMaquina == "")
+            if (IdItem == "" || IdTecnico == "" || IdMaquina == "" /*|| IdLote == ""*/)
             {
-                ShowNotification(false, "Seleccion de campos Requerida", "Revise los campos"); return;
+                ShowNotification(false, "Selección de campos Requeridos", "Revise los campos"); return;
             }
 
             var table = $.fn.dataTable.Api("#IdTabla");
@@ -145,9 +134,10 @@
             if(!validate){  ShowNotification(false,"Item ya seleccionado", "Seleccione otro"); return;}
 
             $.ajax({
-                url: "/"+'@ViewBag.ControllerName'+'/ObtenerInfoItem',
+                @*url: "/" + '@ViewBag.ControllerName' + '/ObtenerInfoItem',*@
+                url: '@Url.Action("ObtenerInfoItem", "Salida")',
                 type: "Get",
-                data: { IdItem: IdItem, IdTecnico: IdTecnico, IdMaquina:IdMaquina },
+                data: { IdItem:IdItem, IdTecnico:IdTecnico, IdMaquina:IdMaquina, IdLote:IdLote },
                 success: function (data) {
                     $.fn.dataTable.Api("#IdTabla").row.add(data).draw(false);
                 },
@@ -161,15 +151,15 @@
             var tabla = $.fn.dataTable.Api("#IdTabla");
             DataFilaActual = tabla.row($(this).closest("tr")).data();
             DataFilaActual.cant_aentregar = $(this).closest("tr").find("[name=InputCantidad]").val();
-            //DataFilaActual.IdTecnico = $(this).closest("tr").find("[name=InputTecnico]").val();
-            //DataFilaActual.IdMaquina = $(this).closest("tr").find("[name=InputMaquina]").val();
+
         });
 
         $("#IdTabla").dataTable({
             responsive: true,
             sDom:"",
             ajax:{
-                url: "/"+'@ViewBag.ControllerName'+'/CargarTablaDetalleSalida',
+                @*url: "/" + '@ViewBag.ControllerName' + '/CargarTablaDetalleSalida',*@
+                url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',
                 data: {IdSalida: @Model.id_salida},
                 type: "GET",
                 dataSrc: function (data) { return data; }
@@ -185,25 +175,26 @@
                       }
                   },
                   {
+                      data: "cod_item"
+                  },
+                  {
                       data: null,
                       render: function (data) {
                           return '<input type="number" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
                       }
                   },
-                  {
-                      data: "cod_item"
-                  },
+                  
                   {
                       data: "descripcion"
                   },
 
                   {
-                      data: "ubicacion"
+                      data: "maquina"
                   },
 
                   {
-                      data: "maquina"
+                      data: "lote"
                   },
 
                   {
@@ -240,9 +231,11 @@
             }
 
             console.log(obj);
-            var url = '/'+'@ViewBag.ControllerName'+'/CrearSalida';
+            @*var url = '/' + '@ViewBag.ControllerName' + '/CrearSalida';*@
+            var url = '@Url.Action("CrearSalida", "Salida")';
             if (str2bool('@Model.EsEditar')) {
-                url = '/'+'@ViewBag.ControllerName'+'/EditarSalida';
+                @*url = '/' + '@ViewBag.ControllerName' + '/EditarSalida';*@
+                url = '@Url.Action("EditarSalida", "Salida")';
             }
             $.ajax({
                 url: url,
@@ -267,7 +260,8 @@
                         },
                          function (dismiss) {
                              if (dismiss === 'cancel') {
-                                 window.location.href = "/"+'@ViewBag.ControllerName'+"/Index";
+                                 @*window.location.href = "/" + '@ViewBag.ControllerName' + "/Index";*@
+                                 window.location.href ='@Url.Action("Index", "Salida")';
                                  LoadWaitNotification();
                              }
                          });

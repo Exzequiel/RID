@@ -85,9 +85,16 @@
     </Key>
     <Property Name="id_item" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="cod_item" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="id_ubicacion" Type="int" Nullable="false" />
     <Property Name="id_objeto" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lote">
+    <Key>
+      <PropertyRef Name="id_lote" />
+    </Key>
+    <Property Name="id_lote" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_lote" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="maquina">
@@ -135,6 +142,7 @@
     <Property Name="id_item" Type="int" Nullable="false" />
     <Property Name="id_maquina" Type="int" Nullable="false" />
     <Property Name="id_tecnico" Type="int" Nullable="false" />
+    <Property Name="id_lote" Type="int" />
     <Property Name="cant_aentregar" Type="int" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
@@ -156,14 +164,6 @@
     <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="puesto" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="activo" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ubicacion">
-    <Key>
-      <PropertyRef Name="id_ubicacion" />
-    </Key>
-    <Property Name="id_ubicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="usuario">
@@ -247,18 +247,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_item_ubicacion">
-    <End Role="ubicacion" Type="Self.ubicacion" Multiplicity="1" />
-    <End Role="item" Type="Self.item" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ubicacion">
-        <PropertyRef Name="id_ubicacion" />
-      </Principal>
-      <Dependent Role="item">
-        <PropertyRef Name="id_ubicacion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_objeto_por_salida_objeto">
     <End Role="objeto" Type="Self.objeto" Multiplicity="1" />
     <End Role="objeto_por_salida" Type="Self.objeto_por_salida" Multiplicity="*" />
@@ -304,6 +292,18 @@
       </Principal>
       <Dependent Role="salida_detalle">
         <PropertyRef Name="id_item" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_salida_detalle_lote">
+    <End Role="lote" Type="Self.lote" Multiplicity="0..1" />
+    <End Role="salida_detalle" Type="Self.salida_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lote">
+        <PropertyRef Name="id_lote" />
+      </Principal>
+      <Dependent Role="salida_detalle">
+        <PropertyRef Name="id_lote" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -377,6 +377,7 @@
     <EntitySet Name="configuracion" EntityType="Self.configuracion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="departamento" EntityType="Self.departamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lote" EntityType="Self.lote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="maquina" EntityType="Self.maquina" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="objeto" EntityType="Self.objeto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="objeto_por_salida" EntityType="Self.objeto_por_salida" Schema="dbo" store:Type="Tables" />
@@ -384,7 +385,6 @@
     <EntitySet Name="salida_detalle" EntityType="Self.salida_detalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tecnico" EntityType="Self.tecnico" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ubicacion" EntityType="Self.ubicacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -406,10 +406,6 @@
       <End Role="objeto" EntitySet="objeto" />
       <End Role="item" EntitySet="item" />
     </AssociationSet>
-    <AssociationSet Name="FK_item_ubicacion" Association="Self.FK_item_ubicacion">
-      <End Role="ubicacion" EntitySet="ubicacion" />
-      <End Role="item" EntitySet="item" />
-    </AssociationSet>
     <AssociationSet Name="FK_objeto_por_salida_objeto" Association="Self.FK_objeto_por_salida_objeto">
       <End Role="objeto" EntitySet="objeto" />
       <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
@@ -424,6 +420,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_salida_detalle_item" Association="Self.FK_salida_detalle_item">
       <End Role="item" EntitySet="item" />
+      <End Role="salida_detalle" EntitySet="salida_detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_salida_detalle_lote" Association="Self.FK_salida_detalle_lote">
+      <End Role="lote" EntitySet="lote" />
       <End Role="salida_detalle" EntitySet="salida_detalle" />
     </AssociationSet>
     <AssociationSet Name="FK_salida_detalle_maquina" Association="Self.FK_salida_detalle_maquina">
