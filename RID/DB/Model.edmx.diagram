@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="BodMantModel.objeto" Width="1.5" PointX="3" PointY="15.5" />
         <EntityTypeShape EntityType="BodMantModel.objeto_por_salida" Width="1.5" PointX="5.25" PointY="9.5" />
         <EntityTypeShape EntityType="BodMantModel.salida" Width="1.5" PointX="3" PointY="9.125" />
-        <EntityTypeShape EntityType="BodMantModel.salida_detalle" Width="1.5" PointX="8.25" PointY="8.75" />
         <EntityTypeShape EntityType="BodMantModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="4.25" />
         <EntityTypeShape EntityType="BodMantModel.tecnico" Width="1.5" PointX="6" PointY="13" />
         <EntityTypeShape EntityType="BodMantModel.usuario" Width="1.5" PointX="3" PointY="5.375" />
@@ -28,14 +27,15 @@
         <AssociationConnector Association="BodMantModel.FK_salida_departamento" />
         <AssociationConnector Association="BodMantModel.FK_usuario_departamento" />
         <AssociationConnector Association="BodMantModel.FK_item_objeto" />
+        <AssociationConnector Association="BodMantModel.FK_objeto_por_salida_objeto" />
+        <AssociationConnector Association="BodMantModel.FK_objeto_por_salida_salida" />
+        <AssociationConnector Association="BodMantModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="BodMantModel.salida_detalle" Width="1.5" PointX="8.25" PointY="11.25" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_item" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_lote" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_maquina" />
-        <AssociationConnector Association="BodMantModel.FK_objeto_por_salida_objeto" />
-        <AssociationConnector Association="BodMantModel.FK_objeto_por_salida_salida" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_salida" />
         <AssociationConnector Association="BodMantModel.FK_salida_detalle_tecnico" />
-        <AssociationConnector Association="BodMantModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

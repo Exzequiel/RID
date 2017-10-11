@@ -3,12 +3,12 @@
         <div class="panel-heading-btn">
             @if (User.IsInRole("Administrador") || User.IsInRole("Standard"))
             {
-                <a href="~/@ViewBag.ControllerName/CrearSalida" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Baja</a>
+                <a href="@Url.Action("CrearSalida", "Salida")" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Crear Baja</a>
             }
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title="" data-init="true"><i class="fa fa-expand"></i></a>
 
         </div>
-        <h4 class="panel-title">@ViewBag.ControllerName</h4>
+        <h4 class="panel-title">Bajas</h4>
     </div>
     <div class="panel-body">
         <table class="table table-bordered table-responsive table-hover" id="IdTabla" style="width: 100%;">
@@ -16,7 +16,7 @@
                 <tr>
                     <th></th>
                     <th>Acciones</th>
-                    <th># @ViewBag.ControllerName</th>
+                    <th># Salida</th>
                     <th>Fecha Transacción</th>
                     <th>Departamento</th>
                     <th>Estado</th>
@@ -45,7 +45,7 @@
             }).then(function () {
                 $.ajax({
                     @*url: '/' + '@ViewBag.ControllerName' + '/ConfirmarSalida',*@
-                    url: '@Url.Action("ConfirmarSalida", @ViewBag.ControllerName)',
+                    url: '@Url.Action("ConfirmarSalida", "Salida")',
                     type: "get",
                     data: { Id: Id },
                     success: function (data) {
@@ -74,7 +74,7 @@
             }).then(function () {
                 $.ajax({
                     @*url: '/' + '@ViewBag.ControllerName' + '/Deshabilitar',*@
-                    url: '@Url.Action("Deshabilitar", @ViewBag.ControllerName)',
+                    url: '@Url.Action("Deshabilitar", "Salida")',
                     type: "get",
                     data: { Id: Id },
                     success: function (data) {
@@ -95,7 +95,7 @@
        var table= $("#IdTabla").dataTable({
            // responsive: true,
             ajax: {
-                url: "@Url.Action("CargarTablaListaSalida", @ViewBag.ControllerName)",
+                url: "@Url.Action("CargarTablaListaSalida", "Salida")",
                 global:false,
                 type: "GET",
                 scrollx:true,
@@ -116,7 +116,7 @@
                             var opciones='<div class="btn-group m-r-5 m-b-5 "><a href="javascript:;" data-toggle="dropdown" class="btn btn-info dropdown-toggle btn-xs" aria-expanded="false">Acciones <span class="caret"></span></a><ul class="dropdown-menu">';
                             opciones += str2bool('@User.IsInRole("Administrador")') || str2bool('@User.IsInRole("Standard")') ? !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="ConfirmarSalida(' + data.id_salida + ')"> Confirmar Salida</a></li>':"";
                             opciones += !data.activo || data.confirmado ? '' : '<li><a href="@Url.Action("EditarSalida", "Salida")?IdSalida=' + data.id_salida + '"> Editar Salida</a></li>';
-                            opciones += !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="DeshabilitarSalida(' + data.id_salida + ')"> Deshabilitar</a></li>';
+                            //opciones += !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="DeshabilitarSalida(' + data.id_salida + ')"> Deshabilitar</a></li>';
                             opciones += '</ul></div>';
                             return opciones;
                         }
@@ -125,6 +125,7 @@
                 {
                         data: "nro_salida"
                 },
+
                 {
                     data: null,
                     render: function (data) {
@@ -136,18 +137,19 @@
                         data: "departamento"
                 },
 
-                  {
-                        data: null,
-                      render: function (data) {
-                            return data.confirmado ? '<span class="padding-5 label label-success"><i class="fa fa-check"></i> Confirmado</span>' : '<span class="padding-5 label label-danger"><i class="fa fa-warning"></i> Pendiente</span>';
-                        }
-                    },
                 {
-                        data: null,
+                    data: null,
                     render: function (data) {
-                            return data.activo ? '<span class="padding-5 label label-success"><i class="fa fa-check"></i></span>' : '<span class="padding-5 label label-danger"><i class="fa fa-ban"></i></span>';
-                        }
+                        return data.confirmado ? '<span class="padding-5 label label-success"><i class="fa fa-check"></i> Confirmado</span>' : '<span class="padding-5 label label-danger"><i class="fa fa-warning"></i> Pendiente</span>';
                     }
+                },
+
+                //{
+                //    data: null,
+                //    render: function (data) {
+                //            return data.activo ? '<span class="padding-5 label label-success"><i class="fa fa-check"></i></span>' : '<span class="padding-5 label label-danger"><i class="fa fa-ban"></i></span>';
+                //    }
+                //},
             ]
         });
 
@@ -163,7 +165,7 @@
             tr.addClass('shown');
             $.ajax({
                 @*url: '/' + '@ViewBag.ControllerName' + '/VerDetalleSalida',*@
-                url: "@Url.Action("VerDetalleSalida", @ViewBag.ControllerName)",
+                url: "@Url.Action("VerDetalleSalida", "Salida")",
                 type: "get",
                 global: false,
                 data: { Id: row.data().id_salida },

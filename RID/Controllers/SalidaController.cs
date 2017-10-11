@@ -34,7 +34,7 @@ namespace RID.Controllers
                     confirmado = x.confirmado,
                     id_departamento = x.id_departamento,
                     departamento = x.departamento.descripcion,
-                    activo = x.activo,
+                    activo = x.activo
 
                 }).ToList();
 
@@ -75,6 +75,7 @@ namespace RID.Controllers
                     lote = x.lote.cod_lote,
                     tecnico = x.tecnico.nombre +" "+x.tecnico.apellido,
                     activo = x.activo
+
                 }).ToList();
                 var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
                 jsonResult.MaxJsonLength = Int32.MaxValue;
@@ -112,7 +113,7 @@ namespace RID.Controllers
                     fecha_transaccion = DateTime.Now,
                     id_departamento = ObtenerIdDepartamentoPorUsuario(),
                     confirmado = false,
-                    activo =true
+                    activo =true,
                     
                 });
 
@@ -123,7 +124,7 @@ namespace RID.Controllers
                         id_salida = NuevaSalida.id_salida,
                         id_item = detalle.id_item,
                         id_maquina = detalle.id_maquina,
-                        id_lote = detalle.id_lote,
+                        id_lote = detalle.id_lote==0?(int?)null:detalle.id_lote,
                         id_tecnico = detalle.id_tecnico,
                         activo = true
                     });
@@ -134,7 +135,7 @@ namespace RID.Controllers
             }
         }
 
-        public ActionResult ObtenerInfoItem(int IdItem, int IdTecnico, int IdMaquina, int IdLote)
+        public ActionResult ObtenerInfoItem(int IdItem, int IdTecnico, int IdMaquina, int IdLote=0)
         {
             using (var context = new BodMantEntities())
             {
@@ -153,10 +154,11 @@ namespace RID.Controllers
                     //ubicacion = model.ubicacion.descripcion,
                     //maquina = model.objeto.cod_objeto+", "+modelMaquina.cod_maquina,
                     maquina = modelMaquina.cod_maquina+","+model.objeto.cod_objeto,
-                    lote = modelIdLote.cod_lote,
+                    lote = modelIdLote==null?"": modelIdLote.cod_lote,
                     tecnico = modelTecnico.nombre +" "+modelTecnico.apellido,
                     id_tecnico = IdTecnico,
-                    id_maquina = IdMaquina
+                    id_maquina = IdMaquina,
+                    id_lote = IdLote
 
                 }, JsonRequestBehavior.AllowGet);
             }

@@ -14,7 +14,6 @@
     <EntitySet Name="objeto" EntityType="BodMantModel.objeto" />
     <EntitySet Name="objeto_por_salida" EntityType="BodMantModel.objeto_por_salida" />
     <EntitySet Name="salida" EntityType="BodMantModel.salida" />
-    <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
     <EntitySet Name="sysdiagrams" EntityType="BodMantModel.sysdiagrams" />
     <EntitySet Name="tecnico" EntityType="BodMantModel.tecnico" />
     <EntitySet Name="usuario" EntityType="BodMantModel.usuario" />
@@ -42,6 +41,19 @@
       <End Role="objeto" EntitySet="objeto" />
       <End Role="item" EntitySet="item" />
     </AssociationSet>
+    <AssociationSet Name="FK_objeto_por_salida_objeto" Association="BodMantModel.FK_objeto_por_salida_objeto">
+      <End Role="objeto" EntitySet="objeto" />
+      <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_objeto_por_salida_salida" Association="BodMantModel.FK_objeto_por_salida_salida">
+      <End Role="salida" EntitySet="salida" />
+      <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="BodMantModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="salida_detalle" EntityType="BodMantModel.salida_detalle" />
     <AssociationSet Name="FK_salida_detalle_item" Association="BodMantModel.FK_salida_detalle_item">
       <End Role="item" EntitySet="item" />
       <End Role="salida_detalle" EntitySet="salida_detalle" />
@@ -54,14 +66,6 @@
       <End Role="maquina" EntitySet="maquina" />
       <End Role="salida_detalle" EntitySet="salida_detalle" />
     </AssociationSet>
-    <AssociationSet Name="FK_objeto_por_salida_objeto" Association="BodMantModel.FK_objeto_por_salida_objeto">
-      <End Role="objeto" EntitySet="objeto" />
-      <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
-    </AssociationSet>
-    <AssociationSet Name="FK_objeto_por_salida_salida" Association="BodMantModel.FK_objeto_por_salida_salida">
-      <End Role="salida" EntitySet="salida" />
-      <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
-    </AssociationSet>
     <AssociationSet Name="FK_salida_detalle_salida" Association="BodMantModel.FK_salida_detalle_salida">
       <End Role="salida" EntitySet="salida" />
       <End Role="salida_detalle" EntitySet="salida_detalle" />
@@ -69,10 +73,6 @@
     <AssociationSet Name="FK_salida_detalle_tecnico" Association="BodMantModel.FK_salida_detalle_tecnico">
       <End Role="tecnico" EntitySet="tecnico" />
       <End Role="salida_detalle" EntitySet="salida_detalle" />
-    </AssociationSet>
-    <AssociationSet Name="AspNetUserRoles" Association="BodMantModel.AspNetUserRoles">
-      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="C__MigrationHistory">
@@ -220,24 +220,6 @@
     <NavigationProperty Name="objeto_por_salida" Relationship="BodMantModel.FK_objeto_por_salida_salida" FromRole="salida" ToRole="objeto_por_salida" />
     <NavigationProperty Name="salida_detalle" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida" ToRole="salida_detalle" />
   </EntityType>
-  <EntityType Name="salida_detalle">
-    <Key>
-      <PropertyRef Name="id_detalle_salida" />
-    </Key>
-    <Property Name="id_detalle_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_salida" Type="Int32" Nullable="false" />
-    <Property Name="id_item" Type="Int32" Nullable="false" />
-    <Property Name="id_maquina" Type="Int32" Nullable="false" />
-    <Property Name="id_tecnico" Type="Int32" Nullable="false" />
-    <Property Name="id_lote" Type="Int32" Nullable="false" />
-    <Property Name="cant_aentregar" Type="Int32" Nullable="false" />
-    <Property Name="activo" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="item" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="salida_detalle" ToRole="item" />
-    <NavigationProperty Name="lote" Relationship="BodMantModel.FK_salida_detalle_lote" FromRole="salida_detalle" ToRole="lote" />
-    <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_salida_detalle_maquina" FromRole="salida_detalle" ToRole="maquina" />
-    <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida_detalle" ToRole="salida" />
-    <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_detalle_tecnico" FromRole="salida_detalle" ToRole="tecnico" />
-  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -350,42 +332,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_salida_detalle_item">
-    <End Type="BodMantModel.item" Role="item" Multiplicity="1" />
-    <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="item">
-        <PropertyRef Name="id_item" />
-      </Principal>
-      <Dependent Role="salida_detalle">
-        <PropertyRef Name="id_item" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_salida_detalle_lote">
-    <End Type="BodMantModel.lote" Role="lote" Multiplicity="1" />
-    <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="lote">
-        <PropertyRef Name="id_lote" />
-      </Principal>
-      <Dependent Role="salida_detalle">
-        <PropertyRef Name="id_lote" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_salida_detalle_maquina">
-    <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
-    <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="maquina">
-        <PropertyRef Name="id_maquina" />
-      </Principal>
-      <Dependent Role="salida_detalle">
-        <PropertyRef Name="id_maquina" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_objeto_por_salida_objeto">
     <End Type="BodMantModel.objeto" Role="objeto" Multiplicity="1" />
     <End Type="BodMantModel.objeto_por_salida" Role="objeto_por_salida" Multiplicity="*" />
@@ -407,6 +353,64 @@
       </Principal>
       <Dependent Role="objeto_por_salida">
         <PropertyRef Name="id_salida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="BodMantModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="BodMantModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
+  <EntityType Name="salida_detalle">
+    <Key>
+      <PropertyRef Name="id_detalle_salida" />
+    </Key>
+    <Property Name="id_detalle_salida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_salida" Type="Int32" Nullable="false" />
+    <Property Name="id_item" Type="Int32" Nullable="false" />
+    <Property Name="id_maquina" Type="Int32" Nullable="false" />
+    <Property Name="id_tecnico" Type="Int32" Nullable="false" />
+    <Property Name="id_lote" Type="Int32" />
+    <Property Name="cant_aentregar" Type="Int32" Nullable="false" />
+    <Property Name="activo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="item" Relationship="BodMantModel.FK_salida_detalle_item" FromRole="salida_detalle" ToRole="item" />
+    <NavigationProperty Name="lote" Relationship="BodMantModel.FK_salida_detalle_lote" FromRole="salida_detalle" ToRole="lote" />
+    <NavigationProperty Name="maquina" Relationship="BodMantModel.FK_salida_detalle_maquina" FromRole="salida_detalle" ToRole="maquina" />
+    <NavigationProperty Name="salida" Relationship="BodMantModel.FK_salida_detalle_salida" FromRole="salida_detalle" ToRole="salida" />
+    <NavigationProperty Name="tecnico" Relationship="BodMantModel.FK_salida_detalle_tecnico" FromRole="salida_detalle" ToRole="tecnico" />
+  </EntityType>
+  <Association Name="FK_salida_detalle_item">
+    <End Type="BodMantModel.item" Role="item" Multiplicity="1" />
+    <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="item">
+        <PropertyRef Name="id_item" />
+      </Principal>
+      <Dependent Role="salida_detalle">
+        <PropertyRef Name="id_item" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_salida_detalle_lote">
+    <End Type="BodMantModel.lote" Role="lote" Multiplicity="0..1" />
+    <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lote">
+        <PropertyRef Name="id_lote" />
+      </Principal>
+      <Dependent Role="salida_detalle">
+        <PropertyRef Name="id_lote" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_salida_detalle_maquina">
+    <End Type="BodMantModel.maquina" Role="maquina" Multiplicity="1" />
+    <End Type="BodMantModel.salida_detalle" Role="salida_detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="maquina">
+        <PropertyRef Name="id_maquina" />
+      </Principal>
+      <Dependent Role="salida_detalle">
+        <PropertyRef Name="id_maquina" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -433,9 +437,5 @@
         <PropertyRef Name="id_tecnico" />
       </Dependent>
     </ReferentialConstraint>
-  </Association>
-  <Association Name="AspNetUserRoles">
-    <End Type="BodMantModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-    <End Type="BodMantModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
   </Association>
 </Schema>

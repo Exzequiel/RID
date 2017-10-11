@@ -143,7 +143,6 @@ C:\Users\IT\Documents\Github\RID\RID\bin\EntityFramework.SqlServer.xml
 C:\Users\IT\Documents\Github\RID\RID\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\IT\Documents\Github\RID\RID\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\IT\Documents\Github\RID\RID\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache
 C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.csproj.CoreCompileInputs.cache
 C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.dll
 C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.pdb
@@ -222,3 +221,5 @@ C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.csproj.CoreCompileInpu
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.dll
 C:\Users\DichterSS\Documents\GitHub\RID\RID\obj\Debug\RID.pdb
 C:\Users\DichterSS\Documents\GitHub\RID\RID\bin\System.Web.Extensions.dll
+C:\Users\IT\Documents\Github\RID\RID\bin\System.Web.Extensions.dll
+C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache

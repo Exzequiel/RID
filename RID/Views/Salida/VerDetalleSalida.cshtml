@@ -18,7 +18,7 @@
         sDom:"",
         ajax:{
             @*url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",*@
-            url: '@Url.Action("CargarTablaDetalleSalida", @ViewBag.ControllerName)',
+            url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',
             data: {IdSalida: '@ViewBag.Id'},
             type: "GET",
             global: false,
@@ -29,18 +29,23 @@
               {
                   data: "cod_item"
               },
+
               {
                   data: "cant_aentregar"
               },
+
               {
                   data: "descripcion"
               },
+
               {
                   data: "maquina"
               },
+
               {
                   data: "lote"
               },
+
               {
                   data: "tecnico"
               }

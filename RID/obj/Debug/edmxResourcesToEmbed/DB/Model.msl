@@ -136,20 +136,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="salida_detalle">
-      <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
-        <MappingFragment StoreEntitySet="salida_detalle">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
-          <ScalarProperty Name="id_lote" ColumnName="id_lote" />
-          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-          <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
-          <ScalarProperty Name="id_item" ColumnName="id_item" />
-          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-          <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="BodMantModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -194,5 +180,19 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="salida_detalle">
+      <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
+        <MappingFragment StoreEntitySet="salida_detalle">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
+          <ScalarProperty Name="id_lote" ColumnName="id_lote" />
+          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+          <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+          <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

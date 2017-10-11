@@ -8,7 +8,7 @@
 <div class="panel panel-inverse">
     <div class="panel-heading">
         <div class="panel-heading-btn">
-            <a href="~/@ViewBag.ControllerName/Index" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
+            <a href="@Url.Action("Index", "Salida")" class="btn btn-xs btn-primary"><i class="fa fa-list"></i> Ver Listado</a>
         </div>
         @if (Model.EsEditar)
         {<h4 class="panel-title">Editar @ViewBag.ControllerName</h4> }
@@ -20,7 +20,7 @@
         <table class="table table-bordered table-responsive" style="width: 100%;">
             <thead>
                 <tr class="success">
-                    <th class="text-center"># @ViewBag.ControllerName</th>
+                    <th class="text-center"># Salida</th>
                     <th class="text-center">Departamento</th>
                     <th class="text-center">Fecha Transacción</th>
                 </tr>
@@ -95,7 +95,7 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar @ViewBag.ControllerName</button>
+                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar Salida</button>
                     </div>
                 </div>
             </div>
@@ -121,9 +121,9 @@
             var IdLote = $("#IdLote").val();
             console.log(IdItem);
 
-            if (IdItem == "" || IdTecnico == "" || IdMaquina == "" || IdLote == "")
+            if (IdItem == "" || IdTecnico == "" || IdMaquina == "" /*|| IdLote == ""*/)
             {
-                ShowNotification(false, "Seleccion de campos Requerido", "Revise los campos"); return;
+                ShowNotification(false, "Selección de campos Requeridos", "Revise los campos"); return;
             }
 
             var table = $.fn.dataTable.Api("#IdTabla");
@@ -135,7 +135,7 @@
 
             $.ajax({
                 @*url: "/" + '@ViewBag.ControllerName' + '/ObtenerInfoItem',*@
-                url: '@Url.Action("ObtenerInfoItem", @ViewBag.ControllerName)',
+                url: '@Url.Action("ObtenerInfoItem", "Salida")',
                 type: "Get",
                 data: { IdItem:IdItem, IdTecnico:IdTecnico, IdMaquina:IdMaquina, IdLote:IdLote },
                 success: function (data) {
@@ -159,7 +159,7 @@
             sDom:"",
             ajax:{
                 @*url: "/" + '@ViewBag.ControllerName' + '/CargarTablaDetalleSalida',*@
-                url: '@Url.Action("CargarTablaDetalleSalida", @ViewBag.ControllerName)',
+                url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',
                 data: {IdSalida: @Model.id_salida},
                 type: "GET",
                 dataSrc: function (data) { return data; }
@@ -232,10 +232,10 @@
 
             console.log(obj);
             @*var url = '/' + '@ViewBag.ControllerName' + '/CrearSalida';*@
-            var url = '@Url.Action("CrearSalida", @ViewBag.ControllerName)';
+            var url = '@Url.Action("CrearSalida", "Salida")';
             if (str2bool('@Model.EsEditar')) {
                 @*url = '/' + '@ViewBag.ControllerName' + '/EditarSalida';*@
-                url = '@Url.Action("EditarSalida", @ViewBag.ControllerName)';
+                url = '@Url.Action("EditarSalida", "Salida")';
             }
             $.ajax({
                 url: url,
@@ -261,7 +261,7 @@
                          function (dismiss) {
                              if (dismiss === 'cancel') {
                                  @*window.location.href = "/" + '@ViewBag.ControllerName' + "/Index";*@
-                                 window.location.href ='@Url.Action("Index", ViewBag.ControllerName)';
+                                 window.location.href ='@Url.Action("Index", "Salida")';
                                  LoadWaitNotification();
                              }
                          });
