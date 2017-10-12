@@ -256,6 +256,28 @@ namespace RID.Controllers
             }
         }
 
-       
+        [HttpGet]
+        public ActionResult CargarReporte()
+        {
+            using (var conexion = new BodMantEntities())
+            {
+                var list = conexion.salida_detalle.Select(x => new ListarReporteSalida
+                {
+                    cod_item = x.item.cod_item,
+                    cant_aentregar = x.cant_aentregar,
+                    descripcion = x.item.descripcion,
+                    cod_objeto = x.item.objeto.cod_objeto,
+                    maquina = x.maquina.descripcion_maquina,
+                    lote = x.lote.cod_lote,
+
+                }).ToList();
+
+                var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
+                jsonResult.MaxJsonLength = Int32.MaxValue;
+                return jsonResult;
+            }
+        }
+
+
     }
 }
