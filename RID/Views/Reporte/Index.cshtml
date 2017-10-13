@@ -28,7 +28,6 @@
 </div>
 
 
-
 @section Scripts {
     <script>
 
@@ -76,33 +75,6 @@
                 
             ]
         });
-
-        @*$('#IdTabla tbody').on('click','td.details-control', function () {
-        var tabla = $.fn.dataTable.Api("#IdTabla");
-        var tr = $(this).closest('tr');
-        var row = tabla.row(tr);
-
-        if (row.child.isShown()) {
-            row.child.hide();
-            tr.removeClass('shown');
-        } else {
-            tr.addClass('shown');
-            $.ajax({
-                url: "@Url.Action("VerDetalleIndex", ViewBag.ControllerName)",
-                type: "get",
-                global: false,
-                data: { Id: row.data().id },
-                success: function (data) {
-                    row.child(data).show();
-                },
-                error: function (data) {
-                    alert("Error de red");
-                },
-            });
-
-        }
-    });*@
-
 
     </script>
 }

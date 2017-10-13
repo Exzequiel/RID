@@ -15,7 +15,12 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var list = contextCm.maquina.ToList().Select(x => new ListMaquinaViewModel { Descripcion = x.descripcion_maquina, CodMaquina = x.cod_maquina, Activo = x.activo, IdMaquina = x.id_maquina });
+                var list = contextCm.maquina.ToList().Select(x => new ListMaquinaViewModel {
+                    Descripcion = x.descripcion_maquina,
+                    CodMaquina = x.cod_maquina,
+                    Activo = x.activo,
+                    IdMaquina = x.id_maquina
+                });
                 return View(list);
             }
 

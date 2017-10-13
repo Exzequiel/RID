@@ -12,6 +12,11 @@ namespace RID.Models.Reporte
 {
     public class ListarReporteSalida 
     {
+
+        [Display(Name = "Fecha de Transacción")]
+        public DateTime fecha_transaccion { get; set; }
+        [Display(Name = "N° de Salida")]
+        public string nro_salida { get; set; }
         [Display(Name = "Cód. Ítem")]
         public string cod_item { get; set; }
         [Display(Name = "Unidades")]
@@ -24,8 +29,6 @@ namespace RID.Models.Reporte
         public string maquina { get; set; }
         [Display(Name = "Lote")]
         public string lote { get; set; }
-
-        public List<ListarReporteSalida> ListaReporte { get; set; }
 
     }
  }

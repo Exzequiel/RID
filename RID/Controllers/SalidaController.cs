@@ -261,20 +261,20 @@ namespace RID.Controllers
         {
             using (var conexion = new BodMantEntities())
             {
-                var list = conexion.salida_detalle.Select(x => new ListarReporteSalida
+                var list = conexion.salida_detalle.ToList().Select(x => new ListarReporteSalida
                 {
+                    fecha_transaccion = x.salida.fecha_transaccion,
+                    nro_salida = x.salida.nro_salida,
                     cod_item = x.item.cod_item,
                     cant_aentregar = x.cant_aentregar,
                     descripcion = x.item.descripcion,
                     cod_objeto = x.item.objeto.cod_objeto,
                     maquina = x.maquina.descripcion_maquina,
-                    lote = x.lote.cod_lote,
+                    lote = x.lote.cod_lote
 
-                }).ToList();
+                });
+                return View(list);
 
-                var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
-                jsonResult.MaxJsonLength = Int32.MaxValue;
-                return jsonResult;
             }
         }
 
