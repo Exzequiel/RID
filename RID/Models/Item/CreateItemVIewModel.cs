@@ -11,7 +11,7 @@ namespace RID.Models.Item
 
         [Display(Name = "Cód. Producto")]
         [Required]
-        public string cod_item { get; set; } 
+        public string CodItem { get; set; } 
 
         [Display(Name = "Descripción")]
         [Required]
@@ -19,7 +19,7 @@ namespace RID.Models.Item
 
         [Display(Name = "Cód. Objeto")]
         [Required]
-        public string cod_objeto { get; set; }
+        public string CodObjeto { get; set; }
         
     }
 }

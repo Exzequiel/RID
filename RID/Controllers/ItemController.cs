@@ -14,7 +14,7 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var list = contextCm.item.ToList().Select(x => new ListItemViewModel { Objeto = x.cod_objeto, Descripcion = x.descripcion, Activo = x.activo, IdItem = x.id_item, cod_item = x.cod_item }).ToList();
+                var list = contextCm.item.ToList().Select(x => new ListItemViewModel { CodObjeto = x.cod_objeto, Descripcion = x.descripcion, activo = x.activo, IdItem = x.id_item, CodItem = x.cod_item}).ToList();
                 return View(list);
             }
 
@@ -30,6 +30,11 @@ namespace RID.Controllers
         //        return View();
         //    }
         //}
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Create(CreateItemVIewModel model)
@@ -41,14 +46,14 @@ namespace RID.Controllers
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
-                    if(contextCm.item.Any(x=>x.cod_item == model.cod_item.Trim()))
+                    if(contextCm.item.Any(x=>x.cod_item == model.CodItem.Trim()))
                     {
                         ModelState.AddModelError("", "Código de Item ya existente, escriba uno diferente");
                         return View(model);
 
                     }
 
-                    contextCm.item.Add(new item { descripcion = model.Descripcion, cod_objeto = model.cod_objeto, activo = true, cod_item = model.cod_item});
+                    contextCm.item.Add(new item { cod_item = model.CodItem, descripcion = model.Descripcion, cod_objeto = model.CodObjeto, activo = true });
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {
@@ -79,7 +84,7 @@ namespace RID.Controllers
                 //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
 
                 var model = contextCm.item.Find(id);
-                return View(new EditItemViewModel {  IdItem = model.id_item,  Descripcion = model.descripcion, cod_item = model.cod_item, cod_objeto = model.cod_objeto });
+                return View(new EditItemViewModel {  IdItem = model.id_item,  Descripcion = model.descripcion, CodItem = model.cod_item, CodObjeto = model.cod_objeto });
             }
         }
         [HttpPost]
@@ -94,15 +99,15 @@ namespace RID.Controllers
                     //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
 
                     if (!ModelState.IsValid) return View(model);
-                    if (contextCm.item.Where(x => x.id_item != model.IdItem).Any(x => x.cod_item == model.cod_item.Trim()))
+                    if (contextCm.item.Where(x => x.id_item != model.IdItem).Any(x => x.cod_item == model.CodItem.Trim()))
                     {
                         ModelState.AddModelError("", "Cod item ya existente, escriba uno diferente");
                         return View(model);
                     }
                     var modelDb = contextCm.item.FirstOrDefault(x => x.id_item == model.IdItem);
                     modelDb.descripcion = model.Descripcion;
-                    modelDb.cod_objeto = model.cod_objeto;
-                    modelDb.cod_item = model.cod_item;
+                    modelDb.cod_objeto = model.CodObjeto;
+                    modelDb.cod_item = model.CodItem;
                     var result = contextCm.SaveChanges() > 0;
                     if (result)
                     {

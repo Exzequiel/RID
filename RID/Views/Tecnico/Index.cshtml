@@ -42,7 +42,7 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.IdTecnico }) |
-                                    @if (Convert.ToBoolean(item.Activo))
+                                    @if (Convert.ToBoolean(item.activo))
                                     {
 
                                         @Html.ActionLink("Desactivar", "Delete", new { id = item.IdTecnico })

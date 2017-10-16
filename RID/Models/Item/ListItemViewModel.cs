@@ -7,7 +7,6 @@ namespace RID.Models.Item
 {
     public class ListItemViewModel : EditItemViewModel
     {
-        public bool? Activo { get; set; }
-        public string Objeto { get; set; }
+        public bool? activo { get; set; }
     }
 }

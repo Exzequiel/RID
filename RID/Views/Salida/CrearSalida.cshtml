@@ -118,7 +118,8 @@
             var IdItem = $("#IdItem").val();
             var IdTecnico = $("#IdTecnico").val();
             var IdMaquina = $("#IdMaquina").val();
-            var IdLote = $("#IdLote").val();
+            //var IdLote = $("#IdLote").val();
+            var IdLote = $("#IdLote").val("").trigger("change");
             console.log(IdItem);
 
             if (IdItem == "" || IdTecnico == "" || IdMaquina == "" /*|| IdLote == ""*/)
@@ -137,7 +138,7 @@
                 @*url: "/" + '@ViewBag.ControllerName' + '/ObtenerInfoItem',*@
                 url: '@Url.Action("ObtenerInfoItem", "Salida")',
                 type: "Get",
-                data: { IdItem:IdItem, IdTecnico:IdTecnico, IdMaquina:IdMaquina, IdLote:IdLote },
+                data: { IdItem:IdItem, IdTecnico:IdTecnico, IdMaquina:IdMaquina, IdLote:IdLote.c },
                 success: function (data) {
                     $.fn.dataTable.Api("#IdTabla").row.add(data).draw(false);
                 },

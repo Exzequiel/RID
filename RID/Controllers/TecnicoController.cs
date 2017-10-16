@@ -14,7 +14,7 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
-                var list = contextCm.tecnico.ToList().Select(x => new ListTecnicoViewModel { Nombre = x.nombre, Apellido = x.apellido, Puesto = x.puesto, Activo = x.activo, IdTecnico = x.id_tecnico });
+                var list = contextCm.tecnico.ToList().Select(x => new ListTecnicoViewModel { Nombre = x.nombre, Apellido = x.apellido, Puesto = x.puesto, activo = x.activo, IdTecnico = x.id_tecnico });
                 return View(list);
             }
 

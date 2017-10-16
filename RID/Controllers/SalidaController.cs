@@ -269,7 +269,8 @@ namespace RID.Controllers
                     cant_aentregar = x.cant_aentregar,
                     descripcion = x.item.descripcion,
                     maquina = x.maquina.cod_maquina +","+ x.item.cod_objeto,
-                    lote = x.lote.cod_lote!=null?null : x.lote.cod_lote
+                    //lote = x.lote.cod_lote==null?null : x.lote.cod_lote
+                    lote = x.lote?.cod_lote??""
                     //id_lote = detalle.id_lote==0?(int?)null:detalle.id_lote,
                 }).ToList();
 
@@ -279,7 +280,7 @@ namespace RID.Controllers
                 TempData["Reporte"] = reporte;
 
                 Stream stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
-               // stream.Seek(0, SeekOrigin.Begin);
+                //stream.Seek(0, SeekOrigin.Begin);
                 //string savedFilename = string.Format("ReporteSalida_{0}", DateTime.Now);
                 //return File(stream, "application/pdf", savedFilename);
                 return File(stream, "application/vnd.ms-excel");
