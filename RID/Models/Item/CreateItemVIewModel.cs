@@ -9,7 +9,7 @@ namespace RID.Models.Item
     public class CreateItemVIewModel
     {
 
-        [Display(Name = "Código Producto")]
+        [Display(Name = "Cód. Producto")]
         [Required]
         public string cod_item { get; set; } 
 
@@ -17,18 +17,9 @@ namespace RID.Models.Item
         [Required]
         public string Descripcion { get; set; }
 
-        //[Display(Name = "Ubicación")]
-        //[Required]
-        //public int IdUbicacion { get; set; }
-
-        [Display(Name = "Objeto")]
+        [Display(Name = "Cód. Objeto")]
         [Required]
-        public int IdObjeto { get; set; }
-
-
-        //[Display(Name = "Cantidad Disponible")]
-        //[Required]
-        //public int CantidadDisponible { get; set; }
+        public string cod_objeto { get; set; }
         
     }
 }

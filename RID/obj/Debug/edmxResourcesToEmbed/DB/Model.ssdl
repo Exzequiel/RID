@@ -85,7 +85,7 @@
     </Key>
     <Property Name="id_item" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="cod_item" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="id_objeto" Type="int" Nullable="false" />
+    <Property Name="cod_objeto" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
@@ -105,22 +105,6 @@
     <Property Name="descripcion_maquina" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="cod_maquina" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="activo" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="objeto">
-    <Key>
-      <PropertyRef Name="id_objeto" />
-    </Key>
-    <Property Name="id_objeto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="cod_objeto" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="activo" Type="bit" Nullable="false" />
-  </EntityType>
-  <EntityType Name="objeto_por_salida">
-    <Key>
-      <PropertyRef Name="id_objeto_por_salida" />
-    </Key>
-    <Property Name="id_objeto_por_salida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_salida" Type="int" Nullable="false" />
-    <Property Name="id_objeto" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="salida">
     <Key>
@@ -235,42 +219,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_item_objeto">
-    <End Role="objeto" Type="Self.objeto" Multiplicity="1" />
-    <End Role="item" Type="Self.item" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="objeto">
-        <PropertyRef Name="id_objeto" />
-      </Principal>
-      <Dependent Role="item">
-        <PropertyRef Name="id_objeto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_objeto_por_salida_objeto">
-    <End Role="objeto" Type="Self.objeto" Multiplicity="1" />
-    <End Role="objeto_por_salida" Type="Self.objeto_por_salida" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="objeto">
-        <PropertyRef Name="id_objeto" />
-      </Principal>
-      <Dependent Role="objeto_por_salida">
-        <PropertyRef Name="id_objeto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_objeto_por_salida_salida">
-    <End Role="salida" Type="Self.salida" Multiplicity="1" />
-    <End Role="objeto_por_salida" Type="Self.objeto_por_salida" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="salida">
-        <PropertyRef Name="id_salida" />
-      </Principal>
-      <Dependent Role="objeto_por_salida">
-        <PropertyRef Name="id_salida" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_salida_departamento">
     <End Role="departamento" Type="Self.departamento" Multiplicity="1" />
     <End Role="salida" Type="Self.salida" Multiplicity="*" />
@@ -379,8 +327,6 @@
     <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="lote" EntityType="Self.lote" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="maquina" EntityType="Self.maquina" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="objeto" EntityType="Self.objeto" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="objeto_por_salida" EntityType="Self.objeto_por_salida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="salida" EntityType="Self.salida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="salida_detalle" EntityType="Self.salida_detalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -401,18 +347,6 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_item_objeto" Association="Self.FK_item_objeto">
-      <End Role="objeto" EntitySet="objeto" />
-      <End Role="item" EntitySet="item" />
-    </AssociationSet>
-    <AssociationSet Name="FK_objeto_por_salida_objeto" Association="Self.FK_objeto_por_salida_objeto">
-      <End Role="objeto" EntitySet="objeto" />
-      <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
-    </AssociationSet>
-    <AssociationSet Name="FK_objeto_por_salida_salida" Association="Self.FK_objeto_por_salida_salida">
-      <End Role="salida" EntitySet="salida" />
-      <End Role="objeto_por_salida" EntitySet="objeto_por_salida" />
     </AssociationSet>
     <AssociationSet Name="FK_salida_departamento" Association="Self.FK_salida_departamento">
       <End Role="departamento" EntitySet="departamento" />

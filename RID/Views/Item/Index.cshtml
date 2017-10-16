@@ -20,15 +20,9 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Descripcion)
                             </th>
-                            @*<th>
-                                @Html.DisplayNameFor(model => model.IdUbicacion)
-                            </th>*@
                             <th>
-                                @Html.DisplayNameFor(model => model.IdObjeto)
+                                @Html.DisplayNameFor(model => model.cod_objeto)
                             </th>
-                            @*<th>
-                                @Html.DisplayNameFor(model => model.CantidadDisponible)
-                            </th>*@
                             <th></th>
                         </tr>
                     </thead>
@@ -42,15 +36,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Descripcion)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.Ubicacion)
-                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Objeto)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.CantidadDisponible)
-                                </td>*@
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.IdItem }) |
                                     @if (Convert.ToBoolean(item.Activo))

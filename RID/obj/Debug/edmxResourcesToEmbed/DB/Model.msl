@@ -81,7 +81,7 @@
         <MappingFragment StoreEntitySet="item">
           <ScalarProperty Name="activo" ColumnName="activo" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
+          <ScalarProperty Name="cod_objeto" ColumnName="cod_objeto" />
           <ScalarProperty Name="cod_item" ColumnName="cod_item" />
           <ScalarProperty Name="id_item" ColumnName="id_item" />
         </MappingFragment>
@@ -106,24 +106,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="objeto">
-      <EntityTypeMapping TypeName="BodMantModel.objeto">
-        <MappingFragment StoreEntitySet="objeto">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="cod_objeto" ColumnName="cod_objeto" />
-          <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="objeto_por_salida">
-      <EntityTypeMapping TypeName="BodMantModel.objeto_por_salida">
-        <MappingFragment StoreEntitySet="objeto_por_salida">
-          <ScalarProperty Name="id_objeto" ColumnName="id_objeto" />
-          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-          <ScalarProperty Name="id_objeto_por_salida" ColumnName="id_objeto_por_salida" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="salida">
       <EntityTypeMapping TypeName="BodMantModel.salida">
         <MappingFragment StoreEntitySet="salida">
@@ -133,6 +115,20 @@
           <ScalarProperty Name="fecha_transaccion" ColumnName="fecha_transaccion" />
           <ScalarProperty Name="nro_salida" ColumnName="nro_salida" />
           <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salida_detalle">
+      <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
+        <MappingFragment StoreEntitySet="salida_detalle">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
+          <ScalarProperty Name="id_lote" ColumnName="id_lote" />
+          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
+          <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
+          <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -180,19 +176,5 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="salida_detalle">
-      <EntityTypeMapping TypeName="BodMantModel.salida_detalle">
-        <MappingFragment StoreEntitySet="salida_detalle">
-          <ScalarProperty Name="activo" ColumnName="activo" />
-          <ScalarProperty Name="cant_aentregar" ColumnName="cant_aentregar" />
-          <ScalarProperty Name="id_lote" ColumnName="id_lote" />
-          <ScalarProperty Name="id_tecnico" ColumnName="id_tecnico" />
-          <ScalarProperty Name="id_maquina" ColumnName="id_maquina" />
-          <ScalarProperty Name="id_item" ColumnName="id_item" />
-          <ScalarProperty Name="id_salida" ColumnName="id_salida" />
-          <ScalarProperty Name="id_detalle_salida" ColumnName="id_detalle_salida" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

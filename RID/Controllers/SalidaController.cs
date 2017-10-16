@@ -1,11 +1,13 @@
 ﻿using RID.DB;
 using RID.Models.Salida;
-using RID.Models.Reporte;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+using RID.Views.Reporte;
 
 namespace RID.Controllers
 {
@@ -70,7 +72,7 @@ namespace RID.Controllers
                     cant_aentregar = x.cant_aentregar,
                     cod_item = x.item.cod_item,
                     descripcion = x.item.descripcion,
-                    maquina = x.maquina.cod_maquina+","+x.item.objeto.cod_objeto,
+                    maquina = x.maquina.cod_maquina+","+x.item.cod_objeto,
                     lote = x.lote.cod_lote,
                     tecnico = x.tecnico.nombre +" "+x.tecnico.apellido,
                     activo = x.activo
@@ -82,6 +84,7 @@ namespace RID.Controllers
             }
         }
 
+        
         #endregion
 
         #region Crear
@@ -95,7 +98,7 @@ namespace RID.Controllers
                 ViewBag.ListaMaquina = conexion.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina + " - " + x.cod_maquina }).ToList();
                 ViewBag.ListaLote = conexion.lote.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_lote.ToString(), Text = x.cod_lote }).ToList();
                 ViewBag.ListaTecnico = conexion.tecnico.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre + " " + x.apellido }).ToList();
-                ViewBag.ListaItem = conexion.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.objeto.cod_objeto }).ToList();
+                ViewBag.ListaItem = conexion.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.cod_objeto }).ToList();
                 return View( new CrearSalidaViewModel {nro_salida = getConfiguracion("CorrelativoSalida"), fecha_transaccion = DateTime.Now, NombreDepartamento = ObtenerNombreDepartamentoPorUsuario() });
             }
         }
@@ -147,7 +150,7 @@ namespace RID.Controllers
                     id_item = IdItem,
                     cod_item = model.cod_item,
                     descripcion = model.descripcion,
-                    maquina = modelMaquina.cod_maquina+","+model.objeto.cod_objeto,
+                    maquina = modelMaquina.cod_maquina+","+model.cod_objeto,
                     lote = modelIdLote==null?"": modelIdLote.cod_lote,
                     tecnico = modelTecnico.nombre +" "+modelTecnico.apellido,
                     id_tecnico = IdTecnico,
@@ -170,7 +173,7 @@ namespace RID.Controllers
                 ViewBag.ListaMaquina = context.maquina.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_maquina.ToString(), Text = x.descripcion_maquina + " - " + x.cod_maquina }).ToList();
                 ViewBag.ListaLote = context.lote.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_lote.ToString(), Text = x.cod_lote }).ToList();
                 ViewBag.ListaTecnico = context.tecnico.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_tecnico.ToString(), Text = x.nombre + " " + x.apellido }).ToList();
-                ViewBag.ListaItem = context.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.objeto.cod_objeto + " |" }).ToList();
+                ViewBag.ListaItem = context.item.Where(x => x.activo).Select(x => new SelectListItem { Value = x.id_item.ToString(), Text = x.cod_item + " - " + x.descripcion + " | Objeto: " + x.cod_objeto + " |" }).ToList();
 
                 return View("CrearSalida", new CrearSalidaViewModel
                 {
@@ -206,7 +209,8 @@ namespace RID.Controllers
                             id_item = detalle.id_item,
                             cant_aentregar = detalle.cant_aentregar,
                             id_maquina = detalle.id_maquina,
-                            id_lote = detalle.id_lote,
+                            //id_lote = detalle.id_lote,
+                            id_lote = detalle.id_lote == 0 ? (int?)null : detalle.id_lote,
                             id_tecnico = detalle.id_tecnico,
                             activo = true
                         });
@@ -256,28 +260,31 @@ namespace RID.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult CargarReporte()
+        public ActionResult ExportarSalidas(int IdSalida)
         {
-            using (var conexion = new BodMantEntities())
-            {
-                var list = conexion.salida_detalle.ToList().Select(x => new ListarReporteSalida
-                {
-                    fecha_transaccion = x.salida.fecha_transaccion,
-                    nro_salida = x.salida.nro_salida,
+            using (var context = new BodMantEntities()) {
+                var model = context.salida.Find(IdSalida);
+                var ListaDetalle = model.salida_detalle.Select(x=> new CrearDetalleSalidaViewModel {
                     cod_item = x.item.cod_item,
                     cant_aentregar = x.cant_aentregar,
                     descripcion = x.item.descripcion,
-                    cod_objeto = x.item.objeto.cod_objeto,
-                    maquina = x.maquina.descripcion_maquina,
-                    lote = x.lote.cod_lote
+                    maquina = x.maquina.cod_maquina +","+ x.item.cod_objeto,
+                    lote = x.lote.cod_lote!=null?null : x.lote.cod_lote
+                    //id_lote = detalle.id_lote==0?(int?)null:detalle.id_lote,
+                }).ToList();
 
-                });
-                return View(list);
+                var reporte = new ReporteSalida();
+                reporte.SetDataSource(ListaDetalle);
+                reporte.Refresh();
+                TempData["Reporte"] = reporte;
 
-            }
+                Stream stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
+               // stream.Seek(0, SeekOrigin.Begin);
+                //string savedFilename = string.Format("ReporteSalida_{0}", DateTime.Now);
+                //return File(stream, "application/pdf", savedFilename);
+                return File(stream, "application/vnd.ms-excel");
+
+            }   
         }
-
-
     }
 }

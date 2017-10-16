@@ -22,11 +22,10 @@ namespace RID.DB
     
         public int id_item { get; set; }
         public string cod_item { get; set; }
-        public int id_objeto { get; set; }
+        public string cod_objeto { get; set; }
         public string descripcion { get; set; }
         public bool activo { get; set; }
     
-        public virtual objeto objeto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<salida_detalle> salida_detalle { get; set; }
     }

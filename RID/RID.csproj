@@ -110,6 +110,12 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
     </Reference>
@@ -205,9 +211,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\SalidaController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
-    <Compile Include="Controllers\ObjetoController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -261,12 +267,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB\objeto.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DB\objeto_por_salida.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DB\salida.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -295,16 +295,6 @@
     <Compile Include="Models\Maquina\CreateMaquinaViewModel.cs" />
     <Compile Include="Models\Maquina\EditMaquinaViewModel.cs" />
     <Compile Include="Models\Maquina\ListMaquinaViewModel.cs" />
-    <Compile Include="Models\Objeto\CreateObjetoViewModel.cs" />
-    <Compile Include="Models\Objeto\EditObjetoViewModel.cs" />
-    <Compile Include="Models\Objeto\ListObjetoViewModel.cs" />
-    <Compile Include="Models\Reporte\ListarReporteSalida.cs" />
-    <Compile Include="Models\Reporte\ReporteSalidas.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReporteSalidas.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Models\Roles\CrearRolViewModel.cs" />
     <Compile Include="Models\Salida\CrearDetalleSalidaViewModel.cs" />
     <Compile Include="Models\Salida\CrearSalidaViewModel.cs" />
@@ -333,6 +323,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Reporte\ReporteSalida.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteSalida.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\alertify\.gitignore" />
@@ -5773,6 +5769,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="DB\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -6680,9 +6677,6 @@
     <Content Include="Views\Tecnico\Create.cshtml" />
     <Content Include="Views\Tecnico\Edit.cshtml" />
     <Content Include="Views\Tecnico\Index.cshtml" />
-    <Content Include="Views\Objeto\Create.cshtml" />
-    <Content Include="Views\Objeto\Edit.cshtml" />
-    <Content Include="Views\Objeto\Index.cshtml" />
     <Content Include="Views\Item\Create.cshtml" />
     <Content Include="Views\Item\Edit.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
@@ -6695,13 +6689,12 @@
     <Content Include="Views\Departamento\Create.cshtml" />
     <Content Include="Views\Departamento\Edit.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
-    <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Salida\CargarReporte.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\plugins\DataTables\extensions\FixedColumns\examples\integration\" />
-    <Folder Include="Views\UserModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -6713,9 +6706,9 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Models\Reporte\ReporteSalidas.rpt">
+    <EmbeddedResource Include="Views\Reporte\ReporteSalida.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReporteSalidas.cs</LastGenOutput>
+      <LastGenOutput>ReporteSalida.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

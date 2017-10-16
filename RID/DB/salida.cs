@@ -17,7 +17,6 @@ namespace RID.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public salida()
         {
-            this.objeto_por_salida = new HashSet<objeto_por_salida>();
             this.salida_detalle = new HashSet<salida_detalle>();
         }
     
@@ -29,8 +28,6 @@ namespace RID.DB
         public bool activo { get; set; }
     
         public virtual departamento departamento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<objeto_por_salida> objeto_por_salida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<salida_detalle> salida_detalle { get; set; }
     }
