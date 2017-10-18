@@ -41,11 +41,6 @@ namespace RID.Controllers
 
                 }).ToList();
 
-                if (Convert.ToInt32(getConfiguracion("Departamento_BodMant")) != ObtenerIdDepartamentoPorUsuario())
-                {
-                    //var departamento = ObtenerIdDepartamentoPorUsuario();
-                    //list = list.Where(x => x.id_departamento == departamento).ToList();
-                }
                 var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
                 jsonResult.MaxJsonLength = Int32.MaxValue;
                 return jsonResult;
@@ -114,7 +109,6 @@ namespace RID.Controllers
                     id_departamento = ObtenerIdDepartamentoPorUsuario(),
                     confirmado = false,
                     activo =true,
-                    
                 });
 
                 foreach (var detalle in model.ListaDetalle??new List<CrearDetalleSalidaViewModel>())
@@ -209,7 +203,6 @@ namespace RID.Controllers
                             id_item = detalle.id_item,
                             cant_aentregar = detalle.cant_aentregar,
                             id_maquina = detalle.id_maquina,
-                            //id_lote = detalle.id_lote,
                             id_lote = detalle.id_lote == 0 ? (int?)null : detalle.id_lote,
                             id_tecnico = detalle.id_tecnico,
                             activo = true
@@ -269,9 +262,7 @@ namespace RID.Controllers
                     cant_aentregar = x.cant_aentregar,
                     descripcion = x.item.descripcion,
                     maquina = x.maquina.cod_maquina +","+ x.item.cod_objeto,
-                    //lote = x.lote.cod_lote==null?null : x.lote.cod_lote
                     lote = x.lote?.cod_lote??""
-                    //id_lote = detalle.id_lote==0?(int?)null:detalle.id_lote,
                 }).ToList();
 
                 var reporte = new ReporteSalida();
@@ -280,11 +271,7 @@ namespace RID.Controllers
                 TempData["Reporte"] = reporte;
 
                 Stream stream = reporte.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
-                //stream.Seek(0, SeekOrigin.Begin);
-                //string savedFilename = string.Format("ReporteSalida_{0}", DateTime.Now);
-                //return File(stream, "application/pdf", savedFilename);
                 return File(stream, "application/vnd.ms-excel");
-
             }   
         }
     }

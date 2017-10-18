@@ -87,11 +87,11 @@
                 <!-- begin mobile sidebar expand / collapse button -->
                 <div class="navbar-header">
                     <a href="javascript:;" class="navbar-brand"><span class="navbar-logo"><i class="ion-compose"></i></span><b>Registro</b> Salidas</a>
-                    @*<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>*@
+                    </button>
                 </div>
                 <!-- end mobile sidebar expand / collapse button -->
                 <!-- begin header navigation right -->
@@ -110,7 +110,7 @@
                     <li class="dropdown navbar-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             @*<img src="assets/img/user-13.jpg" alt="" />*@
-                            <span class="hidden-xs">Bienvenido, @User.Identity.Name</span>
+                            <span class="hidden-xs"></span> Bienvenido, @User.Identity.Name <b class="caret"></b>
                             @*<span class="hidden-xs">Bienvenido, @User.Identity.Name</span>*@
                         </a>
                         <ul class="dropdown-menu animated fadeInLeft">
@@ -180,7 +180,6 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a href="@Url.Action("Index", "Item")" title="Productos"><span>Listar Productos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
-                            <li><a href="@Url.Action("Index", "Objeto")" title="Objetos"><span>Listar Objetos</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                             <li><a href="@Url.Action("Index", "Lote")" title="Lotes"><span>Listar Lotes</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
 
                         </ul>
@@ -196,6 +195,7 @@
                             <li><a href="@Url.Action("Index", "Salida")" title="Bajas"><span>Generar Baja</span><i class="fa fa-paper-plane text-theme m-l-5"></i></a></li>
                         </ul>
                     </li>
+
                     }
 
                     @if (User.IsInRole("Administrador"))
@@ -281,24 +281,30 @@
         <script src="assets/crossbrowserjs/excanvas.min.js"></script>
     <![endif]-->
 
-    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="~/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    @*<script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>*@
+    @*<script src="~/assets/plugins/jquery-cookie/jquery.cookie.js"></script>*@
 
     <!-- ================== END BASE JS ================== -->
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
     <script src="~/assets/plugins/morris/raphael.min.js"></script>
-    <script src="~/assets/plugins/morris/morris.js"></script>
-    <script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>
-    <script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>
-    <script src="~/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>
-    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    @*<script src="~/assets/plugins/morris/morris.js"></script>*@
+    @*<script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>*@
+    @*<script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-merc-en.js"></script>*@
+    @*<script src="~/assets/plugins/bootstrap-calendar/js/bootstrap_calendar.min.js"></script>*@
+    @*<script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>*@
     <script src="~/assets/js/dashboard-v2.min.js"></script>
     <script src="~/assets/js/apps.min.js"></script>
     <!-- ================== END PAGE LEVEL JS ================== -->
 
     @Scripts.Render("~/bundles/ColorAdmin")
     @RenderSection("scripts", required: false)
-
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
     <script>
 		$(document).ready(function() {
 			App.init();

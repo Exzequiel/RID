@@ -37,18 +37,12 @@
 
 
 <script>
-    //$("#FechaNac").datepicker({ format: 'dd/MM/yyyy' });
-    //$("#Telefono").mask("9999-9999");
-    //$("#Identidad").mask("9999-9999-99999");
-
-
         function EditarInfoUsuario() {
 
             if (!$("#FormInfoUsuario").valid()) { return false;}
 
             LoadWaitNotification();
                 $.ajax({
-                    //url: "/Usuario/EditarInfoUsuario",
                     url: '@Url.Action("EditarInfoUsuario", "Usuario")',
                     type: 'POST',
                     dataType: 'json',

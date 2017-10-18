@@ -15,20 +15,14 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.cod_item)
+                                @Html.DisplayNameFor(model => model.CodItem)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Descripcion)
                             </th>
-                            @*<th>
-                                @Html.DisplayNameFor(model => model.IdUbicacion)
-                            </th>*@
                             <th>
-                                @Html.DisplayNameFor(model => model.IdObjeto)
+                                @Html.DisplayNameFor(model => model.CodObjeto)
                             </th>
-                            @*<th>
-                                @Html.DisplayNameFor(model => model.CantidadDisponible)
-                            </th>*@
                             <th></th>
                         </tr>
                     </thead>
@@ -37,23 +31,17 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.cod_item)
+                                    @Html.DisplayFor(modelItem => item.CodItem)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Descripcion)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.Ubicacion)
-                                </td>*@
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Objeto)
+                                    @Html.DisplayFor(modelItem => item.CodObjeto)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.CantidadDisponible)
-                                </td>*@
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.IdItem }) |
-                                    @if (Convert.ToBoolean(item.Activo))
+                                    @if (Convert.ToBoolean(item.activo))
                                     {
 
                                     @Html.ActionLink("Desactivar", "Delete", new { id = item.IdItem })

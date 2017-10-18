@@ -11,6 +11,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="ApplicationInsights.config">
       <publishTime>09/23/2017 09:57:59</publishTime>
     </File>
+    <File Include="App_Browsers/qt.browser">
+      <publishTime>10/13/2017 14:39:23</publishTime>
+    </File>
     <File Include="assets/alertify/.gitignore">
       <publishTime>09/23/2017 10:21:54</publishTime>
     </File>
@@ -645,7 +648,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2017 10:19:30</publishTime>
     </File>
     <File Include="assets/Layout.js">
-      <publishTime>09/23/2017 10:22:07</publishTime>
+      <publishTime>10/18/2017 13:16:43</publishTime>
     </File>
     <File Include="assets/less/bootstrap/alerts.less">
       <publishTime>09/23/2017 10:22:18</publishTime>
@@ -18710,6 +18713,51 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/ApplicationInsights.config">
       <publishTime>09/23/2017 09:57:59</publishTime>
     </File>
+    <File Include="bin/CrystalDecisions.CrystalReports.Engine.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.ClientDoc.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CommLayer.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CommonControls.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CommonObjectModel.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.Controllers.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.CubeDefModel.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.DataDefModel.dll">
+      <publishTime>08/31/2017 05:21:24</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.DataSetConversion.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.ObjectFactory.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.Prompting.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.ReportDefModel.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportAppServer.XmlSerialize.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.ReportSource.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
+    <File Include="bin/CrystalDecisions.Shared.dll">
+      <publishTime>08/31/2017 05:21:26</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
@@ -18788,11 +18836,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Owin.dll">
       <publishTime>11/27/2012 13:00:52</publishTime>
     </File>
+    <File Include="bin/PagedList.dll">
+      <publishTime>10/16/2017 07:27:27</publishTime>
+    </File>
+    <File Include="bin/PagedList.Mvc.dll">
+      <publishTime>10/16/2017 07:27:27</publishTime>
+    </File>
     <File Include="bin/RID.dll">
-      <publishTime>10/11/2017 09:51:24</publishTime>
+      <publishTime>10/18/2017 15:08:07</publishTime>
     </File>
     <File Include="bin/RID.pdb">
-      <publishTime>10/11/2017 09:51:24</publishTime>
+      <publishTime>10/18/2017 15:08:07</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>07/28/2017 08:15:02</publishTime>
@@ -18938,6 +18992,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>07/28/2017 08:15:02</publishTime>
     </File>
+    <File Include="bin/Rotativa.dll">
+      <publishTime>09/29/2017 14:13:30</publishTime>
+    </File>
+    <File Include="bin/stdole.dll">
+      <publishTime>09/05/2017 16:06:05</publishTime>
+    </File>
     <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
       <publishTime>07/19/2017 10:01:30</publishTime>
     </File>
@@ -18992,11 +19052,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>09/23/2017 09:57:50</publishTime>
     </File>
+    <File Include="Content/PagedList.css">
+      <publishTime>10/16/2017 07:27:27</publishTime>
+    </File>
     <File Include="Content/Site.css">
       <publishTime>09/23/2017 09:55:04</publishTime>
     </File>
     <File Include="DB/Model.edmx.diagram">
-      <publishTime>10/10/2017 15:19:06</publishTime>
+      <publishTime>10/16/2017 07:27:27</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>09/23/2017 09:55:04</publishTime>
@@ -19018,6 +19081,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Global.asax">
       <publishTime>09/23/2017 09:55:04</publishTime>
+    </File>
+    <File Include="Rotativa/help-wkhtmltoimage.txt">
+      <publishTime>10/13/2017 14:39:23</publishTime>
+    </File>
+    <File Include="Rotativa/help-wkhtmltopdf.txt">
+      <publishTime>10/13/2017 14:39:23</publishTime>
+    </File>
+    <File Include="Rotativa/wkhtmltoimage.exe">
+      <publishTime>10/13/2017 14:39:23</publishTime>
+    </File>
+    <File Include="Rotativa/wkhtmltopdf.exe">
+      <publishTime>10/13/2017 14:39:23</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>09/23/2017 09:57:50</publishTime>
@@ -19125,13 +19200,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2017 07:12:50</publishTime>
     </File>
     <File Include="Views/Item/Create.cshtml">
-      <publishTime>10/10/2017 13:05:11</publishTime>
+      <publishTime>10/16/2017 09:20:25</publishTime>
     </File>
     <File Include="Views/Item/Edit.cshtml">
-      <publishTime>10/10/2017 13:05:11</publishTime>
+      <publishTime>10/16/2017 09:29:58</publishTime>
     </File>
     <File Include="Views/Item/Index.cshtml">
-      <publishTime>10/10/2017 13:05:11</publishTime>
+      <publishTime>10/16/2017 08:27:22</publishTime>
     </File>
     <File Include="Views/Lote/Create.cshtml">
       <publishTime>10/10/2017 13:05:11</publishTime>
@@ -19140,7 +19215,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/10/2017 13:05:11</publishTime>
     </File>
     <File Include="Views/Lote/Index.cshtml">
-      <publishTime>10/10/2017 18:10:25</publishTime>
+      <publishTime>10/12/2017 07:38:43</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>09/23/2017 09:55:10</publishTime>
@@ -19187,14 +19262,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Role/Index.cshtml">
       <publishTime>09/25/2017 07:03:37</publishTime>
     </File>
+    <File Include="Views/Salida/CargarReporte.cshtml">
+      <publishTime>10/12/2017 13:59:50</publishTime>
+    </File>
     <File Include="Views/Salida/CrearSalida.cshtml">
-      <publishTime>10/10/2017 15:18:17</publishTime>
+      <publishTime>10/18/2017 14:09:59</publishTime>
     </File>
     <File Include="Views/Salida/Index.cshtml">
-      <publishTime>10/10/2017 15:07:53</publishTime>
+      <publishTime>10/17/2017 17:46:04</publishTime>
     </File>
     <File Include="Views/Salida/VerDetalleSalida.cshtml">
-      <publishTime>10/10/2017 14:44:31</publishTime>
+      <publishTime>10/18/2017 14:09:59</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>09/23/2017 09:55:10</publishTime>
@@ -19206,19 +19284,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2017 09:55:10</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/11/2017 09:51:02</publishTime>
+      <publishTime>10/18/2017 12:01:13</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>09/23/2017 09:55:10</publishTime>
     </File>
     <File Include="Views/Tecnico/Create.cshtml">
-      <publishTime>09/25/2017 13:12:55</publishTime>
+      <publishTime>10/16/2017 09:26:19</publishTime>
     </File>
     <File Include="Views/Tecnico/Edit.cshtml">
       <publishTime>09/25/2017 13:14:19</publishTime>
     </File>
     <File Include="Views/Tecnico/Index.cshtml">
-      <publishTime>09/28/2017 08:07:12</publishTime>
+      <publishTime>10/17/2017 09:10:44</publishTime>
     </File>
     <File Include="Views/Usuario/CrearUsuario.cshtml">
       <publishTime>10/09/2017 09:00:14</publishTime>
@@ -19245,7 +19323,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2017 09:55:04</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/11/2017 09:51:29</publishTime>
+      <publishTime>10/17/2017 09:10:44</publishTime>
     </File>
   </ItemGroup>
 </Project>

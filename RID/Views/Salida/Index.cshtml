@@ -20,7 +20,6 @@
                     <th>Fecha Transacción</th>
                     <th>Departamento</th>
                     <th>Estado</th>
-                    @*<th>Activo </th>*@
                 </tr>
             </thead>
             <tbody></tbody>
@@ -44,7 +43,6 @@
                 allowOutsideClick: false
             }).then(function () {
                 $.ajax({
-                    @*url: '/' + '@ViewBag.ControllerName' + '/ConfirmarSalida',*@
                     url: '@Url.Action("ConfirmarSalida", "Salida")',
                     type: "get",
                     data: { Id: Id },
@@ -73,7 +71,6 @@
                 allowOutsideClick: false
             }).then(function () {
                 $.ajax({
-                    @*url: '/' + '@ViewBag.ControllerName' + '/Deshabilitar',*@
                     url: '@Url.Action("Deshabilitar", "Salida")',
                     type: "get",
                     data: { Id: Id },
@@ -117,7 +114,6 @@
                             opciones += str2bool('@User.IsInRole("Administrador")') || str2bool('@User.IsInRole("Standard")') ? !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="ConfirmarSalida(' + data.id_salida + ')"> Confirmar Salida</a></li>':"";
                             opciones += !data.activo || data.confirmado ? '' : '<li><a href="@Url.Action("EditarSalida", "Salida")?IdSalida=' + data.id_salida + '"> Editar Salida</a></li>';
                             opciones += '<li><a href="@Url.Action("ExportarSalidas", "Salida")?IdSalida=' + data.id_salida + '"> Imprimir</a></li>';
-                          //opciones += !data.activo || data.confirmado ? '' : '<li><a href="javascript:void(0);" onclick="DeshabilitarSalida(' + data.id_salida + ')"> Deshabilitar</a></li>';
                             opciones += '</ul></div>';
                             return opciones;
                         }
@@ -158,7 +154,6 @@
         } else {
             tr.addClass('shown');
             $.ajax({
-                @*url: '/' + '@ViewBag.ControllerName' + '/VerDetalleSalida',*@
                 url: "@Url.Action("VerDetalleSalida", "Salida")",
                 type: "get",
                 global: false,

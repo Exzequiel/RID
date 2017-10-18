@@ -12,8 +12,8 @@
         <EntityTypeShape EntityType="BodMantModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="BodMantModel.configuracion" Width="1.5" PointX="5.75" PointY="5.75" />
         <EntityTypeShape EntityType="BodMantModel.departamento" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="BodMantModel.item" Width="1.5" PointX="3" PointY="17.25" />
-        <EntityTypeShape EntityType="BodMantModel.lote" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="BodMantModel.item" Width="1.5" PointX="3" PointY="19.75" />
+        <EntityTypeShape EntityType="BodMantModel.lote" Width="1.5" PointX="3" PointY="17.25" />
         <EntityTypeShape EntityType="BodMantModel.maquina" Width="1.5" PointX="3" PointY="22.75" />
         <EntityTypeShape EntityType="BodMantModel.salida" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="BodMantModel.salida_detalle" Width="1.5" PointX="5.25" PointY="8.75" />

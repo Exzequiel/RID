@@ -23,7 +23,6 @@ namespace RID.Controllers
                 });
                 return View(list);
             }
-
         }
 
         [HttpGet]
@@ -69,6 +68,7 @@ namespace RID.Controllers
                 return View(new EditMaquinaViewModel { IdMaquina = model.id_maquina, Descripcion = model.descripcion_maquina, CodMaquina = model.cod_maquina });
             }
         }
+
         [HttpPost]
         public ActionResult Edit(EditMaquinaViewModel model)
         {
