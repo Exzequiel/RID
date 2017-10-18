@@ -1,22 +1,25 @@
-﻿<table class="table table-bordered table-responsive" id="IdTabla-@ViewBag.Id" style="width: 100%;">
-    <thead>
-        <tr>
-            <th>Cód. Ítem</th>
-            <th>Cantidad</th>
-            <th>Descripción</th>
-            <th>Máquina</th>
-            <th>Lote</th>
-            <th>Técnico</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+﻿<div class="p-10">
+    <table class="table table-bordered table-responsive" id="IdTabla-@ViewBag.Id" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>Cód. Ítem</th>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Máquina</th>
+                <th>Lote</th>
+                <th>Técnico</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
 
 <script>
     $("#IdTabla-" + '@ViewBag.Id').dataTable({
         responsive: true,
         //"lengthMenu": [5, 10, 25, 50, 75, 100],
-        sDom: "",
+        sDom: "Tlfrtip",
         paging:true,
         ajax:{
             @*url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",*@

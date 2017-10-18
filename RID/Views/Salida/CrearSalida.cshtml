@@ -33,7 +33,6 @@
                 </tr>
             </tbody>
         </table>
-        <fieldset>
             <div class="row p-15">
                 @*<hr />*@
                 <div class="col-md-4">
@@ -67,10 +66,7 @@
                     </div>
                 </div>
             </div>
-        </fieldset>
         <form id="FormCrear" class="p-15">
-
-
             <table class="table table-bordered table-responsive" id="IdTabla" style="width: 100%;">
                 <thead>
                     <tr>
@@ -158,6 +154,8 @@
             //"lengthMenu": [[5, 10, 25, 50, -1], [10, 25, 50, "All"]],
             //sDom:"",
             paging: false,
+            "scrollY": "400px",
+            "scrollCollapse": true,
             ajax:{
                 @*url: "/" + '@ViewBag.ControllerName' + '/CargarTablaDetalleSalida',*@
                 url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',
@@ -208,7 +206,8 @@
 
 
         $('#FormCrear').on('submit', function (e) {
-                var validate = true;
+            e.preventDefault();
+            var validate = true;
                 var table = $.fn.dataTable.Api("#IdTabla");
                 if (!table.data().count()) {
                     ShowNotification(false, "No se permite Guardar con el detalle vacio", "");
