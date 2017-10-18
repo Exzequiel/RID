@@ -16,7 +16,8 @@
     $("#IdTabla-" + '@ViewBag.Id').dataTable({
         responsive: true,
         //"lengthMenu": [5, 10, 25, 50, 75, 100],
-        sDom:"",
+        sDom: "",
+        paging:true,
         ajax:{
             @*url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",*@
             url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',

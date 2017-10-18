@@ -91,7 +91,8 @@
                 <hr />
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar Salida</button>
+                        <button type="submit" class="btn btn-success pull-right">Guardar Salida</button>
+                        @*<button type="button" class="btn btn-success pull-right" onclick="Guardar()">Guardar Salida</button>*@
                     </div>
                 </div>
             </div>
@@ -114,7 +115,7 @@
             var IdItem = $("#IdItem").val();
             var IdTecnico = $("#IdTecnico").val();
             var IdMaquina = $("#IdMaquina").val();
-            var IdLote = $("#IdLote").val(); 
+            var IdLote = $("#IdLote").val();
             console.log(IdItem);
 
             if (IdItem == "" || IdTecnico == "" || IdMaquina == "" /*|| IdLote == ""*/)
@@ -156,7 +157,7 @@
             "lengthMenu": [5, 10, 25, 50, 75, 100],
             //"lengthMenu": [[5, 10, 25, 50, -1], [10, 25, 50, "All"]],
             //sDom:"",
-            //paging: false,
+            paging: false,
             ajax:{
                 @*url: "/" + '@ViewBag.ControllerName' + '/CargarTablaDetalleSalida',*@
                 url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',
@@ -180,12 +181,12 @@
                   {
                       data: null,
                       render: function (data) {
-                          return '<input type="number" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
+                          return '<input type="number" data-error="Error" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                           //return '<input type="dom-text" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
                       }
                   },
-                  
+
                   {
                       data: "descripcion"
                   },
@@ -206,19 +207,15 @@
         });
 
 
+        $('#FormCrear').on('submit', function (e) {
+                var validate = true;
+                var table = $.fn.dataTable.Api("#IdTabla");
+                if (!table.data().count()) {
+                    ShowNotification(false, "No se permite Guardar con el detalle vacio", "");
+                    validate = false;
+                }
 
-        function Guardar(){
-            var validate = true;
-            validate = $("#FormCrear").valid();
-            var table = $.fn.dataTable.Api("#IdTabla");
-            if (!table.data().count()) {
-                ShowNotification(false,"No se permite Guardar con el detalle vacio","" );
-                validate = false;
-            }
-            alert(validate);
-            if(!validate){ return;}
-
-            var Tablelist = [];
+                 var Tablelist = [];
             table.rows().every(function (rowIdx, tableLoop, rowLoop) {
                 var data = this.data();
                 Tablelist.push(data);
@@ -226,17 +223,11 @@
 
             var obj = {
                 id_salida: @Model.id_salida,
-                //id_maquina: $("#id_maquina").val(),
-                //id_tecnico: $("#id_tecnico").val(),
-                //id_objeto : $("#id_objeto").val(),
                 ListaDetalle: Tablelist
             }
 
-            console.log(obj);
-            @*var url = '/' + '@ViewBag.ControllerName' + '/CrearSalida';*@
             var url = '@Url.Action("CrearSalida", "Salida")';
             if (str2bool('@Model.EsEditar')) {
-                @*url = '/' + '@ViewBag.ControllerName' + '/EditarSalida';*@
                 url = '@Url.Action("EditarSalida", "Salida")';
             }
             $.ajax({
@@ -276,8 +267,75 @@
                 }
             });
 
+        })
 
-        }
+        @*function Guardar(){
+            var validate = true;
+            validate = $("#FormCrear").validator();
+            var table = $.fn.dataTable.Api("#IdTabla");
+            if (!table.data().count()) {
+                ShowNotification(false,"No se permite Guardar con el detalle vacio","" );
+                validate = false;
+            }
+            if(!validate){ return;}
+
+            var Tablelist = [];
+            table.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                var data = this.data();
+                Tablelist.push(data);
+            });
+
+            var obj = {
+                id_salida: @Model.id_salida,
+                //id_maquina: $("#id_maquina").val(),
+                //id_tecnico: $("#id_tecnico").val(),
+                //id_objeto : $("#id_objeto").val(),
+                ListaDetalle: Tablelist
+            }
+
+
+            var url = '@Url.Action("CrearSalida", "Salida")';
+            if (str2bool('@Model.EsEditar')) {
+                url = '@Url.Action("EditarSalida", "Salida")';
+            }
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: JSON.stringify({ model: obj }),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.Estado) {
+                        swal({
+                            html: "<hr>",
+                            title: data.Titulo,
+                            text: data.Mensaje,
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonText: 'Crear Baja',
+                            cancelButtonColor: '#739e73',
+                            cancelButtonText: 'Ir a Lista',
+                            allowOutsideClick: false
+                        }).then(function () {
+                            location.reload();
+                            LoadWaitNotification();
+                        },
+                         function (dismiss) {
+                             if (dismiss === 'cancel') {
+                                 window.location.href ='@Url.Action("Index", "Salida")';
+                                 LoadWaitNotification();
+                             }
+                         });
+                        RefreshCurrentLanguage();
+                    }
+                    else  ShowNotification(false,data.Titulo,data.Mensaje );
+                },
+                error: function (data) {
+                    alert("Error en red");
+                }
+            });
+
+
+        }*@
     </script>
 
 }

@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
-   
+
+
+
+
     $.extend($.gritter.options, {
        // class_name: 'gritter-light', // for light notifications (can be added directly to $.gritter.add too)
        // position: 'bottom-left', // possibilities: bottom-left, bottom-right, top-left, top-right
