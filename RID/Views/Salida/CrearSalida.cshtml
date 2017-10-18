@@ -33,42 +33,43 @@
                 </tr>
             </tbody>
         </table>
-        <form id="FormCrear" class="p-15">
-            <fieldset>
-                <div class="row">
-                    @*<hr />*@
-                    <div class="col-md-4">
-                        ítem
-                        <div class="form-group">
-                            @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        Máquina
-                        <div class="form-group">
-                            @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        Lote
-                        <div class="form-group">
-                            @Html.DropDownList("IdLote", ViewBag.ListaLote as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        Técnico
-                        <div class="form-group">
-                            @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary" onclick="AgregarFila()">+ Agregar</button>
-                        </div>
+        <fieldset>
+            <div class="row p-15">
+                @*<hr />*@
+                <div class="col-md-4">
+                    ítem
+                    <div class="form-group">
+                        @Html.DropDownList("IdItem", ViewBag.ListaItem as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
                     </div>
                 </div>
-            </fieldset>
+                <div class="col-md-3">
+                    Máquina
+                    <div class="form-group">
+                        @Html.DropDownList("IdMaquina", ViewBag.ListaMaquina as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    Lote
+                    <div class="form-group">
+                        @Html.DropDownList("IdLote", ViewBag.ListaLote as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    Técnico
+                    <div class="form-group">
+                        @Html.DropDownList("IdTecnico", ViewBag.ListaTecnico as List<SelectListItem>, "", new { @class = "form-control", style = "width:100%;" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="AgregarFila()">+ Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <form id="FormCrear" class="p-15">
+
 
             <table class="table table-bordered table-responsive" id="IdTabla" style="width: 100%;">
                 <thead>
@@ -83,11 +84,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>x</td>
-                        <td>1</td>
-                        <td>test</td>
-                    </tr>
                 </tbody>
             </table>
 
@@ -108,9 +104,9 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $("select").select2({ placeholder: "- - Seleccionar - -"});
-        $("select").on("select2:select", function (e) {
-            $(this).valid();
-        });
+        //$("select").on("select2:select", function (e) {
+        //    $(this).valid();
+        //});
 
         //funcion para obtener los datos del item al agregar la fila
         function AgregarFila()
@@ -184,7 +180,7 @@
                   {
                       data: null,
                       render: function (data) {
-                          return '<input type="dom-text" name="InputCantidad" min="1" max=" " class="form-control" required value="' + data.cant_aentregar + '" /> ' +
+                          return '<input type="number" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                           //return '<input type="dom-text" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
                       }
@@ -219,6 +215,7 @@
                 ShowNotification(false,"No se permite Guardar con el detalle vacio","" );
                 validate = false;
             }
+            alert(validate);
             if(!validate){ return;}
 
             var Tablelist = [];
