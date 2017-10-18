@@ -157,7 +157,10 @@
 
         $("#IdTabla").dataTable({
             responsive: true,
-            sDom:"",
+            "lengthMenu": [5, 10, 25, 50, 75, 100],
+            //"lengthMenu": [[5, 10, 25, 50, -1], [10, 25, 50, "All"]],
+            //sDom:"",
+            //paging: false,
             ajax:{
                 @*url: "/" + '@ViewBag.ControllerName' + '/CargarTablaDetalleSalida',*@
                 url: '@Url.Action("CargarTablaDetalleSalida", "Salida")',
@@ -181,7 +184,8 @@
                   {
                       data: null,
                       render: function (data) {
-                          return '<input type="number" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
+                          return '<input type="dom-text" name="InputCantidad" min="1" max=" " class="form-control" required value="' + data.cant_aentregar + '" /> ' +
+                          //return '<input type="dom-text" name="InputCantidad" min="1" class="form-control" required value="' + data.cant_aentregar + '" /> ' +
                               '<span class="text-danger field-validation-valid" data-valmsg-for="InputCantidad" data-valmsg-replace="true"></span>';
                       }
                   },

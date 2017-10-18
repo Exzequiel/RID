@@ -265,3 +265,4 @@ C:\Users\IT\Documents\Github\RID\RID\bin\Microsoft.AspNet.Identity.EntityFramewo
 C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.csproj.CoreCompileInputs.cache
 C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.dll
 C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.pdb
+C:\Users\IT\Documents\Github\RID\RID\obj\Debug\RID.csprojResolveAssemblyReference.cache

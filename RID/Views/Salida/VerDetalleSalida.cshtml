@@ -15,6 +15,7 @@
 <script>
     $("#IdTabla-" + '@ViewBag.Id').dataTable({
         responsive: true,
+        //"lengthMenu": [5, 10, 25, 50, 75, 100],
         sDom:"",
         ajax:{
             @*url: "/" + '@ViewBag.ControllerName' + "/CargarTablaDetalleSalida",*@
