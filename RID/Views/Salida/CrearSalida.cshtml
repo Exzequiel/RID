@@ -22,14 +22,14 @@
                 <tr class="success">
                     <th class="text-center"># Salida</th>
                     <th class="text-center">Departamento</th>
-                    <th class="text-center">Fecha Transacción</th>
+                    <th class="text-center" style="width:300px;" >Fecha Transacción</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="text-center">
                     <td>@Model.nro_salida</td>
                     <td>@Model.NombreDepartamento</td>
-                    <td>@Model.fecha_transaccion.ToShortDateString()</td>
+                    <td>@Html.EditorFor(model => model.fecha_transaccion, new { htmlAttributes = new { @class = "form-control", @Value = Model.fecha_transaccion.ToString("dd/MMMM/yyyy") } })</td>
                 </tr>
             </tbody>
         </table>
@@ -100,7 +100,8 @@
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $("select").select2({ placeholder: "- - Seleccionar - -"});
+        $("select").select2({ placeholder: "- - Seleccionar - -" });
+        $("#fecha_transaccion").datepicker({ format: 'dd/MM/yyyy' });
         //$("select").on("select2:select", function (e) {
         //    $(this).valid();
         //});
@@ -222,6 +223,7 @@
 
             var obj = {
                 id_salida: @Model.id_salida,
+                fecha_transaccion: $("#fecha_transaccion").val(),
                 ListaDetalle: Tablelist
             }
 

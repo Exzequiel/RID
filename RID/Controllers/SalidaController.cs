@@ -110,7 +110,7 @@ namespace RID.Controllers
             {
                 var NuevaSalida = context.salida.Add(new salida {
                     nro_salida = getConfiguracion("CorrelativoSalida"),
-                    fecha_transaccion = DateTime.Now,
+                    fecha_transaccion = model.fecha_transaccion,
                     id_departamento = ObtenerIdDepartamentoPorUsuario(),
                     confirmado = false,
                     activo =true,
@@ -192,6 +192,7 @@ namespace RID.Controllers
             using (var context = new BodMantEntities())
             {
                 var ModelSalida = context.salida.Find(model.id_salida);
+                ModelSalida.fecha_transaccion = model.fecha_transaccion;
 
                 ModelSalida.salida_detalle.ToList().ForEach(x => x.activo = false);
 
@@ -200,6 +201,7 @@ namespace RID.Controllers
                     if (ModelSalida.salida_detalle.Any(x => x.id_detalle_salida == detalle.id_detalle_salida))
                     {
                         var ModelDetalle = ModelSalida.salida_detalle.FirstOrDefault(x => x.id_detalle_salida == detalle.id_detalle_salida);
+
                         ModelDetalle.activo = true;
                         ModelDetalle.cant_aentregar = detalle.cant_aentregar;
                     }else
