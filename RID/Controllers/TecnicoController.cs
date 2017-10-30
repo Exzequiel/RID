@@ -17,6 +17,7 @@ namespace RID.Controllers
                 var list = contextCm.tecnico.ToList().Select(x => new ListTecnicoViewModel { Nombre = x.nombre, Apellido = x.apellido, Puesto = x.puesto, activo = x.activo, IdTecnico = x.id_tecnico });
                 return View(list);
             }
+
         }
 
         [HttpGet]
@@ -24,7 +25,6 @@ namespace RID.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Create(CreateTecnicoViewModel model)
         {
@@ -48,7 +48,9 @@ namespace RID.Controllers
                 {
                     ModelState.AddModelError("", ex.Message);
                     return View(model);
+
                 }
+
             }
         }
 
@@ -61,7 +63,6 @@ namespace RID.Controllers
                 return View(new EditTecnicoViewModel { IdTecnico = model.id_tecnico, Nombre = model.nombre, Apellido = model.apellido, Puesto = model.puesto });
             }
         }
-
         [HttpPost]
         public ActionResult Edit(EditTecnicoViewModel model)
         {
@@ -89,6 +90,7 @@ namespace RID.Controllers
                 {
                     ModelState.AddModelError("", ex.Message);
                     return View(model);
+
                 }
             }
         }

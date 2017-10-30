@@ -46,6 +46,7 @@ namespace RID.Controllers
                         Perfil = x.AspNetUsers.AspNetRoles.Any() ? x.AspNetUsers.AspNetRoles.FirstOrDefault().Name : "",
                         UserName = x.AspNetUsers.UserName,
                         NombreDepartamento = x.departamento!=null?x.departamento.descripcion:""
+                        //esAdmin = x.AspNetUsers.AspNetRoles.Any(z=>z.Name=="Administrador")
                     }).ToList();
 
                     var jsonResult = Json(listaUsuarios, JsonRequestBehavior.AllowGet);
@@ -92,6 +93,7 @@ namespace RID.Controllers
                             cuenta_usuario = model.UserName,
                             email = model.Email,
                             id_departamento  = model.IdDepartamento
+                          
                         });
 
                         var resultado = context.SaveChanges() > 0;

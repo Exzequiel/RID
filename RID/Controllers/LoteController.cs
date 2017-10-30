@@ -17,6 +17,7 @@ namespace RID.Controllers
                 var list = contextCm.lote.ToList().Select(x => new ListLoteVIewModel { CodLote = x.cod_lote, Activo =  x.activo, IdLote = x.id_lote });
                 return View(list);
             }
+
         }
 
         [HttpGet]
@@ -36,6 +37,7 @@ namespace RID.Controllers
                     {
                         ModelState.AddModelError("", "Lote ya existente, escriba uno diferente");
                         return View(model);
+
                     }
 
                     contextCm.lote.Add(new lote { cod_lote = model.CodLote, activo = true });
@@ -55,6 +57,7 @@ namespace RID.Controllers
                     return View(model);
 
                 }
+
             }
         }
 

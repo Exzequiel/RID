@@ -1,0 +1,82 @@
+﻿<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            @if (User.IsInRole("Administrador") || User.IsInRole("Standard"))
+                {
+                    <a href="@Url.Action("GenerarReporte", "Reporte")" class="btn btn-xs btn-primary" data-original-title="Crear Usuario" title="Crear Usuario"><i class="fa fa-plus"></i> Generar Reporte</a>
+                }
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title="" data-init="true"><i class="fa fa-expand"></i></a>
+        </div>
+        <h4 class="panel-title">Reporte</h4>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-responsive table-hover" id="IdTabla" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Fecha Transacción</th>
+                    <th># Salida</th>
+                    <th>Cód. Ítem</th>
+                    <th>Unidades</th>
+                    <th>Descripción</th>
+                    <th>Objeto</th>
+                    <th>Máquina</th>
+                    <th>Lote </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+
+       var table= $("#IdTabla").dataTable({
+            responsive: true,
+            ajax: {
+                url: "@Url.Action("CargarReporte", "Salida")",
+                global:false,
+                type: "GET",
+                dataSrc: function (data) {
+                    return data;
+                }
+            },
+           columns: [
+                {
+                    "className": 'details-control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": ''
+                },
+
+                {
+                    data: "cod_item"
+                },
+
+                {
+                    data: "cant_aentregar"
+                },
+
+                {
+                    data: "descripcion"
+                },
+
+                {
+                    data: "cod_objeto"
+                },
+
+                {
+                    data: "maquina"
+                },
+
+                {
+                    data: "lote"
+                },
+
+            ]
+        });
+
+    </script>
+}

@@ -17,8 +17,19 @@ namespace RID.Controllers
                 var list = contextCm.item.ToList().Select(x => new ListItemViewModel { CodObjeto = x.cod_objeto, Descripcion = x.descripcion, activo = x.activo, IdItem = x.id_item, CodItem = x.cod_item}).ToList();
                 return View(list);
             }
+
         }
 
+        //[HttpGet]
+        //public ActionResult Create()
+        //{
+        //    using (var contextCm = new BodMantEntities())
+        //    {
+        //        ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.cod_item.ToString(), Text = c.cod_objeto }).ToList();
+        //        //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+        //        return View();
+        //    }
+        //}
         [HttpGet]
         public ActionResult Create()
         {
@@ -30,6 +41,8 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
+                //ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
+                //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
                 try
                 {
                     if (!ModelState.IsValid) return View(model);
@@ -37,6 +50,7 @@ namespace RID.Controllers
                     {
                         ModelState.AddModelError("", "Código de Item ya existente, escriba uno diferente");
                         return View(model);
+
                     }
 
                     contextCm.item.Add(new item { cod_item = model.CodItem, descripcion = model.Descripcion, cod_objeto = model.CodObjeto, activo = true });
@@ -56,7 +70,9 @@ namespace RID.Controllers
                     return View(model);
 
                 }
+
             }
+
         }
 
         [HttpGet]
@@ -64,6 +80,9 @@ namespace RID.Controllers
         {
             using (var contextCm = new BodMantEntities())
             {
+                //ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
+                //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+
                 var model = contextCm.item.Find(id);
                 return View(new EditItemViewModel {  IdItem = model.id_item,  Descripcion = model.descripcion, CodItem = model.cod_item, CodObjeto = model.cod_objeto });
             }
@@ -75,6 +94,10 @@ namespace RID.Controllers
             {
                 try
                 {
+
+                    //ViewBag.SelectObjeto = contextCm.objeto.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_objeto.ToString(), Text = c.cod_objeto }).ToList();
+                    //ViewBag.SelectUbicacion = contextCm.ubicacion.Where(c => c.activo == true).ToList().Select(c => new SelectListItem { Value = c.id_ubicacion.ToString(), Text = c.descripcion }).ToList();
+
                     if (!ModelState.IsValid) return View(model);
                     if (contextCm.item.Where(x => x.id_item != model.IdItem).Any(x => x.cod_item == model.CodItem.Trim()))
                     {

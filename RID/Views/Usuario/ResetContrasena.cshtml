@@ -36,12 +36,15 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 <script>
+
+
     function EditarContrasena() {
 
         if (!$("#FormContrasenaUsuario").valid()) { return false; }
 
             LoadWaitNotification();
                 $.ajax({
+                    //url: "/Usuario/ResetContrasena",
                     url: '@Url.Action("ResetContrasena", "Usuario")',
                     type: 'POST',
                     dataType: 'json',

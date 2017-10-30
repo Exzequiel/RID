@@ -48,6 +48,7 @@
     {
         LoadWaitNotification();
         $.ajax({
+            //url: "/Usuario/EditarCuentaUsuario",
             url: '@Url.Action("EditarCuentaUsuario", "Usuario")',
             type: 'get',
             data: { Id: id },
@@ -67,6 +68,7 @@
     function MostrarEditarInfo(id) {
         LoadWaitNotification();
         $.ajax({
+            //url: "/Usuario/EditarInfoUsuario",
             url: '@Url.Action("EditarInfoUsuario", "Usuario")',
             type: 'get',
             data: { Id: id },
@@ -87,6 +89,7 @@
     {
         LoadWaitNotification();
         $.ajax({
+            //url: "/Usuario/ResetContrasena",
             url: '@Url.Action("ResetContrasena", "Usuario")',
             type: 'get',
             data: { Id: id },
@@ -113,6 +116,7 @@
         });
         LoadWaitNotification();
         $.ajax({
+            //url: "/Usuario/" + ActionName,
             url: '@Url.Action(@ViewBag.ActionName, "Usuario")',
             type: "POST",
             data: { Lista: listcheckedrows, IdPersona: idPersona },
@@ -156,6 +160,7 @@
                         opciones += ('<li><a href="javascript:void(0);" onclick="MostrarEditarCuenta(!' + data.Id + '!)"> Editar Cuenta</a></li>').replace(new RegExp("!", 'g'), "'");
                         opciones += ('<li><a href="javascript:void(0);" onclick="MostrarEditarInfo(!' + data.Id + '!)"> Editar Perfil</a></li>').replace(new RegExp("!", 'g'), "'");
                         opciones += ('<li><a href="javascript:void(0);" onclick="MostrarResetContrasena(!' + data.Id + '!)"> Cambiar Contraseña</a></li>').replace(new RegExp("!", 'g'), "'");
+                        //opciones += data.esDoctor ? ('<li><a href="javascript:void(0);" onclick="AgregarEspecialidad(!' + data.Id + '!)"> Agregar Especialidad</a></li>').replace(new RegExp("!", 'g'), "'") : "";
                         opciones += '</ul></div>';
                         return opciones;
                     }

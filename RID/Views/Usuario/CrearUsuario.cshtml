@@ -40,6 +40,29 @@
                             </div>
                         </div>
 
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Identidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Identidad, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Identidad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.FechaNac, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.FechaNac, new { htmlAttributes = new { @class = "form-control", @Value = Model.FechaNac.ToString("dd/MMMM/yyyy") } })
+                                    @Html.ValidationMessageFor(model => model.FechaNac, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                         <hr />
 
                         <div class="form-group">
@@ -89,6 +112,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <a href="/Usuario/Index" class="btn btn-default"><i class="fa fa-arrow-left"></i> </a>
@@ -113,6 +137,10 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+        //$("#FechaNac").datepicker({ format: 'dd/MM/yyyy' });
+        //$("#Telefono").mask("9999-9999");
+        //$("#Identidad").mask("9999-9999-99999");
+
         $("select").select2({
             placeholder: "--Seleccionar--",
             allowClear: true
@@ -124,6 +152,7 @@
 
             LoadWaitNotification();
             $.ajax({
+                //url: "/Usuario/CrearUsuario",
                 url: '@Url.Action("CrearUsuario", "Usuario")',
                 type: 'POST',
                 dataType: 'json',
@@ -143,5 +172,8 @@
             });
         };
 
+
+
     </script>
+
 }
